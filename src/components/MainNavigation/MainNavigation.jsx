@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "./NavBar.module.css";
+import styles from "./MainNavigation.module.css";
 import DrawerLayout from "../DrawerLayout/DrawerLayout";
 
 const title = import.meta.env.VITE_TITLE;
 
-const NavBar = () => {
+const MainNavigation = () => {
 	const [windowIsWide, setWindowIsWide] = useState(window.innerWidth > 1000);
 	const [showDrawer, setShowDrawer] = useState(false);
 
@@ -67,4 +67,4 @@ const NavBar = () => {
 	);
 };
 
-export default NavBar;
+export default MainNavigation;
