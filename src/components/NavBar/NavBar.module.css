@@ -1,0 +1,21 @@
+header {
+  background-color: rgb(49, 52, 57);
+  /* position: sticky; */
+  top: 0;
+}
+
+.webNav {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.webNav > li{
+  display: flex;
+  align-items: center;
+  height: 64px;
+  color: white;
+  list-style-type: none;
+  padding: 0px 15px;
+}

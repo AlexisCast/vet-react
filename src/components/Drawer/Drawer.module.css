@@ -1,0 +1,67 @@
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 10;
+	background: rgba(0, 0, 0, 0.75);
+}
+
+.container__drawer {
+	color: pink !important;
+	position: fixed;
+	top: 0;
+	left: auto;
+  right: 0;
+	width: 80%;
+	z-index: 100;
+	overflow: hidden;
+	background-color: rgb(49, 52, 57);;
+}
+
+/* Define media queries based on the breakpoints */
+@media (min-width: 640px) {
+	/* Styles for screens larger than or equal to 640px (sm) */
+	/* Place your CSS rules here */
+	.container__drawer {
+		color: red !important;
+		width: 80%;
+	}
+}
+
+@media (min-width: 768px) {
+	/* Styles for screens larger than or equal to 768px (md) */
+	/* Place your CSS rules here */
+	.container__drawer {
+		color: green !important; /* Change the text color */
+		width: 60%; /* Adjust the width */
+	}
+}
+
+@media (min-width: 1024px) {
+	/* Styles for screens larger than or equal to 1024px (lg) */
+	/* Place your CSS rules here */
+	.container__drawer {
+		color: orange !important; /* Change the text color */
+		width: 28%; /* Adjust the width */
+	}
+}
+
+@media (min-width: 1280px) {
+	/* Styles for screens larger than or equal to 1280px (xl) */
+	/* Place your CSS rules here */
+	.container__drawer {
+		color: yellow !important; /* Change the text color */
+		width: 23%; /* Adjust the width */
+	}
+}
+
+@media (min-width: 1536px) {
+	/* Styles for screens larger than or equal to 1536px (2xl) */
+	/* Place your CSS rules here */
+	.container__drawer {
+		color: purple !important; /* Change the text color */
+		width: 17%; /* Adjust the width */
+	}
+}
