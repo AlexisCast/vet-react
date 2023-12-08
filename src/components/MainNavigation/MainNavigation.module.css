@@ -29,6 +29,11 @@ header {
   cursor: pointer;
 }
 
+.webNav > li > a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .webNav > li:hover{
   background-color: rgb(46, 47, 51);
 }

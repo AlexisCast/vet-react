@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Drawer from "../Drawer/Drawer";
 
 import styles from "./DrawerLayout.module.css";
@@ -17,7 +19,9 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 				<nav className={styles.Drawer__nav}>
 					<ul className={styles.mobileNav}>
 						<li>All Users</li>
-						<li>All Products</li>
+						<li>
+							<Link to="/products">Products</Link>
+						</li>{" "}
 						<li>All Categories</li>
 						<li>Welcome, User </li>
 						<li>Log In</li>

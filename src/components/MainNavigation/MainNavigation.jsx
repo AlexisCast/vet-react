@@ -1,10 +1,12 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "./MainNavigation.module.css";
 import DrawerLayout from "../DrawerLayout/DrawerLayout";
+
+import styles from "./MainNavigation.module.css";
 
 const title = import.meta.env.VITE_TITLE;
 
@@ -35,11 +37,15 @@ const MainNavigation = () => {
 				{windowIsWide ? (
 					<ul className={styles.navContainer}>
 						<ul className={styles.webNav}>
-							<li>{title}</li>
+							<li>
+								<Link to="/">{title}</Link>
+							</li>
 						</ul>
 						<ul className={styles.webNav}>
 							<li>All Users</li>
-							<li>All Products</li>
+							<li>
+								<Link to="/products">Products</Link>
+							</li>
 							<li>All Categories</li>
 							<li>Welcome, User </li>
 							<li>Log In</li>
@@ -49,7 +55,9 @@ const MainNavigation = () => {
 				) : (
 					<ul className={styles.navContainer}>
 						<ul className={styles.webNav}>
-							<li>{title}</li>
+							<li>
+								<Link to="/">{title}</Link>
+							</li>
 						</ul>
 						<ul className={styles.webNav}>
 							<li onClick={handleOnclick}>

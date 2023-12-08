@@ -26,3 +26,8 @@
   /* padding: 5px 0px; */
   list-style-type: none;
 }
+
+.mobileNav > li > a {
+  color: inherit;
+  text-decoration: none;
+}
