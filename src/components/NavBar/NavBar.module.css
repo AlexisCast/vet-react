@@ -1,0 +1,38 @@
+header {
+  background-color: rgb(49, 52, 57);
+  /* position: sticky; */
+  top: 0;
+}
+
+.navContainer{
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.webNav {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.webNav > li{
+  display: flex;
+  align-items: center;
+  height: 64px;
+  color: white;
+  list-style-type: none;
+  padding: 0px 15px;
+  cursor: pointer;
+}
+
+.webNav > li:hover{
+  background-color: rgb(46, 47, 51);
+}
+
+.faBars{
+  cursor: pointer;
+}
