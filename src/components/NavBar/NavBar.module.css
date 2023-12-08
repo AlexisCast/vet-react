@@ -18,4 +18,13 @@ header {
   color: white;
   list-style-type: none;
   padding: 0px 15px;
+  cursor: pointer;
+}
+
+.webNav > li:hover{
+  background-color: rgb(46, 47, 51);
+}
+
+.faBars{
+  cursor: pointer;
 }

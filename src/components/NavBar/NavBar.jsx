@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 import styles from "./NavBar.module.css";
 import DrawerLayout from "../DrawerLayout/DrawerLayout";
 
@@ -41,8 +44,12 @@ const NavBar = () => {
 				) : (
 					<>
 						<ul className={styles.webNav}>
-							<li>
-								<button onClick={handleOnclick}>icon</button>
+							<li onClick={handleOnclick}>
+								<FontAwesomeIcon
+									icon={faBars}
+									size="xl"
+									className={styles.faBars}
+								/>
 							</li>
 						</ul>
 					</>
