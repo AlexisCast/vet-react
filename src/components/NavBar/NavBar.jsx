@@ -6,6 +6,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NavBar.module.css";
 import DrawerLayout from "../DrawerLayout/DrawerLayout";
 
+const title = import.meta.env.VITE_TITLE;
+
 const NavBar = () => {
 	const [windowIsWide, setWindowIsWide] = useState(window.innerWidth > 1000);
 	const [showDrawer, setShowDrawer] = useState(false);
@@ -31,7 +33,10 @@ const NavBar = () => {
 			/>
 			<nav>
 				{windowIsWide ? (
-					<>
+					<ul className={styles.navContainer}>
+						<ul className={styles.webNav}>
+							<li>{title}</li>
+						</ul>
 						<ul className={styles.webNav}>
 							<li>All Users</li>
 							<li>All Products</li>
@@ -40,9 +45,12 @@ const NavBar = () => {
 							<li>Log In</li>
 							<li>Log Out</li>
 						</ul>
-					</>
+					</ul>
 				) : (
-					<>
+					<ul className={styles.navContainer}>
+						<ul className={styles.webNav}>
+							<li>{title}</li>
+						</ul>
 						<ul className={styles.webNav}>
 							<li onClick={handleOnclick}>
 								<FontAwesomeIcon
@@ -52,7 +60,7 @@ const NavBar = () => {
 								/>
 							</li>
 						</ul>
-					</>
+					</ul>
 				)}
 			</nav>
 		</header>
