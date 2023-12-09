@@ -1,33 +1,55 @@
-.Drawer__container{
-  padding: 16px;
-  display: flex; 
-  flex-direction: column;
-  font-weight: bold;
+.Drawer__container {
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	font-weight: bold;
 }
 
-.Drawer__nav{
-  display: flex; 
-  flex-direction: column;
-  border-top: 2px solid #DB504A;
+.Drawer__container > p {
+	text-align: end;
+}
+
+.Drawer__nav {
+	display: flex;
+	flex-direction: row;
+	border-top: 2px solid #db504a;
+	justify-content: flex-end;
 }
 
 .mobileNav {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 0px 40px 0px 0px;
+	text-align: end;
+	min-width: 200px;
 }
-.mobileNav > li{
-  display: flex;
-  align-items: center;
-  height: 64px;
-  color: white;
-  border-bottom: 2px solid #4F6D7A;
-  /* padding: 5px 0px; */
-  list-style-type: none;
+.mobileNav > li {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: flex-end;
+	/* height: 64px; */
+	color: white;
+	border-bottom: 2px solid #4f6d7a;
+	padding: 10px 0px;
+	list-style-type: none;
+	width: 100%;
+}
+
+.mobileNav > li:hover {
+	background-color: rgb(46, 47, 51);
+	cursor: pointer;
 }
 
 .mobileNav > li > a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
+	width: 100%;
+}
+.test {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
 }

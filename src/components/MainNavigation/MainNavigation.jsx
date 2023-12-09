@@ -7,6 +7,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import DrawerLayout from "../DrawerLayout/DrawerLayout";
 
 import styles from "./MainNavigation.module.css";
+import LinkDropdown from "../LinkDropDowns/LinkDropdown";
 
 const title = import.meta.env.VITE_TITLE;
 
@@ -42,29 +43,63 @@ const MainNavigation = () => {
 							</li>
 						</ul>
 						<ul className={styles.webNav}>
-							<li>All Users</li>
 							<li>
-								<Link to="/products">Products</Link>
+								<Link to="/">Home</Link>
 							</li>
+							<LinkDropdown label="Users" route="/users">
+								<li>
+									<Link to="/">Users jiz</Link>
+								</li>
+								<li>
+									<Link to="/users/baz">Users baz</Link>
+								</li>
+								<li>
+									<Link to="/products/bar">Users bar</Link>
+								</li>
+								<li>
+									<Link to="/users/foo">
+										users fooasdf fsd
+									</Link>
+								</li>
+							</LinkDropdown>
+							<LinkDropdown label="Products" route="/products">
+								<li>
+									<Link to="/products/jiz">Products jiz</Link>
+								</li>
+								<li>
+									<Link to="/products">Products baz</Link>
+								</li>
+								<li>
+									<Link to="/products/bar">Products bar</Link>
+								</li>
+								<li>
+									<Link to="/products/foo">
+										Products fooasdf fsd
+									</Link>
+								</li>
+							</LinkDropdown>
 							<li>All Categories</li>
 							<li>Welcome, User </li>
-							<li>Log In</li>
+							<li>
+								<Link to="/">Log In</Link>
+							</li>
 							<li>Log Out</li>
 						</ul>
 					</ul>
 				) : (
 					<ul className={styles.navContainer}>
-						<ul className={styles.webNav}>
+						<ul className={`${styles.webNav} ${styles.noMinWidth}`}>
 							<li>
 								<Link to="/">{title}</Link>
 							</li>
 						</ul>
-						<ul className={styles.webNav}>
+						<ul className={`${styles.webNav} ${styles.noMinWidth}`}>
 							<li onClick={handleOnclick}>
 								<FontAwesomeIcon
 									icon={faBars}
-									size="xl"
+									size="2xl"
 									className={styles.faBars}
+									onClick={handleOnclick}
 								/>
 							</li>
 						</ul>
