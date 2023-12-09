@@ -1,16 +1,16 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  /* color-scheme: light dark; */
-  /* color: rgba(255, 255, 255, 0.87); */
-  background-color: rgb(243 244 246);
+	/* color-scheme: light dark; */
+	/* color: rgba(255, 255, 255, 0.87); */
+	background-color: rgb(243 244 246);
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 /* a {
@@ -23,16 +23,16 @@ a:hover {
 } */
 
 body {
-  margin: 0;
-  /* display: flex;
+	margin: 0;
+	/* display: flex;
   place-items: center; */
-  min-width: 320px;
-  min-height: 100vh;
+	min-width: 320px;
+	min-height: 100vh;
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+	font-size: 3.2em;
+	line-height: 1.1;
 }
 
 /* button {
@@ -54,7 +54,12 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 } */
 
-main{
-  margin: 2rem auto;
-  text-align: center;
+main {
+	margin: 2rem auto;
+	text-align: center;
+}
+
+li {
+	text-decoration: none;
+	list-style-type: none;
 }

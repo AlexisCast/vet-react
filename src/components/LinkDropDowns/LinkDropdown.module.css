@@ -31,10 +31,13 @@
 }
 
 .dropdownContent li {
+	display: flex;
+	justify-content: center;
 	list-style-type: none;
 	margin: 0;
 	padding: 8px;
 	color: white;
+	text-align: center;
 }
 
 .dropdownContent li:hover {

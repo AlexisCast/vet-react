@@ -56,37 +56,40 @@ const MainNavigation = () => {
 							</li>
 							<LinkDropdown label="Users" route="/users">
 								<li>
-									<Link to="/">Users jiz</Link>
+									<Link to="/users">All</Link>
 								</li>
 								<li>
-									<Link to="/users/baz">Users baz</Link>
+									<Link to="/users">New</Link>
 								</li>
 								<li>
-									<Link to="/products/bar">Users bar</Link>
-								</li>
-								<li>
-									<Link to="/users/foo">
-										users fooasdf fsd
-									</Link>
+									<Link to="/products">Update</Link>
 								</li>
 							</LinkDropdown>
 							<LinkDropdown label="Products" route="/products">
 								<li>
-									<Link to="/products/jiz">Products jiz</Link>
+									<Link to="/products">All</Link>
 								</li>
 								<li>
-									<Link to="/products">Products baz</Link>
+									<Link to="/products/new">New</Link>
 								</li>
 								<li>
-									<Link to="/products/bar">Products bar</Link>
-								</li>
-								<li>
-									<Link to="/products/foo">
-										Products fooasdf fsd
-									</Link>
+									<Link to="/products">Update</Link>
 								</li>
 							</LinkDropdown>
-							<li>All Categories</li>
+							<LinkDropdown
+								label="Categories"
+								route="/categories"
+							>
+								<li>
+									<Link to="/categories">All</Link>
+								</li>
+								<li>
+									<Link to="/categories">New</Link>
+								</li>
+								<li>
+									<Link to="/categories">Update</Link>
+								</li>
+							</LinkDropdown>
 							<li>Welcome, User </li>
 							<li>
 								<Link to="/">Log In</Link>

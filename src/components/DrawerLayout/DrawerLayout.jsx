@@ -34,23 +34,9 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 						</li>
 						<li>
 							<Accordion title="Users" closeDrawer={toggleDrawer}>
-								<AccordionItem route="/" label="All Users" />
-								<AccordionItem
-									route="/users/jiz"
-									label="Users jiz"
-								/>
-								<AccordionItem
-									route="/users/baz"
-									label="Users baz"
-								/>
-								<AccordionItem
-									route="/users/bar"
-									label="Users bar"
-								/>
-								<AccordionItem
-									route="/users/foo"
-									label="Users foo"
-								/>
+								<AccordionItem route="/users" label="All" />
+								<AccordionItem route="/users" label="New" />
+								<AccordionItem route="/users" label="Update" />
 							</Accordion>
 						</li>
 						<li>
@@ -58,29 +44,36 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 								title="Products"
 								closeDrawer={toggleDrawer}
 							>
+								<AccordionItem route="/products" label="All" />
+								<AccordionItem
+									route="/products/new"
+									label="New"
+								/>
 								<AccordionItem
 									route="/products"
-									label="All Products"
-								/>
-								<AccordionItem
-									route="/products/jiz"
-									label="Products jiz"
-								/>
-								<AccordionItem
-									route="/products/baz"
-									label="Products baz"
-								/>
-								<AccordionItem
-									route="/products/bar"
-									label="Products bar"
-								/>
-								<AccordionItem
-									route="/products/foo"
-									label="Products foo"
+									label="Update"
 								/>
 							</Accordion>
 						</li>
-						<li onClick={toggleDrawer}>All Categories</li>
+						<li>
+							<Accordion
+								title="Categories"
+								closeDrawer={toggleDrawer}
+							>
+								<AccordionItem
+									route="/categories"
+									label="All"
+								/>
+								<AccordionItem
+									route="/categories"
+									label="New"
+								/>
+								<AccordionItem
+									route="/categories"
+									label="Update"
+								/>
+							</Accordion>
+						</li>
 						<li onClick={toggleDrawer}>Welcome, User </li>
 						<li onClick={toggleDrawer}>Log In</li>
 						<li onClick={toggleDrawer}>Log Out</li>
