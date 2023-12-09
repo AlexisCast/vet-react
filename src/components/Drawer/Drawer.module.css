@@ -13,11 +13,11 @@
 	position: fixed;
 	top: 0;
 	left: auto;
-  right: 0;
+	right: 0;
 	width: 80%;
 	z-index: 100;
 	overflow: hidden;
-	background-color: rgb(49, 52, 57);;
+	background-color: rgb(49, 52, 57);
 }
 
 /* Define media queries based on the breakpoints */

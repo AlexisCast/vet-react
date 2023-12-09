@@ -1,0 +1,46 @@
+/* LinkDropdown.module.css */
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: inherit;
+	padding: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdownContent {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	background-color: rgb(49, 52, 57);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	padding: 0px;
+	z-index: 1;
+	margin: 0;
+}
+
+.dropdownContent li {
+	list-style-type: none;
+	margin: 0;
+	padding: 8px;
+	color: white;
+}
+
+.dropdownContent li:hover {
+	background-color: rgb(46, 47, 51);
+}
+
+.show {
+	display: block;
+}
