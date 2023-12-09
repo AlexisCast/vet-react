@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Drawer from "../Drawer/Drawer";
 
@@ -22,7 +22,15 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 				<nav className={styles.Drawer__nav}>
 					<ul className={styles.mobileNav}>
 						<li onClick={toggleDrawer}>
-							<Link to="/">Home</Link>
+							<NavLink
+								to="/"
+								className={({ isActive }) =>
+									isActive ? styles.active : undefined
+								}
+								end
+							>
+								Home
+							</NavLink>
 						</li>
 						<li>
 							<Accordion title="Users" closeDrawer={toggleDrawer}>

@@ -48,8 +48,13 @@
 	text-decoration: none;
 	width: 100%;
 }
+
 .test {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+}
+
+.active {
+	color: pink !important;
 }

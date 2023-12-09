@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -44,7 +44,15 @@ const MainNavigation = () => {
 						</ul>
 						<ul className={styles.webNav}>
 							<li>
-								<Link to="/">Home</Link>
+								<NavLink
+									to="/"
+									className={({ isActive }) =>
+										isActive ? styles.active : undefined
+									}
+									end
+								>
+									Home
+								</NavLink>
 							</li>
 							<LinkDropdown label="Users" route="/users">
 								<li>

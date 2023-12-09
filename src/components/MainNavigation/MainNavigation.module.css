@@ -49,3 +49,7 @@ header {
 	cursor: pointer;
 	/* width: 100%; */
 }
+
+.active {
+	color: pink !important;
+}
