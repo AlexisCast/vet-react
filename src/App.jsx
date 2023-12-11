@@ -7,6 +7,7 @@ import ErrorPage from "./pages/Error";
 import ProductDetailPage from "./pages/ProductDetail";
 import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
+import ProductsRootLayout from "./pages/ProductsRoot";
 
 const router = createBrowserRouter([
 	{
@@ -20,19 +21,25 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "products",
-				element: <Products />,
-			},
-			{
-				path: "products/:productId",
-				element: <ProductDetailPage />,
-			},
-			{
-				path: "products/new",
-				element: <NewProduct />,
-			},
-			{
-				path: "products/:productId/edit",
-				element: <EditProduct />,
+				element: <ProductsRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Products />,
+					},
+					{
+						path: "products/:productId",
+						element: <ProductDetailPage />,
+					},
+					{
+						path: "products/new",
+						element: <NewProduct />,
+					},
+					{
+						path: "products/:productId/edit",
+						element: <EditProduct />,
+					},
+				],
 			},
 		],
 	},
