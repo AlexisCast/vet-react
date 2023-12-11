@@ -1,9 +1,21 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+```bash
+npm i
+npm run dev
+```
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 # restserver-react
+
+## Tags 
+
+- v1.0.0 “v1.0.0” -> feat/4_ReactRouter_nested_layout_ProductsRootLayout -> Branch 1.0.0-rc-1
+  - Basic Routing
+
+## Env File:
+- VITE_TITLE
+
+```bash
+VITE_TITLE=<NAME OF BUSINESS>
+
+```
