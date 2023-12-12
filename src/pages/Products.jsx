@@ -6,6 +6,10 @@ import ProductList from "../components/ProductList/ProductList";
 
 const Products = () => {
 	const data = useLoaderData();
+
+	if (data.isError) {
+		return <p>{data.msg}</p>;
+	}
 	const products = data.products;
 
 	return (
@@ -31,7 +35,7 @@ export const loader = async () => {
 	const response = await fetch("http://localhost:8080/api/products");
 
 	if (!response.ok) {
-		//..
+		return { isError: true, msg: "Could not fetch products..." };
 	} else {
 		// const resData = await response.json();
 		// console.log(await resData);
