@@ -32,10 +32,16 @@ const Products = () => {
 export default Products;
 
 export const loader = async () => {
-	const response = await fetch("http://localhost:8080/api/products");
+	const response = await fetch("http://localhost:8080/api/products123");
 
 	if (!response.ok) {
-		return { isError: true, msg: "Could not fetch products..." };
+		// OPTION 1: return { isError: true, msg: "Could not fetch products..." };
+		throw new Response(
+			JSON.stringify({ msg: "Could not fetch products..." }),
+			{
+				status: 500,
+			}
+		);
 	} else {
 		// const resData = await response.json();
 		// console.log(await resData);
