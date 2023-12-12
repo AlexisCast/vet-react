@@ -5,7 +5,8 @@ import { Link, useLoaderData } from "react-router-dom";
 import ProductList from "../components/ProductList/ProductList";
 
 const Products = () => {
-	const products = useLoaderData();
+	const data = useLoaderData();
+	const products = data.products;
 
 	return (
 		<div>
@@ -32,11 +33,13 @@ export const loader = async () => {
 	if (!response.ok) {
 		//..
 	} else {
-		const resData = await response.json();
-		console.log(await resData);
-		console.log(await resData.products);
-		console.table(await resData.products);
+		// const resData = await response.json();
+		// console.log(await resData);
+		// console.log(await resData.products);
+		// console.table(await resData.products);
 
-		return resData.products;
+		// return resData.products;
+
+		return response;
 	}
 };
