@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, json } from "react-router-dom";
 
 // import { mockProducts } from "../mock/products";
 
@@ -32,12 +32,18 @@ const Products = () => {
 export default Products;
 
 export const loader = async () => {
-	const response = await fetch("http://localhost:8080/api/products123");
+	const response = await fetch("http://localhost:8080/api/products");
 
 	if (!response.ok) {
 		// OPTION 1: return { isError: true, msg: "Could not fetch products..." };
-		throw new Response(
+		/* OPTION 2: throw new Response(
 			JSON.stringify({ msg: "Could not fetch products..." }),
+			{
+				status: 500,
+			}
+		); */
+		throw json(
+			{ msg: "Could not fetch products..." },
 			{
 				status: 500,
 			}
