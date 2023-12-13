@@ -4,7 +4,9 @@ import HomePage from "./pages/Home";
 import Products, { loader as productsLoader } from "./pages/Products";
 import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
-import ProductDetailPage from "./pages/ProductDetail";
+import ProductDetailPage, {
+	loader as productDetailLoader,
+} from "./pages/ProductDetail";
 import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
 import ProductsRootLayout from "./pages/ProductsRoot";
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
 					{
 						path: ":productId",
 						element: <ProductDetailPage />,
+						loader: productDetailLoader,
 					},
 					{
 						path: "new",
