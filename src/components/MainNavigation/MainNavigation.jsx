@@ -43,6 +43,17 @@ const MainNavigation = () => {
 							</li>
 						</ul>
 						<ul className={styles.webNav}>
+						<li>
+								<NavLink
+									to="/auth"
+									className={({ isActive }) =>
+										isActive ? styles.active : undefined
+									}
+									end
+								>
+									Authentication
+								</NavLink>
+							</li>
 							<li>
 								<NavLink
 									to="/"
