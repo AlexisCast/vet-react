@@ -1,9 +1,9 @@
-import { useParams, Link, json, useLoaderData } from "react-router-dom";
+import { useParams, Link, json, useRouteLoaderData } from "react-router-dom";
 import ProductItem from "../components/ProductItem/ProductItem";
 
 const ProductDetailPage = () => {
 	const params = useParams();
-	const data = useLoaderData();
+	const data = useRouteLoaderData("product-detail");
 
 	console.log(data);
 	return (
