@@ -1,8 +1,12 @@
-import { Form, Link, useSearchParams } from "react-router-dom";
+import { Form, Link, useSearchParams, useActionData } from "react-router-dom";
 
 import styles from "./AuthForm.module.css";
 
 function AuthForm() {
+	const data = useActionData();
+
+	console.log("data");
+	console.log(data);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const isLogin = searchParams.get("mode") === "login";
 
@@ -10,6 +14,18 @@ function AuthForm() {
 		<>
 			<Form method="post" className={styles.form}>
 				<h1>{isLogin ? "Log in" : "Create a new user"}</h1>
+				{data && data.msg && (
+					<ul>
+						<li key={data.msg}>{data.msg}</li>
+					</ul>
+				)}
+				{data && data.errors && (
+					<ul>
+						{data.errors.map((err, i) => (
+							<li key={i}>{err.msg}</li>
+						))}
+					</ul>
+				)}
 				{!isLogin && (
 					<p>
 						<label htmlFor="email">Name</label>

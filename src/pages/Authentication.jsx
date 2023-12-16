@@ -54,7 +54,14 @@ export const action = async ({ request }) => {
 		});
 
 		if (!response.ok) {
+			console.log(await response);
 			return response;
+			// throw json(
+			// 	{
+			// 		msg: "Could not auth user.",
+			// 	},
+			// 	{ status: 500 }
+			// );
 		} else {
 			console.log(await response.json());
 			return redirect("/");
