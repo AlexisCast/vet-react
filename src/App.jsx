@@ -32,16 +32,22 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ":productId",
-						element: <ProductDetailPage />,
+						id: "product-detail",
 						loader: productDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <ProductDetailPage />,
+							},
+							{
+								path: "edit",
+								element: <EditProduct />,
+							},
+						],
 					},
 					{
 						path: "new",
 						element: <NewProduct />,
-					},
-					{
-						path: ":productId/edit",
-						element: <EditProduct />,
 					},
 				],
 			},
