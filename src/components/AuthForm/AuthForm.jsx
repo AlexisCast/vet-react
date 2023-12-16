@@ -10,6 +10,12 @@ function AuthForm() {
 		<>
 			<Form method="post" className={styles.form}>
 				<h1>{isLogin ? "Log in" : "Create a new user"}</h1>
+				{!isLogin && (
+					<p>
+						<label htmlFor="email">Name</label>
+						<input id="name" type="text" name="name" required />
+					</p>
+				)}
 				<p>
 					<label htmlFor="email">Email</label>
 					<input id="email" type="email" name="email" required />
