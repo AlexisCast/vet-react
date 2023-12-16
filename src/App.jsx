@@ -10,6 +10,7 @@ import ProductDetailPage, {
 import NewProduct from "./pages/NewProduct";
 import EditProduct from "./pages/EditProduct";
 import ProductsRootLayout from "./pages/ProductsRoot";
+import AuthenticationPage from "./pages/Authentication";
 
 const router = createBrowserRouter([
 	{
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
 						element: <NewProduct />,
 					},
 				],
+			},
+			{
+				path: "auth",
+				element: <AuthenticationPage />,
 			},
 		],
 	},

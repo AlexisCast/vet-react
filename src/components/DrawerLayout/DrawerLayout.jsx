@@ -23,6 +23,17 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 					<ul className={styles.mobileNav}>
 						<li onClick={toggleDrawer}>
 							<NavLink
+								to="/auth"
+								className={({ isActive }) =>
+									isActive ? styles.active : undefined
+								}
+								end
+							>
+								Authentication
+							</NavLink>
+						</li>
+						<li onClick={toggleDrawer}>
+							<NavLink
 								to="/"
 								className={({ isActive }) =>
 									isActive ? styles.active : undefined
