@@ -1,5 +1,5 @@
 import { useParams, Link, json, useRouteLoaderData } from "react-router-dom";
-import ProductItem from "../components/ProductItem/ProductItem";
+import ProductItem from "../../components/ProductItem/ProductItem";
 
 const ProductDetailPage = () => {
 	const params = useParams();

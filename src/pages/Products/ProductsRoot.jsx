@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import ProductsNavigation from "../components/ProductsNavigation/ProductsNavigation";
+import ProductsNavigation from "../../components/ProductsNavigation/ProductsNavigation";
 
 
 const ProductsRootLayout = () => {

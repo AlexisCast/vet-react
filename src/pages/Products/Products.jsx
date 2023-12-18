@@ -2,7 +2,7 @@ import { Link, useLoaderData, json } from "react-router-dom";
 
 // import { mockProducts } from "../mock/products";
 
-import ProductList from "../components/ProductList/ProductList";
+import ProductList from "../../components/ProductList/ProductList";
 
 const Products = () => {
 	const data = useLoaderData();

@@ -1,5 +1,5 @@
 import { useParams, useRouteLoaderData } from "react-router-dom";
-import ProductForm from "../components/ProductForm/ProductForm";
+import ProductForm from "../../components/ProductForm/ProductForm";
 
 const EditProduct = () => {
 	const params = useParams();

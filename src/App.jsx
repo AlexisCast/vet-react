@@ -1,15 +1,15 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/Home";
-import Products, { loader as productsLoader } from "./pages/Products";
+import Products, { loader as productsLoader } from "./pages/Products/Products";
 import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
 import ProductDetailPage, {
 	loader as productDetailLoader,
-} from "./pages/ProductDetail";
-import NewProduct from "./pages/NewProduct";
-import EditProduct from "./pages/EditProduct";
-import ProductsRootLayout from "./pages/ProductsRoot";
+} from "./pages/Products/ProductDetail";
+import NewProduct from "./pages/Products/NewProduct";
+import EditProduct from "./pages/Products/EditProduct";
+import ProductsRootLayout from "./pages/Products/ProductsRoot";
 import AuthenticationPage, {
 	action as authAction,
 } from "./pages/Authentication";
