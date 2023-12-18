@@ -21,6 +21,9 @@ import CategoryDetailPage, {
 	loader as categoryDetailLoader,
 } from "./pages/Categories/CategoryDetail";
 import EditCategory from "./pages/Categories/EditCategory";
+import NewCategory, {
+	action as newCategoryAction,
+} from "./pages/Categories/NewCategory";
 
 const router = createBrowserRouter([
 	{
@@ -86,10 +89,11 @@ const router = createBrowserRouter([
 							},
 						],
 					},
-					// {
-					// 	path: "new",
-					// 	element: <NewProduct />,
-					// },
+					{
+						path: "new",
+						element: <NewCategory />,
+						action: newCategoryAction,
+					},
 				],
 			},
 			{

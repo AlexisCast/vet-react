@@ -1,22 +1,24 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Form, useActionData, useNavigate } from "react-router-dom";
 
 import styles from "./CategoryForm.module.css";
 
 const CategoryForm = ({ method, category }) => {
+	const data = useActionData();
+	console.log("data CategoryForm");
+	console.log(data);
+
 	const navigate = useNavigate();
 	function cancelHandler() {
 		navigate("..");
 	}
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		// Your form submission logic, including handling the uploaded image (if needed)
-	};
-
 	return (
-		<form className={styles.form}>
+		<Form method="post" className={styles.form}>
+			{data && data.msg && (
+				<ul>
+					<li key={data.msg}>{data.msg}</li>
+				</ul>
+			)}
 			<p>
 				<label htmlFor="title">Name</label>
 				<input
@@ -33,7 +35,7 @@ const CategoryForm = ({ method, category }) => {
 					id="category"
 					type="text"
 					name="category"
-					required
+					// required
 					defaultValue={category ? category._id : ""}
 				/>
 			</p>
@@ -43,7 +45,7 @@ const CategoryForm = ({ method, category }) => {
 				</button>
 				<button>Save</button>
 			</div>
-		</form>
+		</Form>
 	);
 };
 
