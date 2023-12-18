@@ -19,6 +19,7 @@ import Categories, {
 import CategoriesRootLayout from "./pages/Categories/CategoriesRoot";
 import CategoryDetailPage, {
 	loader as categoryDetailLoader,
+	action as deleteEventAction,
 } from "./pages/Categories/CategoryDetail";
 import EditCategory from "./pages/Categories/EditCategory";
 import NewCategory, {
@@ -82,6 +83,7 @@ const router = createBrowserRouter([
 							{
 								index: true,
 								element: <CategoryDetailPage />,
+								action: deleteEventAction,
 							},
 							{
 								path: "edit",

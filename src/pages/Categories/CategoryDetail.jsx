@@ -1,5 +1,12 @@
-import { useParams, Link, json, useRouteLoaderData } from "react-router-dom";
+import {
+	useParams,
+	Link,
+	json,
+	useRouteLoaderData,
+	redirect,
+} from "react-router-dom";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
+import { getAuthToken } from "../../../util/auth";
 
 const CategoryDetailPage = () => {
 	const params = useParams();
@@ -26,6 +33,8 @@ export default CategoryDetailPage;
 export const loader = async ({ request, params }) => {
 	const id = params.categoryId;
 
+	console.log("categoryDetail loader");
+
 	const response = await fetch("http://localhost:8080/api/categories/" + id);
 
 	if (!response.ok) {
@@ -38,4 +47,31 @@ export const loader = async ({ request, params }) => {
 	} else {
 		return response;
 	}
+};
+
+export const action = async ({ request, params }) => {
+	const id = params.categoryId;
+
+	const token = getAuthToken();
+
+	const response = await fetch("http://localhost:8080/api/categories/" + id, {
+		method: request.method,
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		throw json(
+			{ msg: "Could not delete category..." },
+			{
+				status: 500,
+			}
+		);
+	}
+
+	console.log("deleting category", await response.json());
+
+	return redirect("/categories");
 };

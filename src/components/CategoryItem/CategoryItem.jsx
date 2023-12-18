@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 
 import styles from "./CategoryItem.module.css";
 
 const CategoryItem = ({ category }) => {
-	function startDeleteHandler() {
-		// ...
-	}
+	const submit = useSubmit();
+
+	const startDeleteHandler = () => {
+		const proceed = window.confirm("Are you sure?");
+
+		if (proceed) {
+			submit(null, { method: "delete" });
+		}
+	};
 
 	return (
 		<article className={styles.product}>
