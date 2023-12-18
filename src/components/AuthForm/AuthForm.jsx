@@ -19,13 +19,16 @@ function AuthForm() {
 						<li key={data.msg}>{data.msg}</li>
 					</ul>
 				)}
-				{data && data.errors && (
+				{/*
+				//TODO this should be uncomment when creating new user & need to be fixed frontend and backend
+        
+        {data && data.errors && (
 					<ul>
 						{data.errors.map((err, i) => (
 							<li key={i}>{err.msg}</li>
 						))}
 					</ul>
-				)}
+				)} */}
 				{!isLogin && (
 					<p>
 						<label htmlFor="email">Name</label>
