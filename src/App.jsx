@@ -13,6 +13,14 @@ import ProductsRootLayout from "./pages/Products/ProductsRoot";
 import AuthenticationPage, {
 	action as authAction,
 } from "./pages/Authentication";
+import Categories, {
+	loader as categoriesLoader,
+} from "./pages/Categories/Categories";
+import CategoriesRootLayout from "./pages/Categories/CategoriesRoot";
+import CategoryDetailPage, {
+	loader as categoryDetailLoader,
+} from "./pages/Categories/CategoryDetail";
+import EditCategory from "./pages/Categories/EditCategory";
 
 const router = createBrowserRouter([
 	{
@@ -52,6 +60,36 @@ const router = createBrowserRouter([
 						path: "new",
 						element: <NewProduct />,
 					},
+				],
+			},
+			{
+				path: "categories",
+				element: <CategoriesRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Categories />,
+						loader: categoriesLoader,
+					},
+					{
+						path: ":categoryId",
+						id: "category-detail",
+						loader: categoryDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <CategoryDetailPage />,
+							},
+							{
+								path: "edit",
+								element: <EditCategory />,
+							},
+						],
+					},
+					// {
+					// 	path: "new",
+					// 	element: <NewProduct />,
+					// },
 				],
 			},
 			{
