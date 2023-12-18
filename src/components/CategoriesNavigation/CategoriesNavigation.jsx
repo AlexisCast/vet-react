@@ -8,10 +8,10 @@ const CategoriesNavigation = () => {
 			<nav>
 				<ul className={classes.list}>
 					<li>
-						<NavLink href="/categories">All Categories</NavLink>
+						<NavLink to="/categories">All Categories</NavLink>
 					</li>
 					<li>
-						<NavLink href="/categories/new">New Category</NavLink>
+						<NavLink to="/categories/new">New Category</NavLink>
 					</li>
 				</ul>
 			</nav>
