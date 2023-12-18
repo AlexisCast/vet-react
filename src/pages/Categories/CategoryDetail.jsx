@@ -1,16 +1,17 @@
 import { useParams, Link, json, useRouteLoaderData } from "react-router-dom";
-import ProductItem from "../components/ProductItem/ProductItem";
+import CategoryItem from "../../components/CategoryItem/CategoryItem";
 
-const ProductDetailPage = () => {
+const CategoryDetailPage = () => {
 	const params = useParams();
-	const data = useRouteLoaderData("product-detail");
+	const data = useRouteLoaderData("category-detail");
+	console.log("category-detail data");
 
 	console.log(data);
 	return (
 		<div>
 			<h1>Product Detail</h1>
-			<p>{params.productId}</p>
-			<ProductItem product={data} />
+			<p>{params.categoryId}</p>
+			<CategoryItem category={data} />
 			<p>
 				<Link to=".." relative="path">
 					Back
@@ -20,11 +21,12 @@ const ProductDetailPage = () => {
 	);
 };
 
-export default ProductDetailPage;
+export default CategoryDetailPage;
 
 export const loader = async ({ request, params }) => {
-	const id = params.productId;
-	const response = await fetch("http://localhost:8080/api/products/" + id);
+	const id = params.categoryId;
+
+	const response = await fetch("http://localhost:8080/api/categories/" + id);
 
 	if (!response.ok) {
 		throw json(

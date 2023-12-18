@@ -2,19 +2,21 @@ import { Link, useLoaderData, json } from "react-router-dom";
 
 // import { mockProducts } from "../mock/products";
 
-import ProductList from "../components/ProductList/ProductList";
+import CategoryList from "../../components/CategoryList/CategoryList";
 
-const Products = () => {
+const Categories = () => {
 	const data = useLoaderData();
+	console.log("data");
+	console.log(data);
 
 	if (data.isError) {
 		return <p>{data.msg}</p>;
 	}
-	const products = data.products;
+	const categories = data.categories;
 
 	return (
 		<div>
-			<h1>Products </h1>
+			<h1>Categories </h1>
 			<p>
 				Go to <Link to="/">HomePage</Link>
 			</p>
@@ -23,16 +25,17 @@ const Products = () => {
 				{/* {error && <p>{error}</p>} */}
 			</div>
 			{/* {!isLoading && fetchedProducts && ( */}
-			<ProductList products={products} />
+			<CategoryList categories={categories} />
 			{/* )} */}
 		</div>
 	);
 };
 
-export default Products;
+export default Categories;
 
 export const loader = async () => {
-	const response = await fetch("http://localhost:8080/api/products");
+	console.log("Categories");
+	const response = await fetch("http://localhost:8080/api/categories");
 
 	if (!response.ok) {
 		// OPTION 1: return { isError: true, msg: "Could not fetch products..." };
