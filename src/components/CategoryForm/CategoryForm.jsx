@@ -2,6 +2,7 @@ import {
 	Form,
 	useActionData,
 	useNavigate,
+	useNavigation,
 	json,
 	redirect,
 } from "react-router-dom";
@@ -14,6 +15,10 @@ const CategoryForm = ({ method, category }) => {
 	const data = useActionData();
 	console.log("data CategoryForm");
 	console.log(data);
+
+	const navigation = useNavigation();
+
+	const isSubmitting = navigation.state === "submitting";
 
 	const navigate = useNavigate();
 	function cancelHandler() {
@@ -48,10 +53,16 @@ const CategoryForm = ({ method, category }) => {
 				/>
 			</p>
 			<div className={styles.actions}>
-				<button type="button" onClick={cancelHandler}>
+				<button
+					disabled={isSubmitting}
+					type="button"
+					onClick={cancelHandler}
+				>
 					Cancel
 				</button>
-				<button>Save</button>
+				<button disabled={isSubmitting}>
+					{isSubmitting ? "... Submitting" : "Save"}
+				</button>
 			</div>
 		</Form>
 	);
