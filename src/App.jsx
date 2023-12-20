@@ -6,6 +6,7 @@ import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
 import ProductDetailPage, {
 	loader as productDetailLoader,
+	action as deleteProductAction,
 } from "./pages/Products/ProductDetail";
 import NewProduct from "./pages/Products/NewProduct";
 import EditProduct from "./pages/Products/EditProduct";
@@ -53,6 +54,7 @@ const router = createBrowserRouter([
 							{
 								index: true,
 								element: <ProductDetailPage />,
+								action: deleteProductAction,
 							},
 							{
 								path: "edit",
