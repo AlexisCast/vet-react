@@ -12,7 +12,7 @@ const EditCategory = () => {
 			<h1>Edit Category Page</h1>
 			<p>{params.categoryId}</p>
 
-			<CategoryForm category={data} />
+			<CategoryForm method="put" category={data} />
 		</div>
 	);
 };

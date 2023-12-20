@@ -22,9 +22,9 @@ import CategoryDetailPage, {
 	action as deleteEventAction,
 } from "./pages/Categories/CategoryDetail";
 import EditCategory from "./pages/Categories/EditCategory";
-import NewCategory, {
-	action as newCategoryAction,
-} from "./pages/Categories/NewCategory";
+import NewCategory from "./pages/Categories/NewCategory";
+
+import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
 
 const router = createBrowserRouter([
 	{
@@ -88,13 +88,14 @@ const router = createBrowserRouter([
 							{
 								path: "edit",
 								element: <EditCategory />,
+								action: manipulateCategoryAction,
 							},
 						],
 					},
 					{
 						path: "new",
 						element: <NewCategory />,
-						action: newCategoryAction,
+						action: manipulateCategoryAction,
 					},
 				],
 			},
