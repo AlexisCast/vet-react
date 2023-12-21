@@ -4,6 +4,7 @@ import ProductForm from "../../components/ProductForm/ProductForm";
 const EditProduct = () => {
 	const params = useParams();
 	const data = useRouteLoaderData("product-detail");
+	console.log("product-detail");
 	console.log(data);
 
 	return (
@@ -11,7 +12,7 @@ const EditProduct = () => {
 			<h1>EditProduct Page</h1>
 			<p>{params.productId}</p>
 
-			<ProductForm product={data} />
+			<ProductForm method="put" product={data} />
 		</div>
 	);
 };
