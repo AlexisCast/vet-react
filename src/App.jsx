@@ -26,6 +26,7 @@ import EditCategory from "./pages/Categories/EditCategory";
 import NewCategory from "./pages/Categories/NewCategory";
 
 import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
+import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 
 const router = createBrowserRouter([
 	{
@@ -59,12 +60,14 @@ const router = createBrowserRouter([
 							{
 								path: "edit",
 								element: <EditProduct />,
+								action: manipulateProductAction,
 							},
 						],
 					},
 					{
 						path: "new",
 						element: <NewProduct />,
+						action: manipulateProductAction,
 					},
 				],
 			},

@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+	Form,
+	redirect,
+	useActionData,
+	useNavigate,
+	useNavigation,
+} from "react-router-dom";
+
+import { getAuthToken } from "../../../util/auth";
+
+import noImage from "../../assets/no-image.jpg";
 
 import styles from "./ProductForm.module.css";
 
@@ -9,10 +19,19 @@ const ProductForm = ({ method, product }) => {
 		product ? product.image : null
 	);
 
+	const data = useActionData();
+	console.log("data ProductForm");
+	console.log(data);
+
+	const navigation = useNavigation();
+
+	const isSubmitting = navigation.state === "submitting";
+
 	const navigate = useNavigate();
-	function cancelHandler() {
+
+	const cancelHandler = () => {
 		navigate("..");
-	}
+	};
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -39,7 +58,12 @@ const ProductForm = ({ method, product }) => {
 	};
 
 	return (
-		<form className={styles.form}>
+		<Form method={method} className={styles.form}>
+			{data && data.msg && (
+				<ul>
+					<li key={data.msg}>{data.msg}</li>
+				</ul>
+			)}
 			<p>
 				<label htmlFor="title">Name</label>
 				<input
@@ -56,13 +80,17 @@ const ProductForm = ({ method, product }) => {
 					id="image"
 					type="url"
 					name="image"
-					required
+					// required
 					defaultValue={product ? product.img : ""}
 				/>
 			</p>
 			<p>
 				<label htmlFor="image">Image</label>
-				<img src={product.img} alt={product.name} />
+				{product.img ? (
+					<img src={product.img} alt={product.name} />
+				) : (
+					<img src={noImage} alt="noImage" />
+				)}
 				{/* Change input type to file */}
 				<input
 					id="image"
@@ -85,7 +113,7 @@ const ProductForm = ({ method, product }) => {
 					id="available"
 					type="text"
 					name="available"
-					required
+					// required
 					defaultValue={product ? product.available : ""}
 				/>
 			</p>
@@ -102,9 +130,9 @@ const ProductForm = ({ method, product }) => {
 			<p>
 				<label htmlFor="date">Category ID</label>
 				<input
-					id="category"
+					id="categoryId"
 					type="text"
-					name="category"
+					name="categoryId"
 					required
 					defaultValue={product ? product.category._id : ""}
 				/>
@@ -121,13 +149,61 @@ const ProductForm = ({ method, product }) => {
 			</p>
 
 			<div className={styles.actions}>
-				<button type="button" onClick={cancelHandler}>
+				<button
+					disabled={isSubmitting}
+					type="button"
+					onClick={cancelHandler}
+				>
 					Cancel
 				</button>
-				<button>Save</button>
+				<button disabled={isSubmitting}>
+					{isSubmitting ? "... Submitting" : "Save"}
+				</button>
 			</div>
-		</form>
+		</Form>
 	);
 };
 
 export default ProductForm;
+
+export const action = async ({ request, params }) => {
+	const method = request.method;
+
+	const data = await request.formData();
+
+	const eventData = {
+		name: data.get("title"),
+		category: data.get("categoryId"),
+		price: data.get("price"),
+	};
+
+	console.log("eventData");
+	console.log(eventData);
+
+	const token = getAuthToken();
+
+	let url = "http://localhost:8080/api/products";
+
+	if (method === "PUT") {
+		const productId = params.productId;
+		url = "http://localhost:8080/api/products/" + productId;
+	}
+
+	const response = await fetch(url, {
+		method: method,
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+		body: JSON.stringify(eventData),
+	});
+
+	if (!response.ok) {
+		// throw json({ msg: "Could not save category." }, { status: 500 });
+		return response;
+	}
+
+	console.log(await response);
+
+	return redirect("/products");
+};
