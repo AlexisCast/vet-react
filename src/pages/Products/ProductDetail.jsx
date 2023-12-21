@@ -1,5 +1,13 @@
-import { useParams, Link, json, useRouteLoaderData } from "react-router-dom";
+import {
+	useParams,
+	Link,
+	json,
+	useRouteLoaderData,
+	redirect,
+} from "react-router-dom";
 import ProductItem from "../../components/ProductItem/ProductItem";
+
+import { getAuthToken } from "../../../util/auth";
 
 const ProductDetailPage = () => {
 	const params = useParams();
@@ -36,4 +44,32 @@ export const loader = async ({ request, params }) => {
 	} else {
 		return response;
 	}
+};
+
+export const action = async ({ request, params }) => {
+	const id = params.productId;
+
+	const token = getAuthToken();
+
+	const response = await fetch("http://localhost:8080/api/products/" + id, {
+		method: request.method,
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		return response;
+		// throw json(
+		// 	{ msg: "Could not delete product..." },
+		// 	{
+		// 		status: 500,
+		// 	}
+		// );
+	}
+
+	console.log("deleting product", await response.json());
+
+	return redirect("/products");
 };

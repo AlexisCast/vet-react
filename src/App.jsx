@@ -6,6 +6,7 @@ import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
 import ProductDetailPage, {
 	loader as productDetailLoader,
+	action as deleteProductAction,
 } from "./pages/Products/ProductDetail";
 import NewProduct from "./pages/Products/NewProduct";
 import EditProduct from "./pages/Products/EditProduct";
@@ -25,6 +26,7 @@ import EditCategory from "./pages/Categories/EditCategory";
 import NewCategory from "./pages/Categories/NewCategory";
 
 import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
+import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 
 const router = createBrowserRouter([
 	{
@@ -53,16 +55,19 @@ const router = createBrowserRouter([
 							{
 								index: true,
 								element: <ProductDetailPage />,
+								action: deleteProductAction,
 							},
 							{
 								path: "edit",
 								element: <EditProduct />,
+								action: manipulateProductAction,
 							},
 						],
 					},
 					{
 						path: "new",
 						element: <NewProduct />,
+						action: manipulateProductAction,
 					},
 				],
 			},
