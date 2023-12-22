@@ -41,6 +41,27 @@ header {
 	width: 100%;
 }
 
+.logoutForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+}
+
+.logoutButton {
+	color: white;
+	background-color: rgb(49, 52, 57);
+	border: none;
+	font-size: 16px;
+	line-height: 24px;
+	font-family: var(--family);
+	height: 100%;
+}
+
+.logoutButton:hover {
+	background-color: rgb(46, 47, 51);
+}
+
 .webNav > li:hover {
 	background-color: rgb(46, 47, 51);
 }
