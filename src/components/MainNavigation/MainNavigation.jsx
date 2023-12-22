@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Form, Link, NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -43,7 +43,7 @@ const MainNavigation = () => {
 							</li>
 						</ul>
 						<ul className={styles.webNav}>
-						<li>
+							<li>
 								<NavLink
 									to="/auth"
 									className={({ isActive }) =>
@@ -105,7 +105,13 @@ const MainNavigation = () => {
 							<li>
 								<Link to="/">Log In</Link>
 							</li>
-							<li>Log Out</li>
+							<li>
+								<Form action="/logout" method="post">
+									<button className={styles.logoutButton}>
+										Log Out
+									</button>
+								</Form>
+							</li>
 						</ul>
 					</ul>
 				) : (
