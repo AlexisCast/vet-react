@@ -105,8 +105,12 @@ const MainNavigation = () => {
 							<li>
 								<Link to="/">Log In</Link>
 							</li>
-							<li>
-								<Form action="/logout" method="post">
+							<li className={styles.lilogoutForm}>
+								<Form
+									className={styles.logoutForm}
+									action="/logout"
+									method="post"
+								>
 									<button className={styles.logoutButton}>
 										Log Out
 									</button>
