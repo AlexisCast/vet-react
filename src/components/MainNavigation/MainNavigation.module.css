@@ -41,11 +41,18 @@ header {
 	width: 100%;
 }
 
+.lilogoutForm {
+	padding: 0px !important;
+	width: 110px;
+}
+
 .logoutForm {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	height: 100%;
+	padding: 0;
+	width: 100%;
 }
 
 .logoutButton {
@@ -56,6 +63,7 @@ header {
 	line-height: 24px;
 	font-family: var(--family);
 	height: 100%;
+	cursor: pointer;
 }
 
 .logoutButton:hover {
