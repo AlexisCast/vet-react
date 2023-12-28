@@ -1,16 +1,25 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import Drawer from "../Drawer/Drawer";
 
 import styles from "./DrawerLayout.module.css";
 import Accordion, { AccordionItem } from "../Accordion/Accordion";
+import { setToken } from "../../../util/auth";
 
 const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
+	const navigate = useNavigate();
+
 	// const drawerIsVisbile = useSelector((state) => state.ui.drawerIsVisbile);
 	// const dispatch = useDispatch();
 
 	const toggleDrawer = () => {
 		setShowDrawer(false);
+	};
+
+	const toggleDrawerWithAction = () => {
+		setShowDrawer(false);
+		setToken();
+		navigate("/");
 	};
 
 	//TODO: refactor for toggleDrawer
@@ -87,7 +96,7 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 						</li>
 						<li onClick={toggleDrawer}>Welcome, User </li>
 						<li onClick={toggleDrawer}>Log In</li>
-						<li onClick={toggleDrawer}>Log Out</li>
+						<li onClick={toggleDrawerWithAction}>Log Out</li>
 					</ul>
 				</nav>
 			</div>
