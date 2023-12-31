@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useRouteLoaderData } from "react-router-dom";
 
 import classes from "./CategoriesNavigation.module.css";
 
 const CategoriesNavigation = () => {
+	const token = useRouteLoaderData("root");
+
 	return (
 		<header className={classes.header}>
 			<nav>
@@ -10,9 +12,11 @@ const CategoriesNavigation = () => {
 					<li>
 						<NavLink to="/categories">All Categories</NavLink>
 					</li>
-					<li>
-						<NavLink to="/categories/new">New Category</NavLink>
-					</li>
+					{token && (
+						<li>
+							<NavLink to="/categories/new">New Category</NavLink>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</header>

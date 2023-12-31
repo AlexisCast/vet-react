@@ -1,10 +1,12 @@
-import { Link, useSubmit } from "react-router-dom";
+import { Link, useRouteLoaderData, useSubmit } from "react-router-dom";
 
 import noImage from "../../assets/no-image.jpg";
 
 import styles from "./ProductItem.module.css";
 
 const ProductItem = ({ product }) => {
+	const token = useRouteLoaderData("root");
+
 	const submit = useSubmit();
 
 	const startDeleteHandler = () => {
@@ -25,10 +27,12 @@ const ProductItem = ({ product }) => {
 			<h4>{product.name}</h4>
 			<p>Available: {product.available ? "YES" : "NO"}</p>
 			<p>Category: {product.category.name}</p>
-			<menu className={styles.actions}>
-				<Link to="edit">Edit</Link>
-				<button onClick={startDeleteHandler}>Delete</button>
-			</menu>
+			{token && (
+				<menu className={styles.actions}>
+					<Link to="edit">Edit</Link>
+					<button onClick={startDeleteHandler}>Delete</button>
+				</menu>
+			)}
 		</article>
 	);
 };
