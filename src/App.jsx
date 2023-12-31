@@ -29,7 +29,7 @@ import { action as manipulateCategoryAction } from "./components/CategoryForm/Ca
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
-import { tokenLoader } from "../util/auth";
+import { checkAuthLoader, tokenLoader } from "../util/auth";
 
 const router = createBrowserRouter([
 	{
@@ -66,6 +66,7 @@ const router = createBrowserRouter([
 								path: "edit",
 								element: <EditProduct />,
 								action: manipulateProductAction,
+								loader: checkAuthLoader,
 							},
 						],
 					},
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
 						path: "new",
 						element: <NewProduct />,
 						action: manipulateProductAction,
+						loader: checkAuthLoader,
 					},
 				],
 			},
@@ -99,6 +101,7 @@ const router = createBrowserRouter([
 								path: "edit",
 								element: <EditCategory />,
 								action: manipulateCategoryAction,
+								loader: checkAuthLoader,
 							},
 						],
 					},
@@ -106,6 +109,7 @@ const router = createBrowserRouter([
 						path: "new",
 						element: <NewCategory />,
 						action: manipulateCategoryAction,
+						loader: checkAuthLoader,
 					},
 				],
 			},
