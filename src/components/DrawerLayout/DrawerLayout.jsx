@@ -1,4 +1,9 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import {
+	Link,
+	NavLink,
+	useNavigate,
+	useRouteLoaderData,
+} from "react-router-dom";
 
 import Drawer from "../Drawer/Drawer";
 
@@ -7,6 +12,8 @@ import Accordion, { AccordionItem } from "../Accordion/Accordion";
 import { setToken } from "../../../util/auth";
 
 const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
+	const token = useRouteLoaderData("root");
+
 	const navigate = useNavigate();
 
 	// const drawerIsVisbile = useSelector((state) => state.ui.drawerIsVisbile);
@@ -22,6 +29,12 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 		navigate("/");
 	};
 
+	const toggleDrawerWithActionLogIn = () => {
+		setShowDrawer(false);
+		setToken();
+		navigate("/auth?mode=login");
+	};
+
 	//TODO: refactor for toggleDrawer
 
 	return (
@@ -30,17 +43,22 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 				<p>Drawer Header</p>
 				<nav className={styles.Drawer__nav}>
 					<ul className={styles.mobileNav}>
-						<li onClick={toggleDrawer}>
-							<NavLink
-								to="/auth"
-								className={({ isActive }) =>
-									isActive ? styles.active : undefined
-								}
-								end
-							>
-								Authentication
-							</NavLink>
-						</li>
+						{token && (
+							<li onClick={toggleDrawer}>Welcome, User </li>
+						)}
+						{!token && (
+							<li onClick={toggleDrawer}>
+								<NavLink
+									to="/auth"
+									className={({ isActive }) =>
+										isActive ? styles.active : undefined
+									}
+									end
+								>
+									Authentication
+								</NavLink>
+							</li>
+						)}
 						<li onClick={toggleDrawer}>
 							<NavLink
 								to="/"
@@ -94,9 +112,14 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 								/>
 							</Accordion>
 						</li>
-						<li onClick={toggleDrawer}>Welcome, User </li>
-						<li onClick={toggleDrawer}>Log In</li>
-						<li onClick={toggleDrawerWithAction}>Log Out</li>
+						{!token && (
+							<li onClick={toggleDrawerWithActionLogIn}>
+								Log In
+							</li>
+						)}
+						{token && (
+							<li onClick={toggleDrawerWithAction}>Log Out</li>
+						)}
 					</ul>
 				</nav>
 			</div>

@@ -1,4 +1,4 @@
-import { Form, Link, NavLink } from "react-router-dom";
+import { Form, Link, NavLink, useRouteLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,8 @@ import LinkDropdown from "../LinkDropDowns/LinkDropdown";
 const title = import.meta.env.VITE_TITLE;
 
 const MainNavigation = () => {
+	const token = useRouteLoaderData("root");
+
 	const [windowIsWide, setWindowIsWide] = useState(window.innerWidth > 1000);
 	const [showDrawer, setShowDrawer] = useState(false);
 
@@ -43,17 +45,20 @@ const MainNavigation = () => {
 							</li>
 						</ul>
 						<ul className={styles.webNav}>
-							<li>
-								<NavLink
-									to="/auth"
-									className={({ isActive }) =>
-										isActive ? styles.active : undefined
-									}
-									end
-								>
-									Authentication
-								</NavLink>
-							</li>
+							{token && <li>Welcome, User </li>}
+							{!token && (
+								<li>
+									<NavLink
+										to="/auth"
+										className={({ isActive }) =>
+											isActive ? styles.active : undefined
+										}
+										end
+									>
+										Authentication
+									</NavLink>
+								</li>
+							)}
 							<li>
 								<NavLink
 									to="/"
@@ -101,21 +106,31 @@ const MainNavigation = () => {
 									<Link to="/categories">Update</Link>
 								</li>
 							</LinkDropdown>
-							<li>Welcome, User </li>
-							<li>
-								<Link to="/">Log In</Link>
-							</li>
-							<li className={styles.lilogoutForm}>
-								<Form
-									className={styles.logoutForm}
-									action="/logout"
-									method="post"
-								>
-									<button className={styles.logoutButton}>
-										Log Out
-									</button>
-								</Form>
-							</li>
+							{!token && (
+								<li>
+									<NavLink
+										to="/auth?mode=login"
+										className={({ isActive }) =>
+											isActive ? styles.active : undefined
+										}
+									>
+										Log In
+									</NavLink>
+								</li>
+							)}
+							{token && (
+								<li className={styles.lilogoutForm}>
+									<Form
+										className={styles.logoutForm}
+										action="/logout"
+										method="post"
+									>
+										<button className={styles.logoutButton}>
+											Log Out
+										</button>
+									</Form>
+								</li>
+							)}
 						</ul>
 					</ul>
 				) : (

@@ -29,11 +29,15 @@ import { action as manipulateCategoryAction } from "./components/CategoryForm/Ca
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
+import { tokenLoader } from "../util/auth";
+
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <RootLayout />,
 		errorElement: <ErrorPage />,
+		id: "root",
+		loader: tokenLoader,
 		children: [
 			{
 				index: true,

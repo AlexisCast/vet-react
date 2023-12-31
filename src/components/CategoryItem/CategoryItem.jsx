@@ -1,8 +1,10 @@
-import { Link, useSubmit } from "react-router-dom";
+import { Link, useRouteLoaderData, useSubmit } from "react-router-dom";
 
 import styles from "./CategoryItem.module.css";
 
 const CategoryItem = ({ category }) => {
+	const token = useRouteLoaderData("root");
+
 	const submit = useSubmit();
 
 	const startDeleteHandler = () => {
@@ -17,10 +19,12 @@ const CategoryItem = ({ category }) => {
 		<article className={styles.product}>
 			<h4>{category.name}</h4>
 			<p>ID: {category._id}</p>
-			<menu className={styles.actions}>
-				<Link to="edit">Edit</Link>
-				<button onClick={startDeleteHandler}>Delete</button>
-			</menu>
+			{token && (
+				<menu className={styles.actions}>
+					<Link to="edit">Edit</Link>
+					<button onClick={startDeleteHandler}>Delete</button>
+				</menu>
+			)}
 		</article>
 	);
 };

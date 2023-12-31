@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useRouteLoaderData } from "react-router-dom";
 
 import classes from "./ProductsNavigation.module.css";
 
 const ProductsNavigation = () => {
+	const token = useRouteLoaderData("root");
+
 	return (
 		<header className={classes.header}>
 			<nav>
@@ -10,9 +12,11 @@ const ProductsNavigation = () => {
 					<li>
 						<NavLink to="/products">All Products</NavLink>
 					</li>
-					<li>
-						<NavLink to="/products/new">New Product</NavLink>
-					</li>
+					{token && (
+						<li>
+							<NavLink to="/products/new">New Product</NavLink>
+						</li>
+					)}
 				</ul>
 			</nav>
 		</header>
