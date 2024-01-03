@@ -7,7 +7,7 @@ import {
 	useNavigation,
 } from "react-router-dom";
 
-import { getAuthToken } from "../../../util/auth";
+import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 import noImage from "../../assets/no-image.jpg";
 
@@ -199,6 +199,9 @@ export const action = async ({ request, params }) => {
 	});
 
 	if (!response.ok) {
+		const responseData = await response.clone().json();
+
+		isTokenExpired(responseData?.msg);
 		// throw json({ msg: "Could not save category." }, { status: 500 });
 		return response;
 	}

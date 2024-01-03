@@ -10,11 +10,17 @@ export const setToken = (token) => {
 
 export const getAuthToken = () => {
 	const token = localStorage.getItem("token");
+
+	if (!token) {
+		return null;
+	}
+
 	return token;
 };
 
 export const tokenLoader = () => {
-	return getAuthToken();
+	const token = getAuthToken();
+	return token;
 };
 
 export const checkAuthLoader = () => {
@@ -25,4 +31,11 @@ export const checkAuthLoader = () => {
 	}
 
 	return null;
+};
+
+export const isTokenExpired = (msg) => {
+	if (msg === "Token has expired") {
+		window.confirm("Session has expired...");
+		localStorage.setItem("token", "EXPIRED");
+	}
 };
