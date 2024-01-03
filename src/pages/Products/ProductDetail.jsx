@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import ProductItem from "../../components/ProductItem/ProductItem";
 
-import { getAuthToken } from "../../../util/auth";
+import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 const ProductDetailPage = () => {
 	const params = useParams();
@@ -60,6 +60,9 @@ export const action = async ({ request, params }) => {
 	});
 
 	if (!response.ok) {
+		const responseData = await response.clone().json();
+
+		isTokenExpired(responseData?.msg);
 		return response;
 		// throw json(
 		// 	{ msg: "Could not delete product..." },
