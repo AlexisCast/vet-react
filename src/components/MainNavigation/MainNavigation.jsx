@@ -8,11 +8,14 @@ import DrawerLayout from "../DrawerLayout/DrawerLayout";
 
 import styles from "./MainNavigation.module.css";
 import LinkDropdown from "../LinkDropDowns/LinkDropdown";
+import { getUser } from "../../../util/auth";
 
 const title = import.meta.env.VITE_TITLE;
 
 const MainNavigation = () => {
 	const token = useRouteLoaderData("root");
+
+	const { name: userName } = getUser();
 
 	const [windowIsWide, setWindowIsWide] = useState(window.innerWidth > 1000);
 	const [showDrawer, setShowDrawer] = useState(false);
@@ -35,6 +38,7 @@ const MainNavigation = () => {
 			<DrawerLayout
 				showDrawer={showDrawer}
 				setShowDrawer={setShowDrawer}
+				userName={userName}
 			/>
 			<nav>
 				{windowIsWide ? (
@@ -45,7 +49,7 @@ const MainNavigation = () => {
 							</li>
 						</ul>
 						<ul className={styles.webNav}>
-							{token && <li>Welcome, User </li>}
+							{token && <li>Welcome, {userName} </li>}
 							{!token && (
 								<li>
 									<NavLink

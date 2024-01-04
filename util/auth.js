@@ -8,6 +8,14 @@ export const setToken = (token) => {
 	}
 };
 
+export const setUser = (user) => {
+	if (user) {
+		localStorage.setItem("user", user);
+	} else {
+		localStorage.removeItem("user");
+	}
+};
+
 export const getAuthToken = () => {
 	const token = localStorage.getItem("token");
 
@@ -16,6 +24,16 @@ export const getAuthToken = () => {
 	}
 
 	return token;
+};
+
+export const getUser = () => {
+	const user = localStorage.getItem("user");
+
+	if (!user) {
+		return null;
+	}
+
+	return JSON.parse(user);
 };
 
 export const tokenLoader = () => {
