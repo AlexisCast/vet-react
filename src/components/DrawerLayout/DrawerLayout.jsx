@@ -11,7 +11,7 @@ import styles from "./DrawerLayout.module.css";
 import Accordion, { AccordionItem } from "../Accordion/Accordion";
 import { setToken } from "../../../util/auth";
 
-const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
+const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
 	const token = useRouteLoaderData("root");
 
 	const navigate = useNavigate();
@@ -44,7 +44,7 @@ const DrawerLayout = ({ showDrawer, setShowDrawer }) => {
 				<nav className={styles.Drawer__nav}>
 					<ul className={styles.mobileNav}>
 						{token && (
-							<li onClick={toggleDrawer}>Welcome, User </li>
+							<li onClick={toggleDrawer}>Welcome, {userName} </li>
 						)}
 						{!token && (
 							<li onClick={toggleDrawer}>

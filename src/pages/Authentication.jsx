@@ -1,7 +1,7 @@
 import { json, redirect } from "react-router-dom";
 import AuthForm from "../components/AuthForm/AuthForm";
 
-import { setToken } from "../../util/auth";
+import { setToken, setUser } from "../../util/auth";
 
 function AuthenticationPage() {
 	return <AuthForm />;
@@ -39,8 +39,10 @@ export const action = async ({ request }) => {
 			const resData = await response.json();
 			console.log(resData.user);
 			const token = resData.token;
+			const user = JSON.stringify(resData.user);
 
 			setToken(token);
+			setUser(user);
 
 			return redirect("/");
 		}
