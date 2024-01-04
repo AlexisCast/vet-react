@@ -37,5 +37,7 @@ export const isTokenExpired = (msg) => {
 	if (msg === "Token has expired") {
 		window.confirm("Session has expired...");
 		localStorage.setItem("token", "EXPIRED");
+		return true;
 	}
+	return false;
 };

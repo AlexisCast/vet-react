@@ -6,7 +6,7 @@ import {
 	redirect,
 } from "react-router-dom";
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
-import { getAuthToken } from "../../../util/auth";
+import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 const CategoryDetailPage = () => {
 	const params = useParams();
@@ -63,12 +63,18 @@ export const action = async ({ request, params }) => {
 	});
 
 	if (!response.ok) {
-		throw json(
-			{ msg: "Could not delete category..." },
-			{
-				status: 500,
-			}
-		);
+		const responseData = await response.clone().json();
+
+		if (isTokenExpired(responseData?.msg)) {
+			return response;
+		} else {
+			throw json(
+				{ msg: "Could not delete category..." },
+				{
+					status: 500,
+				}
+			);
+		}
 	}
 
 	console.log("deleting category", await response.json());
