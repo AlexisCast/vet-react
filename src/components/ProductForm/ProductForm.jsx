@@ -51,14 +51,12 @@ const ProductForm = ({ method, product }) => {
 		}
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		// Your form submission logic, including handling the uploaded image (if needed)
-	};
-
 	return (
-		<Form method={method} className={styles.form}>
+		<Form
+			method={method}
+			className={styles.form}
+			encType="multipart/form-data"
+		>
 			{data && data.msg && (
 				<ul>
 					<li key={data.msg}>{data.msg}</li>
@@ -85,7 +83,7 @@ const ProductForm = ({ method, product }) => {
 				/>
 			</p>
 			<p>
-				<label htmlFor="image">Image</label>
+				<label htmlFor="image">Current Image</label>
 				{product.img ? (
 					<img src={product.img} alt={product.name} />
 				) : (
@@ -93,9 +91,9 @@ const ProductForm = ({ method, product }) => {
 				)}
 				{/* Change input type to file */}
 				<input
-					id="image"
+					id="file"
 					type="file"
-					name="image"
+					name="file"
 					onChange={handleImageChange}
 					required={!product}
 				/>
@@ -175,6 +173,7 @@ export const action = async ({ request, params }) => {
 		name: data.get("title"),
 		category: data.get("categoryId"),
 		price: data.get("price"),
+		file: data.get("file"),
 	};
 
 	console.log("eventData");
@@ -200,13 +199,44 @@ export const action = async ({ request, params }) => {
 
 	if (!response.ok) {
 		const responseData = await response.clone().json();
-
 		isTokenExpired(responseData?.msg);
-		// throw json({ msg: "Could not save category." }, { status: 500 });
 		return response;
-	}
+	} else {
+		const responseData = await response.clone().json();
 
-	console.log(await response);
+		const { _id } = responseData;
+
+		// If it's a PUT or POST request and there's a file, update the image separately
+		if (
+			(method === "PUT" || method === "POST") &&
+			eventData.file.size > 0
+		) {
+			let productId = params.productId;
+
+			if (method == "POST") {
+				productId = _id;
+			}
+
+			const urlToUpdateImage = `http://localhost:8080/api/uploads/products/${productId}`;
+
+			const formData = new FormData();
+			formData.append("file", eventData.file);
+
+			const imageUpdateResponse = await fetch(urlToUpdateImage, {
+				method: "PUT",
+				headers: {
+					"x-token": token,
+				},
+				body: formData,
+			});
+
+			if (!imageUpdateResponse.ok) {
+				const responseData = await imageUpdateResponse.clone().json();
+				isTokenExpired(responseData?.msg);
+				return imageUpdateResponse;
+			}
+		}
+	}
 
 	return redirect("/products");
 };

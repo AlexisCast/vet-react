@@ -25,7 +25,7 @@ const ProductItem = ({ product }) => {
 				<img src={noImage} alt="noImage" />
 			)}
 			<h4>{product.name}</h4>
-			<p>Available: {product.available ? "YES" : "NO"}</p>
+			{/* <p>Available: {product.available ? "YES" : "NO"}</p> */}
 			<p>Category: {product.category.name}</p>
 			{token && (
 				<menu className={styles.actions}>
