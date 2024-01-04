@@ -167,8 +167,10 @@ export default ProductForm;
 export const action = async ({ request, params }) => {
 	const method = request.method;
 
+	// Get form data
 	const data = await request.formData();
 
+	// Extract relevant data from form
 	const eventData = {
 		name: data.get("title"),
 		category: data.get("categoryId"),
@@ -179,31 +181,41 @@ export const action = async ({ request, params }) => {
 	console.log("eventData");
 	console.log(eventData);
 
+	// Get authentication token
 	const token = getAuthToken();
 
+	// Set API endpoint URL based on request method
 	let url = "http://localhost:8080/api/products";
-
 	if (method === "PUT") {
 		const productId = params.productId;
-		url = "http://localhost:8080/api/products/" + productId;
+		url = `http://localhost:8080/api/products/${productId}`;
 	}
 
-	const response = await fetch(url, {
+	// Set up fetch options
+	const fetchOptions = {
 		method: method,
 		headers: {
 			"Content-Type": "application/json",
 			"x-token": token,
 		},
-		body: JSON.stringify(eventData),
-	});
+	};
+
+	if (method === "PUT" || method === "POST") {
+		// Add body for PUT and POST requests
+		fetchOptions.body = JSON.stringify(eventData);
+	}
+
+	// Make the API request
+	const response = await fetch(url, fetchOptions);
 
 	if (!response.ok) {
+		// Handle errors
 		const responseData = await response.clone().json();
 		isTokenExpired(responseData?.msg);
 		return response;
 	} else {
+		// Handle success
 		const responseData = await response.clone().json();
-
 		const { _id } = responseData;
 
 		// If it's a PUT or POST request and there's a file, update the image separately
@@ -211,17 +223,16 @@ export const action = async ({ request, params }) => {
 			(method === "PUT" || method === "POST") &&
 			eventData.file.size > 0
 		) {
-			let productId = params.productId;
-
-			if (method == "POST") {
-				productId = _id;
-			}
+			// Determine productId based on method
+			const productId = method === "POST" ? _id : params.productId;
 
 			const urlToUpdateImage = `http://localhost:8080/api/uploads/products/${productId}`;
 
+			// Set up formData for image update
 			const formData = new FormData();
 			formData.append("file", eventData.file);
 
+			// Make the image update request
 			const imageUpdateResponse = await fetch(urlToUpdateImage, {
 				method: "PUT",
 				headers: {
@@ -231,6 +242,7 @@ export const action = async ({ request, params }) => {
 			});
 
 			if (!imageUpdateResponse.ok) {
+				// Handle image update errors
 				const responseData = await imageUpdateResponse.clone().json();
 				isTokenExpired(responseData?.msg);
 				return imageUpdateResponse;
@@ -238,5 +250,6 @@ export const action = async ({ request, params }) => {
 		}
 	}
 
+	// Redirect to "/products" after successful request
 	return redirect("/products");
 };
