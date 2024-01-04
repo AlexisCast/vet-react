@@ -9,7 +9,7 @@ const CategoryList = ({ categories }) => {
 				<li key={cat._id} className={styles.item}>
 					<Link to={`/categories/${cat._id}`}>
 						<div className={styles.content}>
-							<p>Name: {cat.name}</p>
+							<p>{cat.name}</p>
 							{/* <p>ID: ${cat._id}</p> */}
 						</div>
 					</Link>

@@ -10,7 +10,10 @@ const CategoriesNavigation = () => {
 			<nav>
 				<ul className={classes.list}>
 					<li>
-						<NavLink to="/categories">All Categories</NavLink>
+						<NavLink to="/products">Products</NavLink>
+					</li>
+					<li>
+						<NavLink to="/categories">Categories</NavLink>
 					</li>
 					{token && (
 						<li>

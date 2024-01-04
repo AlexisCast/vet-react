@@ -33,7 +33,7 @@
 	flex-direction: column;
 	justify-content: center;
 	width: 100%;
-	text-align: justify;
+	text-align: center;
 	padding: 1rem;
 }
 .content p {
