@@ -9,7 +9,7 @@ import {
 
 import styles from "./CategoryForm.module.css";
 
-import { getAuthToken } from "../../../util/auth";
+import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 const CategoryForm = ({ method, category }) => {
 	const data = useActionData();
@@ -98,6 +98,9 @@ export const action = async ({ request, params }) => {
 	});
 
 	if (!response.ok) {
+		const responseData = await response.clone().json();
+
+		isTokenExpired(responseData?.msg);
 		// throw json({ msg: "Could not save category." }, { status: 500 });
 		return response;
 	}
