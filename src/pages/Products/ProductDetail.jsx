@@ -9,6 +9,8 @@ import ProductItem from "../../components/ProductItem/ProductItem";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const ProductDetailPage = () => {
 	const params = useParams();
 	const data = useRouteLoaderData("product-detail");
@@ -32,7 +34,7 @@ export default ProductDetailPage;
 
 export const loader = async ({ request, params }) => {
 	const id = params.productId;
-	const response = await fetch("http://localhost:8080/api/products/" + id);
+	const response = await fetch(client_url + "/api/products/" + id);
 
 	if (!response.ok) {
 		throw json(
@@ -51,7 +53,7 @@ export const action = async ({ request, params }) => {
 
 	const token = getAuthToken();
 
-	const response = await fetch("http://localhost:8080/api/products/" + id, {
+	const response = await fetch(client_url + "/api/products/" + id, {
 		method: request.method,
 		headers: {
 			"Content-Type": "application/json",

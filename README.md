@@ -14,8 +14,9 @@ npm run dev
 
 ## Env File:
 - VITE_TITLE
+- VITE_CLIENT_URL
 
 ```bash
 VITE_TITLE=<NAME OF BUSINESS>
-
+VITE_TITLE=http://localhost:8080
 ```

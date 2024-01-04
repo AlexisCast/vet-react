@@ -3,6 +3,8 @@ import AuthForm from "../components/AuthForm/AuthForm";
 
 import { setToken, setUser } from "../../util/auth";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 function AuthenticationPage() {
 	return <AuthForm />;
 }
@@ -25,7 +27,7 @@ export const action = async ({ request }) => {
 			password: data.get("password"),
 		};
 
-		const response = await fetch("http://localhost:8080/api/auth/" + mode, {
+		const response = await fetch("/api/auth/" + mode, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -54,7 +56,7 @@ export const action = async ({ request }) => {
 			role: "SALES_ROLE",
 		};
 
-		const response = await fetch("http://localhost:8080/api/users", {
+		const response = await fetch(client_url + "/api/users", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",

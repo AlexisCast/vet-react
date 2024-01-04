@@ -13,6 +13,8 @@ import noImage from "../../assets/no-image.jpg";
 
 import styles from "./ProductForm.module.css";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const ProductForm = ({ method, product }) => {
 	const [image, setImage] = useState(product ? product.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
@@ -185,10 +187,10 @@ export const action = async ({ request, params }) => {
 	const token = getAuthToken();
 
 	// Set API endpoint URL based on request method
-	let url = "http://localhost:8080/api/products";
+	let url = `${client_url}/api/products`;
 	if (method === "PUT") {
 		const productId = params.productId;
-		url = `http://localhost:8080/api/products/${productId}`;
+		url = `${client_url}/api/products/${productId}`;
 	}
 
 	// Set up fetch options
@@ -226,7 +228,7 @@ export const action = async ({ request, params }) => {
 			// Determine productId based on method
 			const productId = method === "POST" ? _id : params.productId;
 
-			const urlToUpdateImage = `http://localhost:8080/api/uploads/products/${productId}`;
+			const urlToUpdateImage = `${client_url}/api/uploads/products/${productId}`;
 
 			// Set up formData for image update
 			const formData = new FormData();
