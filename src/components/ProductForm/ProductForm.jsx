@@ -51,14 +51,12 @@ const ProductForm = ({ method, product }) => {
 		}
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-
-		// Your form submission logic, including handling the uploaded image (if needed)
-	};
-
 	return (
-		<Form method={method} className={styles.form}>
+		<Form
+			method={method}
+			className={styles.form}
+			encType="multipart/form-data"
+		>
 			{data && data.msg && (
 				<ul>
 					<li key={data.msg}>{data.msg}</li>
@@ -85,7 +83,7 @@ const ProductForm = ({ method, product }) => {
 				/>
 			</p>
 			<p>
-				<label htmlFor="image">Image</label>
+				<label htmlFor="image">Current Image</label>
 				{product.img ? (
 					<img src={product.img} alt={product.name} />
 				) : (
@@ -93,9 +91,9 @@ const ProductForm = ({ method, product }) => {
 				)}
 				{/* Change input type to file */}
 				<input
-					id="image"
+					id="file"
 					type="file"
-					name="image"
+					name="file"
 					onChange={handleImageChange}
 					required={!product}
 				/>
@@ -169,44 +167,89 @@ export default ProductForm;
 export const action = async ({ request, params }) => {
 	const method = request.method;
 
+	// Get form data
 	const data = await request.formData();
 
+	// Extract relevant data from form
 	const eventData = {
 		name: data.get("title"),
 		category: data.get("categoryId"),
 		price: data.get("price"),
+		file: data.get("file"),
 	};
 
 	console.log("eventData");
 	console.log(eventData);
 
+	// Get authentication token
 	const token = getAuthToken();
 
+	// Set API endpoint URL based on request method
 	let url = "http://localhost:8080/api/products";
-
 	if (method === "PUT") {
 		const productId = params.productId;
-		url = "http://localhost:8080/api/products/" + productId;
+		url = `http://localhost:8080/api/products/${productId}`;
 	}
 
-	const response = await fetch(url, {
+	// Set up fetch options
+	const fetchOptions = {
 		method: method,
 		headers: {
 			"Content-Type": "application/json",
 			"x-token": token,
 		},
-		body: JSON.stringify(eventData),
-	});
+	};
 
-	if (!response.ok) {
-		const responseData = await response.clone().json();
-
-		isTokenExpired(responseData?.msg);
-		// throw json({ msg: "Could not save category." }, { status: 500 });
-		return response;
+	if (method === "PUT" || method === "POST") {
+		// Add body for PUT and POST requests
+		fetchOptions.body = JSON.stringify(eventData);
 	}
 
-	console.log(await response);
+	// Make the API request
+	const response = await fetch(url, fetchOptions);
 
+	if (!response.ok) {
+		// Handle errors
+		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
+		return response;
+	} else {
+		// Handle success
+		const responseData = await response.clone().json();
+		const { _id } = responseData;
+
+		// If it's a PUT or POST request and there's a file, update the image separately
+		if (
+			(method === "PUT" || method === "POST") &&
+			eventData.file.size > 0
+		) {
+			// Determine productId based on method
+			const productId = method === "POST" ? _id : params.productId;
+
+			const urlToUpdateImage = `http://localhost:8080/api/uploads/products/${productId}`;
+
+			// Set up formData for image update
+			const formData = new FormData();
+			formData.append("file", eventData.file);
+
+			// Make the image update request
+			const imageUpdateResponse = await fetch(urlToUpdateImage, {
+				method: "PUT",
+				headers: {
+					"x-token": token,
+				},
+				body: formData,
+			});
+
+			if (!imageUpdateResponse.ok) {
+				// Handle image update errors
+				const responseData = await imageUpdateResponse.clone().json();
+				isTokenExpired(responseData?.msg);
+				return imageUpdateResponse;
+			}
+		}
+	}
+
+	// Redirect to "/products" after successful request
 	return redirect("/products");
 };
