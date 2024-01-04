@@ -27,7 +27,7 @@ export const action = async ({ request }) => {
 			password: data.get("password"),
 		};
 
-		const response = await fetch("/api/auth/" + mode, {
+		const response = await fetch(client_url + "/api/auth/" + mode, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
