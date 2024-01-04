@@ -4,6 +4,8 @@ import { Link, useLoaderData, json } from "react-router-dom";
 
 import ProductList from "../../components/ProductList/ProductList";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const Products = () => {
 	const data = useLoaderData();
 
@@ -32,7 +34,7 @@ const Products = () => {
 export default Products;
 
 export const loader = async () => {
-	const response = await fetch("http://localhost:8080/api/products");
+	const response = await fetch(client_url + "/api/products");
 
 	if (!response.ok) {
 		// OPTION 1: return { isError: true, msg: "Could not fetch products..." };

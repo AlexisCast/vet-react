@@ -11,6 +11,8 @@ import styles from "./CategoryForm.module.css";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const CategoryForm = ({ method, category }) => {
 	const data = useActionData();
 	console.log("data CategoryForm");
@@ -81,11 +83,11 @@ export const action = async ({ request, params }) => {
 
 	const token = getAuthToken();
 
-	let url = "http://localhost:8080/api/categories";
+	let url = `${client_url}/api/categories`;
 
 	if (method === "PUT") {
 		const eventId = params.categoryId;
-		url = "http://localhost:8080/api/categories/" + eventId;
+		url = `${client_url}/api/categories/${eventId}`;
 	}
 
 	const response = await fetch(url, {

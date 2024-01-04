@@ -4,6 +4,8 @@ import { Link, useLoaderData, json } from "react-router-dom";
 
 import CategoryList from "../../components/CategoryList/CategoryList";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const Categories = () => {
 	const data = useLoaderData();
 	console.log("data");
@@ -35,7 +37,7 @@ export default Categories;
 
 export const loader = async () => {
 	console.log("Categories");
-	const response = await fetch("http://localhost:8080/api/categories");
+	const response = await fetch(`${client_url}/api/categories`);
 
 	if (!response.ok) {
 		// OPTION 1: return { isError: true, msg: "Could not fetch products..." };

@@ -8,6 +8,8 @@ import {
 import CategoryItem from "../../components/CategoryItem/CategoryItem";
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
+const client_url = import.meta.env.VITE_CLIENT_URL;
+
 const CategoryDetailPage = () => {
 	const params = useParams();
 	const data = useRouteLoaderData("category-detail");
@@ -35,7 +37,7 @@ export const loader = async ({ request, params }) => {
 
 	console.log("categoryDetail loader");
 
-	const response = await fetch("http://localhost:8080/api/categories/" + id);
+	const response = await fetch(client_url + "/api/categories/" + id);
 
 	if (!response.ok) {
 		throw json(
@@ -54,7 +56,7 @@ export const action = async ({ request, params }) => {
 
 	const token = getAuthToken();
 
-	const response = await fetch("http://localhost:8080/api/categories/" + id, {
+	const response = await fetch(client_url + "/api/categories/" + id, {
 		method: request.method,
 		headers: {
 			"Content-Type": "application/json",
