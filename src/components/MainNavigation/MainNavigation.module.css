@@ -1,0 +1,84 @@
+header {
+	background-color: rgb(49, 52, 57);
+	/* position: sticky; */
+	top: 0;
+}
+
+.navContainer {
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.webNav {
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
+
+.webNav > li {
+	display: flex;
+	align-items: center;
+	height: 64px;
+	color: white;
+	list-style-type: none;
+	padding: 0px 15px;
+	cursor: pointer;
+	min-width: 80px;
+}
+
+.noMinWidth > li {
+	min-width: 0px !important;
+}
+
+.webNav > li > a {
+	color: inherit;
+	text-decoration: none;
+	text-align: center;
+	width: 100%;
+}
+
+.lilogoutForm {
+	padding: 0px !important;
+	width: 110px;
+}
+
+.logoutForm {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	padding: 0;
+	width: 100%;
+}
+
+.logoutButton {
+	color: white;
+	background-color: rgb(49, 52, 57);
+	border: none;
+	font-size: 16px;
+	line-height: 24px;
+	font-family: var(--family);
+	height: 100%;
+	cursor: pointer;
+}
+
+.logoutButton:hover {
+	background-color: rgb(46, 47, 51);
+}
+
+.webNav > li:hover {
+	background-color: rgb(46, 47, 51);
+}
+
+.faBars {
+	cursor: pointer;
+	/* width: 100%; */
+}
+
+.active {
+	color: pink !important;
+}

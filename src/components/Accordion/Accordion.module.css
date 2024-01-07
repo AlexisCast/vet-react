@@ -1,0 +1,40 @@
+.Accordion_Container {
+	width: 100%;
+}
+
+.AccordionButton__button {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.Accordion__content {
+	border-top: 2px solid #4f6d7a;
+	width: 80%;
+	/* margin-left: 40px; */
+}
+
+.Accordion__content > ul {
+	padding: 0;
+	padding-top: 5px;
+}
+
+.AccordionItem {
+	padding: 5px 0px;
+	list-style-type: none;
+}
+
+.AccordionItem:hover {
+	background-color: #4f6d7a;
+}
+
+.AccordionItem > a {
+	text-decoration: none;
+	/* list-style-type: none; */
+	color: inherit;
+}
+
+.faCaretDown {
+	padding-right: 5px;
+}
