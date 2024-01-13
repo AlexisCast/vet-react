@@ -41,9 +41,11 @@ const RootLayout = () => {
 				{navigation.state === "loading" && <p>Loading...</p>}
 				<Outlet />
 			</main>
-			<Portal>
-				<WhatsAppButton />
-			</Portal>
+			{!token && (
+				<Portal>
+					<WhatsAppButton />
+				</Portal>
+			)}
 		</>
 	);
 };

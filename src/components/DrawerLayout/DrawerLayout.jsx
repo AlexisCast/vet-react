@@ -46,19 +46,6 @@ const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
 						{token && (
 							<li onClick={toggleDrawer}>Welcome, {userName} </li>
 						)}
-						{!token && (
-							<li onClick={toggleDrawer}>
-								<NavLink
-									to="/auth"
-									className={({ isActive }) =>
-										isActive ? styles.active : undefined
-									}
-									end
-								>
-									Authentication
-								</NavLink>
-							</li>
-						)}
 						<li onClick={toggleDrawer}>
 							<NavLink
 								to="/"
@@ -71,10 +58,27 @@ const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
 							</NavLink>
 						</li>
 						<li>
-							<Accordion title="Users" closeDrawer={toggleDrawer}>
-								<AccordionItem route="/users" label="All" />
-								<AccordionItem route="/users" label="New" />
-								<AccordionItem route="/users" label="Update" />
+							<Accordion
+								title="Owners"
+								closeDrawer={toggleDrawer}
+							>
+								<AccordionItem route="/owners" label="All" />
+								<AccordionItem
+									route="/owners/new"
+									label="New"
+								/>
+							</Accordion>
+						</li>
+						<li>
+							<Accordion
+								title="Patients"
+								closeDrawer={toggleDrawer}
+							>
+								<AccordionItem route="/patients" label="All" />
+								<AccordionItem
+									route="/patients/new"
+									label="New"
+								/>
 							</Accordion>
 						</li>
 						<li>

@@ -50,19 +50,6 @@ const MainNavigation = () => {
 						</ul>
 						<ul className={styles.webNav}>
 							{token && <li>Welcome, {userName} </li>}
-							{!token && (
-								<li>
-									<NavLink
-										to="/auth"
-										className={({ isActive }) =>
-											isActive ? styles.active : undefined
-										}
-										end
-									>
-										Authentication
-									</NavLink>
-								</li>
-							)}
 							<li>
 								<NavLink
 									to="/"
@@ -74,15 +61,20 @@ const MainNavigation = () => {
 									Home
 								</NavLink>
 							</li>
-							<LinkDropdown label="Users" route="/users">
+							<LinkDropdown label="Owners" route="/owners">
 								<li>
-									<Link to="/users">All</Link>
+									<Link to="/owners">All</Link>
 								</li>
 								<li>
-									<Link to="/users">New</Link>
+									<Link to="/owners/new">New</Link>
+								</li>
+							</LinkDropdown>
+							<LinkDropdown label="Patients" route="/users">
+								<li>
+									<Link to="/patients">All</Link>
 								</li>
 								<li>
-									<Link to="/products">Update</Link>
+									<Link to="/patients/new">New</Link>
 								</li>
 							</LinkDropdown>
 							<LinkDropdown label="Products" route="/products">
@@ -91,9 +83,6 @@ const MainNavigation = () => {
 								</li>
 								<li>
 									<Link to="/products/new">New</Link>
-								</li>
-								<li>
-									<Link to="/products">Update</Link>
 								</li>
 							</LinkDropdown>
 							<LinkDropdown
@@ -105,9 +94,6 @@ const MainNavigation = () => {
 								</li>
 								<li>
 									<Link to="/categories">New</Link>
-								</li>
-								<li>
-									<Link to="/categories">Update</Link>
 								</li>
 							</LinkDropdown>
 							{!token && (
