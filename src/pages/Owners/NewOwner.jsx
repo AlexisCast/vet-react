@@ -1,12 +1,23 @@
-import CategoryForm from "../../components/CategoryForm/CategoryForm";
+import OwnerForm from "../../components/OwnerForm/OwnerForm";
 
-const NewCategory = () => {
+const NewOwner = () => {
+	const owner = {
+		_id: "",
+		address: "",
+		email: "",
+		lastName: "",
+		name: "",
+		other: "",
+		phoneNumber1: "",
+		phoneNumber2: "",
+	};
+
 	return (
 		<div>
-			<h1>NewCategory</h1>
-			<CategoryForm method="post" />
+			<h1>New Owner</h1>
+			<OwnerForm method="post" owner={owner} />
 		</div>
 	);
 };
 
-export default NewCategory;
+export default NewOwner;
