@@ -33,10 +33,12 @@ import OwnerDetailPage, {
 } from "./pages/Owners/OwnerDetail";
 
 import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
+import { action as manipulateOwnerAction } from "./components/OwnerForm/OwnerForm";
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
+import EditOwner from "./pages/Owners/EditOwner";
 
 const router = createBrowserRouter([
 	{
@@ -139,12 +141,12 @@ const router = createBrowserRouter([
 								element: <OwnerDetailPage />,
 								action: deleteOwnerAction,
 							},
-							// 		{
-							// 			path: "edit",
-							// 			element: <EditCategory />,
-							// 			action: manipulateCategoryAction,
-							// 			loader: checkAuthLoader,
-							// 		},
+									{
+										path: "edit",
+										element: <EditOwner />,
+										action: manipulateOwnerAction,
+										loader: checkAuthLoader,
+									},
 						],
 					},
 					// {

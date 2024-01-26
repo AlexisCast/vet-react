@@ -19,7 +19,7 @@ const OwnerDetailPage = () => {
 	return (
 		<div>
 			<h1>Owner Detail</h1>
-			<p>{params.ownerId}</p>
+			{/* <p>{params.ownerId}</p> */}
 			<OwnerItem data={data} />
 			<p>
 				<Link to=".." relative="path">
