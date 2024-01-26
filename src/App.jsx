@@ -4,6 +4,10 @@ import HomePage from "./pages/Home";
 import Products, { loader as productsLoader } from "./pages/Products/Products";
 import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
+import AuthenticationPage, {
+	action as authAction,
+} from "./pages/Authentication";
+
 import ProductDetailPage, {
 	loader as productDetailLoader,
 	action as deleteProductAction,
@@ -11,9 +15,7 @@ import ProductDetailPage, {
 import NewProduct from "./pages/Products/NewProduct";
 import EditProduct from "./pages/Products/EditProduct";
 import ProductsRootLayout from "./pages/Products/ProductsRoot";
-import AuthenticationPage, {
-	action as authAction,
-} from "./pages/Authentication";
+
 import Categories, {
 	loader as categoriesLoader,
 } from "./pages/Categories/Categories";
@@ -25,7 +27,17 @@ import CategoryDetailPage, {
 import EditCategory from "./pages/Categories/EditCategory";
 import NewCategory from "./pages/Categories/NewCategory";
 
+import Owners, { loader as ownersLoader } from "./pages/Owners/Owners";
+import OwnersRootLayout from "./pages/Owners/OwnerRoot";
+import OwnerDetailPage, {
+	loader as ownerDetailLoader,
+	action as deleteOwnerAction,
+} from "./pages/Owners/OwnerDetail";
+import EditOwner from "./pages/Owners/EditOwner";
+import NewOwner from "./pages/Owners/NewOwner";
+
 import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
+import { action as manipulateOwnerAction } from "./components/OwnerForm/OwnerForm";
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
@@ -109,6 +121,41 @@ const router = createBrowserRouter([
 						path: "new",
 						element: <NewCategory />,
 						action: manipulateCategoryAction,
+						loader: checkAuthLoader,
+					},
+				],
+			},
+			{
+				path: "owners",
+				element: <OwnersRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Owners />,
+						loader: ownersLoader,
+					},
+					{
+						path: ":ownerId",
+						id: "owner-detail",
+						loader: ownerDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <OwnerDetailPage />,
+								action: deleteOwnerAction,
+							},
+							{
+								path: "edit",
+								element: <EditOwner />,
+								action: manipulateOwnerAction,
+								loader: checkAuthLoader,
+							},
+						],
+					},
+					{
+						path: "new",
+						element: <NewOwner />,
+						action: manipulateOwnerAction,
 						loader: checkAuthLoader,
 					},
 				],
