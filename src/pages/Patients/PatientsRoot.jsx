@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import OwnersNavigation from "../../components/OwnersNavigation/OwnersNavigation";
+import PatientsNavigation from "../../components/PatientsNavigation/PatientsNavigation";
 
 const PatientsRootLayout = () => {
 	return (
 		<>
-			<OwnersNavigation />
+			<PatientsNavigation />
 			<main>
 				<Outlet />
 			</main>

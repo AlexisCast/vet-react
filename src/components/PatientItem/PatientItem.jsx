@@ -9,8 +9,19 @@ const PatientItem = ({ data }) => {
 
 	const submit = useSubmit();
 
-	const { age, gender, name, note, owner, race, sterilized, user, _id, img } =
-		data;
+	const {
+		_id,
+		age,
+		gender,
+		img,
+		name,
+		note,
+		owner,
+		race,
+		sterilized,
+		user,
+		weight,
+	} = data;
 
 	const startDeleteHandler = () => {
 		const proceed = window.confirm("Are you sure?");
@@ -38,10 +49,16 @@ const PatientItem = ({ data }) => {
 					<b>Age:</b> {age}
 				</p>
 				<p>
+					<b>Weight:</b> {weight}
+				</p>
+				<p>
 					<b>Gender:</b> {gender}
 				</p>
 				<p>
 					<b>Sterilized:</b> {sterilized ? "Yes" : "No"}
+				</p>
+				<p>
+					<b>Note:</b> {note}
 				</p>
 				<p>
 					<b>Owners Name:</b> {owner.name}

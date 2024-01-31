@@ -1,28 +1,28 @@
 import { useState } from "react";
 import {
 	Form,
-	redirect,
 	useActionData,
 	useNavigate,
 	useNavigation,
+	json,
+	redirect,
 } from "react-router-dom";
+
+import styles from "./PatientForm.module.css";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 import noImage from "../../assets/no-image.jpg";
 
-import styles from "./ProductForm.module.css";
-
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
-const ProductForm = ({ method, product }) => {
-	const [image, setImage] = useState(product ? product.image : null);
+const PatientForm = ({ method, patient }) => {
+	const [image, setImage] = useState(patient ? patient.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
-		product ? product.image : null
+		patient ? patient.image : null
 	);
-
 	const data = useActionData();
-	console.log("data ProductForm");
+	console.log("data PatientForm");
 	console.log(data);
 
 	const navigation = useNavigation();
@@ -30,10 +30,23 @@ const ProductForm = ({ method, product }) => {
 	const isSubmitting = navigation.state === "submitting";
 
 	const navigate = useNavigate();
-
-	const cancelHandler = () => {
+	function cancelHandler() {
 		navigate("..");
-	};
+	}
+
+	const {
+		_id,
+		age,
+		gender,
+		img,
+		name,
+		note,
+		owner,
+		race,
+		sterilized,
+		user,
+		weight,
+	} = patient;
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -65,13 +78,13 @@ const ProductForm = ({ method, product }) => {
 				</ul>
 			)}
 			<p>
-				<label htmlFor="title">Name</label>
+				<label htmlFor="name">Name</label>
 				<input
-					id="title"
+					id="name"
 					type="text"
-					name="title"
+					name="name"
 					required
-					defaultValue={product ? product.name : ""}
+					defaultValue={patient ? name : ""}
 				/>
 			</p>
 			<p>
@@ -81,13 +94,13 @@ const ProductForm = ({ method, product }) => {
 					type="url"
 					name="image"
 					// required
-					defaultValue={product ? product.img : ""}
+					defaultValue={patient ? patient.img : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="file">Current Image</label>
-				{product.img ? (
-					<img src={product.img} alt={product.name} />
+				<label htmlFor="image">Current Image</label>
+				{patient.img ? (
+					<img src={patient.img} alt={patient.name} />
 				) : (
 					<img src={noImage} alt="noImage" />
 				)}
@@ -97,7 +110,7 @@ const ProductForm = ({ method, product }) => {
 					type="file"
 					name="file"
 					onChange={handleImageChange}
-					required={!product}
+					required={!patient}
 				/>
 			</p>
 			{previewUrl && (
@@ -108,46 +121,95 @@ const ProductForm = ({ method, product }) => {
 				/>
 			)}
 			<p>
-				<label htmlFor="available">Available</label>
+				<label htmlFor="race">Race</label>
 				<input
-					id="available"
+					id="race"
 					type="text"
-					name="available"
+					name="race"
+					required
+					defaultValue={patient ? race : ""}
+				/>
+			</p>
+			<p>
+				<label htmlFor="age">Age</label>
+				<input
+					id="age"
+					type="text"
+					name="age"
 					// required
-					defaultValue={product ? product.available : ""}
+					defaultValue={patient ? age : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="category">Category Name</label>
+				<label htmlFor="weight">Weight</label>
 				<input
-					id="category"
+					id="weight"
 					type="text"
-					name="category"
-					required
-					defaultValue={product ? product.category.name : ""}
+					name="weight"
+					// required
+					defaultValue={patient ? weight : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="categoryId">Category ID</label>
+				<label htmlFor="gender">Gender</label>
 				<input
-					id="categoryId"
+					id="gender"
 					type="text"
-					name="categoryId"
-					required
-					defaultValue={product ? product.category._id : ""}
+					name="gender"
+					// required
+					defaultValue={patient ? gender : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="price">Price</label>
+				<label htmlFor="sterilized">Sterilized</label>
 				<input
-					id="price"
+					id="sterilized"
 					type="text"
-					name="price"
-					required
-					defaultValue={product ? product.price : ""}
+					name="sterilized"
+					// required
+					defaultValue={patient ? sterilized : ""}
 				/>
 			</p>
-
+			<p>
+				<label htmlFor="sterilized">Note</label>
+				<input
+					id="note"
+					type="text"
+					name="note"
+					// required
+					defaultValue={patient ? note : ""}
+				/>
+			</p>
+			<p>
+				<label htmlFor="owner_id">Owners ID</label>
+				<input
+					id="owner_id"
+					type="text"
+					name="owner_id"
+					required
+					defaultValue={owner ? owner._id : ""}
+				/>
+			</p>
+			<p>
+				<label htmlFor="owner_name">Owners Name</label>
+				<input
+					id="owner_name"
+					type="text"
+					name="owner_name"
+					// required
+					defaultValue={owner ? owner.name : ""}
+				/>
+			</p>
+			<p>
+				<label htmlFor="owner_phoneNumber1">Phone Number 1</label>
+				<input
+					id="owner_phoneNumber1"
+					type="text"
+					name="ownerphoneNumber1"
+					// required
+					defaultValue={owner ? owner.phoneNumber1 : ""}
+				/>
+			</p>
 			<div className={styles.actions}>
 				<button
 					disabled={isSubmitting}
@@ -164,19 +226,22 @@ const ProductForm = ({ method, product }) => {
 	);
 };
 
-export default ProductForm;
+export default PatientForm;
 
 export const action = async ({ request, params }) => {
 	const method = request.method;
 
-	// Get form data
 	const data = await request.formData();
 
-	// Extract relevant data from form
 	const eventData = {
-		name: data.get("title"),
-		category: data.get("categoryId"),
-		price: data.get("price"),
+		name: data.get("name"),
+		race: data.get("race"),
+		age: data.get("age"),
+		weight: data.get("weight"),
+		gender: data.get("gender"),
+		sterilized: data.get("sterilized"),
+		note: data.get("note"),
+		owner: data.get("owner_id"),
 		file: data.get("file"),
 	};
 
@@ -187,10 +252,10 @@ export const action = async ({ request, params }) => {
 	const token = getAuthToken();
 
 	// Set API endpoint URL based on request method
-	let url = `${client_url}/api/products`;
+	let url = `${client_url}/api/patients`;
 	if (method === "PUT") {
-		const productId = params.productId;
-		url = `${client_url}/api/products/${productId}`;
+		const eventId = params.patientId;
+		url = `${client_url}/api/patients/${eventId}`;
 	}
 
 	// Set up fetch options
@@ -211,9 +276,10 @@ export const action = async ({ request, params }) => {
 	const response = await fetch(url, fetchOptions);
 
 	if (!response.ok) {
-		// Handle errors
 		const responseData = await response.clone().json();
+
 		isTokenExpired(responseData?.msg);
+		// throw json({ msg: "Could not save category." }, { status: 500 });
 		return response;
 	} else {
 		// Handle success
@@ -225,10 +291,10 @@ export const action = async ({ request, params }) => {
 			(method === "PUT" || method === "POST") &&
 			eventData.file.size > 0
 		) {
-			// Determine productId based on method
-			const productId = method === "POST" ? _id : params.productId;
+			// Determine patientId based on method
+			const patientId = method === "POST" ? _id : params.patientId;
 
-			const urlToUpdateImage = `${client_url}/api/uploads/products/${productId}`;
+			const urlToUpdateImage = `${client_url}/api/uploads/patients/${patientId}`;
 
 			// Set up formData for image update
 			const formData = new FormData();
@@ -252,6 +318,7 @@ export const action = async ({ request, params }) => {
 		}
 	}
 
-	// Redirect to "/products" after successful request
-	return redirect("/products");
+	console.log(await response);
+
+	return redirect("/patients");
 };
