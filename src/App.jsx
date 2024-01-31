@@ -42,6 +42,11 @@ import { action as manipulateProductAction } from "./components/ProductForm/Prod
 import { action as logoutAction } from "./pages/Logout";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
+import Patients, { loader as patientsLoader } from "./pages/Patients/Patients";
+import PatientDetailPage, {
+	loader as patientDetailLoader,
+	action as deletePatientAction,
+} from "./pages/Patients/PatientDetail";
 
 const router = createBrowserRouter([
 	{
@@ -157,6 +162,29 @@ const router = createBrowserRouter([
 						element: <NewOwner />,
 						action: manipulateOwnerAction,
 						loader: checkAuthLoader,
+					},
+				],
+			},
+			{
+				path: "patients",
+				element: <OwnersRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Patients />,
+						loader: patientsLoader,
+					},
+					{
+						path: ":patientId",
+						id: "patient-detail",
+						loader: patientDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <PatientDetailPage />,
+								action: deletePatientAction,
+							},
+						],
 					},
 				],
 			},
