@@ -38,15 +38,20 @@ import NewOwner from "./pages/Owners/NewOwner";
 
 import { action as manipulateCategoryAction } from "./components/CategoryForm/CategoryForm";
 import { action as manipulateOwnerAction } from "./components/OwnerForm/OwnerForm";
+import { action as manipulatePatientAction } from "./components/PatientForm/PatientForm";
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
-import { checkAuthLoader, tokenLoader } from "../util/auth";
 import Patients, { loader as patientsLoader } from "./pages/Patients/Patients";
 import PatientDetailPage, {
 	loader as patientDetailLoader,
 	action as deletePatientAction,
 } from "./pages/Patients/PatientDetail";
+import EditPatient from "./pages/Patients/EditPatient";
+import NewPatient from "./pages/Patients/NewPatient";
+
+import { checkAuthLoader, tokenLoader } from "../util/auth";
+import PatientsRootLayout from "./pages/Patients/PatientsRoot";
 
 const router = createBrowserRouter([
 	{
@@ -167,7 +172,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "patients",
-				element: <OwnersRootLayout />,
+				element: <PatientsRootLayout />,
 				children: [
 					{
 						index: true,
@@ -184,7 +189,19 @@ const router = createBrowserRouter([
 								element: <PatientDetailPage />,
 								action: deletePatientAction,
 							},
+							{
+								path: "edit",
+								element: <EditPatient />,
+								action: manipulatePatientAction,
+								loader: checkAuthLoader,
+							},
 						],
+					},
+					{
+						path: "new",
+						element: <NewPatient />,
+						action: manipulatePatientAction,
+						loader: checkAuthLoader,
 					},
 				],
 			},

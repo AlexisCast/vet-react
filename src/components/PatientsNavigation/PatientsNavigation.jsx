@@ -1,8 +1,8 @@
 import { NavLink, useRouteLoaderData } from "react-router-dom";
 
-import classes from "./OwnersNavigation.module.css";
+import classes from "./PatientsNavigation.module.css";
 
-const OwnersNavigation = () => {
+const PatientsNavigation = () => {
 	const token = useRouteLoaderData("root");
 
 	return (
@@ -16,11 +16,11 @@ const OwnersNavigation = () => {
 						<NavLink to="/categories">Categories</NavLink>
 					</li>
 					<li>
-						<NavLink to="/patients">Patients</NavLink>
+						<NavLink to="/owners">Owners</NavLink>
 					</li>
 					{token && (
 						<li>
-							<NavLink to="/owners/new">New Owner</NavLink>
+							<NavLink to="/patients/new">New Patient</NavLink>
 						</li>
 					)}
 				</ul>
@@ -29,4 +29,4 @@ const OwnersNavigation = () => {
 	);
 };
 
-export default OwnersNavigation;
+export default PatientsNavigation;

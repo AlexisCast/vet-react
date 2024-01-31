@@ -16,9 +16,19 @@ const ProductsNavigation = () => {
 						<NavLink to="/categories">Categories</NavLink>
 					</li>
 					{token && (
-						<li>
-							<NavLink to="/products/new">New Product</NavLink>
-						</li>
+						<>
+							<li>
+								<NavLink to="/patients">Patients</NavLink>
+							</li>
+							<li>
+								<NavLink to="/owners">Owners</NavLink>
+							</li>
+							<li>
+								<NavLink to="/products/new">
+									New Product
+								</NavLink>
+							</li>
+						</>
 					)}
 				</ul>
 			</nav>
