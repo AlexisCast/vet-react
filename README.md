@@ -11,6 +11,7 @@ npm run dev
 
 - v1.0.0 “v1.0.0” ->feat/6_Owners_wPatientsList -> Branch 1.0.0-rc-1
   - Owners w/PatientList
+  - compatible with Branch 1.0.0-rc-1 in https://github.com/AlexisCast/vet-serv 
 
 ## Env File:
 - VITE_TITLE
