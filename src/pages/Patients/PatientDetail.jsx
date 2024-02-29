@@ -22,9 +22,7 @@ const PatientDetailPage = () => {
 			{/* <p>{params.ownerId}</p> */}
 			<PatientItem data={data} />
 			<p>
-				<Link to=".." relative="path">
-					Back
-				</Link>
+				<Link to="/patients">Patients</Link>
 			</p>
 		</div>
 	);
@@ -35,7 +33,7 @@ export default PatientDetailPage;
 export const loader = async ({ request, params }) => {
 	const id = params.patientId;
 
-	console.log("patientDetail loader",id);
+	console.log("patientDetail loader", id);
 
 	const token = getAuthToken();
 
