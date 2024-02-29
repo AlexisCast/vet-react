@@ -54,3 +54,7 @@
 .actions button:hover {
 	background-color: var(--color-delete);
 }
+
+.ownerName {
+	color: cyan;
+}

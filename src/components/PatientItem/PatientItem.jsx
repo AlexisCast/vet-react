@@ -61,7 +61,13 @@ const PatientItem = ({ data }) => {
 					<b>Note:</b> {note}
 				</p>
 				<p>
-					<b>Owners Name:</b> {owner.name}
+					<b>Owners Name:</b>{" "}
+					<Link
+						to={`/owners/${owner._id}`}
+						className={styles.ownerName}
+					>
+						{owner.name}
+					</Link>
 				</p>
 				<p>
 					<b>Phone Number 1:</b> {owner.phoneNumber1}

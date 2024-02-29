@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import OwnerItem from "../../components/OwnerItem/OwnerItem";
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
+import PatientsList from "../../components/PatientsList/PatientsList";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
@@ -16,16 +17,20 @@ const OwnerDetailPage = () => {
 	console.log("owner-detail data");
 
 	console.log(data);
+
+	const { owner, patients, total } = data;
 	return (
 		<div>
 			<h1>Owner Detail</h1>
 			{/* <p>{params.ownerId}</p> */}
-			<OwnerItem data={data} />
+			<OwnerItem data={owner} />
 			<p>
 				<Link to=".." relative="path">
 					Back
 				</Link>
 			</p>
+			<h3>Total of Patients: {total}</h3>
+			<PatientsList patients={patients} />
 		</div>
 	);
 };
@@ -39,13 +44,16 @@ export const loader = async ({ request, params }) => {
 
 	const token = getAuthToken();
 
-	const response = await fetch(client_url + "/api/owners/" + id, {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-			"x-token": token,
-		},
-	});
+	const response = await fetch(
+		client_url + "/api/owners/" + id + "/patients",
+		{
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				"x-token": token,
+			},
+		}
+	);
 
 	if (!response.ok) {
 		throw json(
