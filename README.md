@@ -9,8 +9,8 @@ npm run dev
 
 ## Tags 
 
-- v1.0.0 “v1.0.0” -> feat/4_ReactRouter_nested_layout_ProductsRootLayout -> Branch 1.0.0-rc-1
-  - Basic Routing
+- v1.0.0 “v1.0.0” ->feat/6_Owners_wPatientsList -> Branch 1.0.0-rc-1
+  - Owners w/PatientList
 
 ## Env File:
 - VITE_TITLE
