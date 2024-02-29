@@ -5,10 +5,6 @@ import noImage from "../../assets/no-image.jpg";
 import styles from "./PatientsList.module.css";
 
 const PatientsList = ({ patients }) => {
-	if (patients.length === 0) {
-		return <h2>No patients</h2>;
-	}
-
 	return (
 		<ul className={styles.list}>
 			{patients.map((obj) => (

@@ -29,8 +29,14 @@ const OwnerDetailPage = () => {
 					Back
 				</Link>
 			</p>
-			<h3>Total of Patients: {total}</h3>
-			<PatientsList patients={patients} />
+			{patients.length === 0 ? (
+				<h2>No patients</h2>
+			) : (
+				<>
+					<h3>Total of Patients: {total}</h3>
+					<PatientsList patients={patients} />
+				</>
+			)}
 		</div>
 	);
 };
