@@ -13,15 +13,18 @@ import styles from "./PatientForm.module.css";
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 import noImage from "../../assets/no-image.jpg";
+import Dropdown from "../Dropdown/Dropdown";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
-const PatientForm = ({ method, patient }) => {
+const PatientForm = ({ method, patient, listOfOwners }) => {
+	const [selectedOption, setSelectedOption] = useState("");
 	const [image, setImage] = useState(patient ? patient.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
 		patient ? patient.image : null
 	);
 	const data = useActionData();
+	const { total, owners } = listOfOwners;
 	console.log("data PatientForm");
 	console.log(data);
 
@@ -47,6 +50,18 @@ const PatientForm = ({ method, patient }) => {
 		user,
 		weight,
 	} = patient;
+
+	const options = owners.map((item) => ({
+		id: item._id,
+		option: `${item.name} ${item.lastName}`,
+	}));
+
+	const handleSelect = (option) => {
+		setSelectedOption(option);
+	};
+
+	// const options = ["Option 1", "Option 2", "Option 3"];
+	// const options = owners;
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -180,6 +195,12 @@ const PatientForm = ({ method, patient }) => {
 					defaultValue={patient ? note : ""}
 				/>
 			</p>
+			<>
+				<label htmlFor="selected_option">
+					Selected Option: {selectedOption}
+				</label>
+				<Dropdown options={options} onSelect={handleSelect} />
+			</>
 			<p>
 				<label htmlFor="owner_id">Owners ID</label>
 				<input

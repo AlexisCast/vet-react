@@ -6,6 +6,7 @@
 .form label,
 .form input,
 .form textarea {
+	text-align: justify;
 	display: block;
 	width: 100%;
 }
