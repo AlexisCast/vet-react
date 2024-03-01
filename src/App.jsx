@@ -48,7 +48,7 @@ import PatientDetailPage, {
 	action as deletePatientAction,
 } from "./pages/Patients/PatientDetail";
 import EditPatient from "./pages/Patients/EditPatient";
-import NewPatient from "./pages/Patients/NewPatient";
+import NewPatient,{loader as newPatientLoader} from "./pages/Patients/NewPatient";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 import PatientsRootLayout from "./pages/Patients/PatientsRoot";
@@ -199,9 +199,10 @@ const router = createBrowserRouter([
 					},
 					{
 						path: "new",
+						id: "new-patientData",
 						element: <NewPatient />,
 						action: manipulatePatientAction,
-						loader: checkAuthLoader,
+						loader: newPatientLoader,
 					},
 				],
 			},
