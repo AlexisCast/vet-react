@@ -18,7 +18,13 @@ import Dropdown from "../Dropdown/Dropdown";
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
 const PatientForm = ({ method, patient, listOfOwners }) => {
-	const [selectedOption, setSelectedOption] = useState("");
+	//	Dropdown states
+	const [selectedOwnerOption, setSelectedOwnerOption] = useState(null);
+	const [selectedOwnerName, setSelectedOwnerName] = useState(null);
+	const [selectedOwnerId, setSelectedOwnerId] = useState(null);
+	const [selectedOwnerPhoneNumber1, setSelectedOwnerPhoneNumber1] =
+		useState(null);
+
 	const [image, setImage] = useState(patient ? patient.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
 		patient ? patient.image : null
@@ -57,11 +63,28 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 	}));
 
 	const handleSelect = (option) => {
-		setSelectedOption(option);
+		setSelectedOwnerOption(option);
+
+		const filteredOwnerData = owners.filter((item) => item._id == option);
+
+		if (filteredOwnerData.length == 0) {
+			setSelectedOwnerName(null);
+			setSelectedOwnerId(null);
+			setSelectedOwnerPhoneNumber1(null);
+		} else {
+			setSelectedOwnerName(
+				filteredOwnerData[0].name + " " + filteredOwnerData[0].lastName
+			);
+			setSelectedOwnerId(filteredOwnerData[0]._id);
+			setSelectedOwnerPhoneNumber1(filteredOwnerData[0].phoneNumber1);
+		}
 	};
 
-	// const options = ["Option 1", "Option 2", "Option 3"];
-	// const options = owners;
+	// const options = [
+	// 	{ id: "65e0fdacf84beca149f75a8f1", option: "HELLO1", lastName: "WORLD" },
+	// 	{ id: "65e0fdacf84beca149f75a8f2", option: "HELLO2", lastName: "WORLD" },
+	// 	{ id: "65e0fdacf84beca149f75a8f3", option: "HELLO3", lastName: "WORLD" },
+	// ];
 
 	const handleImageChange = (e) => {
 		const file = e.target.files[0];
@@ -197,9 +220,13 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 			</p>
 			<>
 				<label htmlFor="selected_option">
-					Selected Option: {selectedOption}
+					Selected Option: {selectedOwnerOption}
 				</label>
-				<Dropdown options={options} onSelect={handleSelect} />
+				<Dropdown
+					options={options}
+					onSelect={handleSelect}
+					selectedOptionDefault={owner._id}
+				/>
 			</>
 			<p>
 				<label htmlFor="owner_id">Owners ID</label>
@@ -208,7 +235,8 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					type="text"
 					name="owner_id"
 					required
-					defaultValue={owner ? owner._id : ""}
+					value={selectedOwnerId || (owner && owner._id) || ""}
+					readOnly
 				/>
 			</p>
 			<p>
@@ -218,7 +246,12 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					type="text"
 					name="owner_name"
 					// required
-					defaultValue={owner ? owner.name : ""}
+					value={
+						selectedOwnerName ||
+						(owner && owner.name + " " + owner.lastName) ||
+						""
+					}
+					readOnly
 				/>
 			</p>
 			<p>
@@ -228,7 +261,12 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					type="text"
 					name="ownerphoneNumber1"
 					// required
-					defaultValue={owner ? owner.phoneNumber1 : ""}
+					value={
+						selectedOwnerPhoneNumber1 ||
+						(owner && owner.phoneNumber1) ||
+						""
+					}
+					readOnly
 				/>
 			</p>
 			<div className={styles.actions}>

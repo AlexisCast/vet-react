@@ -13,6 +13,7 @@ const PatientItem = ({ data }) => {
 		_id,
 		age,
 		gender,
+		lastName,
 		img,
 		name,
 		note,
@@ -66,7 +67,7 @@ const PatientItem = ({ data }) => {
 						to={`/owners/${owner._id}`}
 						className={styles.ownerName}
 					>
-						{owner.name}
+						{owner.name + " " + owner.lastName}
 					</Link>
 				</p>
 				<p>
