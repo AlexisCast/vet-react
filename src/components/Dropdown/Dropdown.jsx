@@ -2,8 +2,8 @@ import { useState } from "react";
 
 import styles from "./Dropdown.module.css";
 
-const Dropdown = ({ options, onSelect }) => {
-	const [selectedOption, setSelectedOption] = useState("");
+const Dropdown = ({ options, onSelect, selectedOptionDefault = "null" }) => {
+	const [selectedOption, setSelectedOption] = useState(selectedOptionDefault);
 
 	const handleSelect = (option) => {
 		setSelectedOption(option);
