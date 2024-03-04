@@ -28,7 +28,7 @@ const EditPatient = () => {
 	}
 	return (
 		<div>
-			<h1>Edit Owner</h1>
+			<h1>Edit Patient</h1>
 			{/* <p>{params.patientId}</p> */}
 
 			<PatientForm

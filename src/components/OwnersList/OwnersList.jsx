@@ -12,7 +12,9 @@ const OwnersList = ({ owners }) => {
 							<p>Name: {obj.name}</p>
 							<p>Last Name: {obj.lastName}</p>
 							<p>Phone Number 1: {obj.phoneNumber1}</p>
-							<p>Phone Number 2: {obj.phoneNumber2}</p>
+							{obj.phoneNumber2 && (
+								<p>Phone Number 2: {obj.phoneNumber2}</p>
+							)}
 							{/* <p>ID: ${obj._id}</p> */}
 						</div>
 					</Link>
