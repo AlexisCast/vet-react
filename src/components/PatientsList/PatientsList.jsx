@@ -17,7 +17,7 @@ const PatientsList = ({ patients }) => {
 						)}
 						<div className={styles.content}>
 							<p>Name: {obj.name}</p>
-							<p>Race: {obj.race}</p>
+							<p>Specie: {obj.specie}</p>
 							<p>Owner: {obj.owner.name}</p>
 							{/* <p>ID: ${obj._id}</p> */}
 						</div>

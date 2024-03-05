@@ -25,7 +25,7 @@ const NewPatient = () => {
 		name: "",
 		note: "",
 		owner: "",
-		race: "",
+		specie: "",
 		sterilized: "",
 		user: "",
 		_id: "",

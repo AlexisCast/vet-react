@@ -51,7 +51,7 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 		name,
 		note,
 		owner,
-		race,
+		specie,
 		sterilized,
 		user,
 		weight,
@@ -159,13 +159,13 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 				/>
 			)}
 			<p>
-				<label htmlFor="race">Race</label>
+				<label htmlFor="specie">Specie</label>
 				<input
-					id="race"
+					id="specie"
 					type="text"
-					name="race"
+					name="specie"
 					required
-					defaultValue={patient ? race : ""}
+					defaultValue={patient ? specie : ""}
 				/>
 			</p>
 			<p>
@@ -294,7 +294,7 @@ export const action = async ({ request, params }) => {
 
 	const eventData = {
 		name: data.get("name"),
-		race: data.get("race"),
+		specie: data.get("specie"),
 		age: data.get("age"),
 		weight: data.get("weight"),
 		gender: data.get("gender"),
