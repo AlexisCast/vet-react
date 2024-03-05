@@ -7,12 +7,14 @@ const EditOwner = () => {
 	console.log("owner-detail");
 	console.log(data);
 
+	const ownderData = data.owner;
+
 	return (
 		<div>
 			<h1>Edit Owner</h1>
 			<p>{params.ownerId}</p>
 
-			<OwnerForm method="put" owner={data} />
+			<OwnerForm method="put" owner={ownderData} />
 		</div>
 	);
 };

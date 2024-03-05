@@ -28,7 +28,7 @@ const OwnerItem = ({ data }) => {
 
 	return (
 		<article className={styles.owner}>
-			<p>ID: {_id}</p>
+			{/* <p>ID: {_id}</p> */}
 			<div className={styles.ownderInfo_container}>
 				<p>
 					<b>Name:</b> {name}

@@ -25,9 +25,7 @@ const OwnerDetailPage = () => {
 			{/* <p>{params.ownerId}</p> */}
 			<OwnerItem data={owner} />
 			<p>
-				<Link to=".." relative="path">
-					Back
-				</Link>
+				<Link to="/owners">Owners</Link>
 			</p>
 			{patients.length === 0 ? (
 				<h2>No patients</h2>
