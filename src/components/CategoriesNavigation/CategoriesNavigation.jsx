@@ -18,15 +18,15 @@ const CategoriesNavigation = () => {
 					{token && (
 						<>
 							<li>
+								<NavLink to="/categories/new">
+									New Category
+								</NavLink>
+							</li>
+							<li>
 								<NavLink to="/patients">Patients</NavLink>
 							</li>
 							<li>
 								<NavLink to="/owners">Owners</NavLink>
-							</li>
-							<li>
-								<NavLink to="/categories/new">
-									New Category
-								</NavLink>
 							</li>
 						</>
 					)}

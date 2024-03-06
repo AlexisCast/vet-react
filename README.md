@@ -13,6 +13,9 @@ npm run dev
   - Owners w/PatientList
   - compatible with Branch 1.0.0-rc-1 in https://github.com/AlexisCast/vet-serv 
 
+## FE - BE
+-  [feat_11_FE](https://github.com/AlexisCast/vet-react/tree/feat/11_Gender_field_dropdown) -> [feat_6_BE](https://github.com/AlexisCast/vet-serv/tree/feat/6_patients_updates_for_feat_11_FE)
+
 ## Env File:
 - VITE_TITLE
 - VITE_CLIENT_URL

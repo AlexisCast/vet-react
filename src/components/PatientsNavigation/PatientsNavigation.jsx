@@ -15,13 +15,23 @@ const PatientsNavigation = () => {
 					<li>
 						<NavLink to="/categories">Categories</NavLink>
 					</li>
-					<li>
-						<NavLink to="/owners">Owners</NavLink>
-					</li>
 					{token && (
-						<li>
-							<NavLink to="/patients/new">New Patient</NavLink>
-						</li>
+						<>
+							<li>
+								<NavLink to="/owners">Owners</NavLink>
+							</li>
+							<li>
+								<NavLink to="/owners/new">New Owner</NavLink>
+							</li>
+							<li>
+								<NavLink to="/patients">Patients</NavLink>
+							</li>
+							<li>
+								<NavLink to="/patients/new">
+									New Patient
+								</NavLink>
+							</li>
+						</>
 					)}
 				</ul>
 			</nav>
