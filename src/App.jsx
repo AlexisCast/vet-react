@@ -1,25 +1,25 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import RootLayout from "./pages/Root/Root";
 import HomePage from "./pages/Home";
 import Products, { loader as productsLoader } from "./pages/Products/Products";
-import RootLayout from "./pages/Root/Root";
 import ErrorPage from "./pages/Error";
 import AuthenticationPage, {
 	action as authAction,
 } from "./pages/Authentication";
 
+import ProductsRootLayout from "./pages/Products/ProductsRoot";
 import ProductDetailPage, {
 	loader as productDetailLoader,
 	action as deleteProductAction,
 } from "./pages/Products/ProductDetail";
 import NewProduct from "./pages/Products/NewProduct";
 import EditProduct from "./pages/Products/EditProduct";
-import ProductsRootLayout from "./pages/Products/ProductsRoot";
 
+import CategoriesRootLayout from "./pages/Categories/CategoriesRoot";
 import Categories, {
 	loader as categoriesLoader,
 } from "./pages/Categories/Categories";
-import CategoriesRootLayout from "./pages/Categories/CategoriesRoot";
 import CategoryDetailPage, {
 	loader as categoryDetailLoader,
 	action as deleteEventAction,
@@ -27,8 +27,8 @@ import CategoryDetailPage, {
 import EditCategory from "./pages/Categories/EditCategory";
 import NewCategory from "./pages/Categories/NewCategory";
 
-import Owners, { loader as ownersLoader } from "./pages/Owners/Owners";
 import OwnersRootLayout from "./pages/Owners/OwnerRoot";
+import Owners, { loader as ownersLoader } from "./pages/Owners/Owners";
 import OwnerDetailPage, {
 	loader as ownerDetailLoader,
 	action as deleteOwnerAction,
@@ -42,16 +42,21 @@ import { action as manipulatePatientAction } from "./components/PatientForm/Pati
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as logoutAction } from "./pages/Logout";
 
+import PatientsRootLayout from "./pages/Patients/PatientsRoot";
 import Patients, { loader as patientsLoader } from "./pages/Patients/Patients";
 import PatientDetailPage, {
 	loader as patientDetailLoader,
 	action as deletePatientAction,
 } from "./pages/Patients/PatientDetail";
 import EditPatient from "./pages/Patients/EditPatient";
-import NewPatient,{loader as newPatientLoader} from "./pages/Patients/NewPatient";
+import NewPatient, {
+	loader as newPatientLoader,
+} from "./pages/Patients/NewPatient";
+
+import SpeciesRootLayout from "./pages/Species/SpeciesRoot";
+import Species, { loader as speciesLoader } from "./pages/Species/Species";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
-import PatientsRootLayout from "./pages/Patients/PatientsRoot";
 
 const router = createBrowserRouter([
 	{
@@ -206,6 +211,18 @@ const router = createBrowserRouter([
 					},
 				],
 			},
+			{
+				path: "species",
+				element: <SpeciesRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Species />,
+						loader: speciesLoader,
+					},
+				],
+			},
+
 			{
 				path: "auth",
 				element: <AuthenticationPage />,

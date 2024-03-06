@@ -77,6 +77,14 @@ const MainNavigation = () => {
 									<Link to="/patients/new">New</Link>
 								</li>
 							</LinkDropdown>
+							<LinkDropdown label="Species" route="/species">
+								<li>
+									<Link to="/species">All</Link>
+								</li>
+								<li>
+									<Link to="/species/new">New</Link>
+								</li>
+							</LinkDropdown>
 							<LinkDropdown label="Products" route="/products">
 								<li>
 									<Link to="/products">All</Link>

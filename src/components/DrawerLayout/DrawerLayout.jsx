@@ -83,6 +83,18 @@ const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
 						</li>
 						<li>
 							<Accordion
+								title="Species"
+								closeDrawer={toggleDrawer}
+							>
+								<AccordionItem route="/species" label="All" />
+								<AccordionItem
+									route="/species/new"
+									label="New"
+								/>
+							</Accordion>
+						</li>
+						<li>
+							<Accordion
 								title="Products"
 								closeDrawer={toggleDrawer}
 							>
