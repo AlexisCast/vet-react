@@ -18,15 +18,40 @@ import Dropdown from "../Dropdown/Dropdown";
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
 const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
+	const {
+		_id,
+		age,
+		gender,
+		img,
+		name,
+		note,
+		owner,
+		specie,
+		sterilized,
+		user,
+		weight,
+	} = patient;
+
 	//	Dropdown states for Owner
-	const [selectedOwnerName, setSelectedOwnerName] = useState(null);
-	const [selectedOwnerId, setSelectedOwnerId] = useState(null);
-	const [selectedOwnerPhoneNumber1, setSelectedOwnerPhoneNumber1] =
-		useState(null);
+	const [selectedOwnerName, setSelectedOwnerName] = useState(
+		owner ? owner.name + " " + owner.lastName : ""
+	);
+	const [selectedOwnerId, setSelectedOwnerId] = useState(
+		owner ? owner._id : ""
+	);
+	const [selectedOwnerPhoneNumber1, setSelectedOwnerPhoneNumber1] = useState(
+		owner ? owner.phoneNumber1 : ""
+	);
 
 	//	Dropdown states for Species
-	const [selectedSpeciesId, setSelectedSpeciesId] = useState(null);
-	const [selectSpeciesName, setSelectSpeciesName] = useState(null);
+	const [selectedSpeciesId, setSelectedSpeciesId] = useState(
+		specie ? specie._id : ""
+	);
+
+	//	Dropdown states for Gender
+	const [selectedGenderId, setSelectedGenderId] = useState(
+		patient ? gender : ""
+	);
 
 	//	Image states
 	const [image, setImage] = useState(patient ? patient.image : null);
@@ -51,19 +76,10 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 		navigate("..");
 	}
 
-	const {
-		_id,
-		age,
-		gender,
-		img,
-		name,
-		note,
-		owner,
-		specie,
-		sterilized,
-		user,
-		weight,
-	} = patient;
+	const genderOptions = [
+		{ id: "M", option: "Male" },
+		{ id: "F", option: "Female" },
+	];
 
 	const ownerOptions = owners.map((item) => ({
 		id: item._id,
@@ -100,8 +116,11 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 			setSelectedSpeciesId(null);
 		} else {
 			setSelectedSpeciesId(filteredSpeciesData[0]._id);
-			setSelectSpeciesName(filteredSpeciesData[0].name);
 		}
+	};
+
+	const handleSelectGender = (option) => {
+		setSelectedGenderId(option);
 	};
 
 	// const ownerOptions = [
@@ -200,7 +219,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					type="text"
 					name="specie"
 					required
-					value={selectedSpeciesId || (specie && specie._id) || ""}
+					value={selectedSpeciesId || ""}
 					readOnly
 				/>
 			</p>
@@ -224,14 +243,25 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					defaultValue={patient ? weight : ""}
 				/>
 			</p>
+			<>
+				<label htmlFor="selected_option">
+					Selected Gender: {selectedGenderId}
+				</label>
+				<Dropdown
+					text="Select a Gender"
+					options={genderOptions}
+					onSelect={handleSelectGender}
+					selectedOptionDefault={gender}
+				/>
+			</>
 			<p>
 				<label htmlFor="gender">Gender</label>
 				<input
 					id="gender"
 					type="text"
 					name="gender"
-					// required
-					defaultValue={patient ? gender : ""}
+					value={selectedGenderId || ""}
+					readOnly
 				/>
 			</p>
 			<p>
@@ -272,7 +302,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					type="text"
 					name="owner_id"
 					required
-					value={selectedOwnerId || (owner && owner._id) || ""}
+					value={selectedOwnerId || ""}
 					readOnly
 				/>
 			</p>
@@ -282,11 +312,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					id="owner_name"
 					type="text"
 					name="owner_name"
-					value={
-						selectedOwnerName ||
-						(owner && owner.name + " " + owner.lastName) ||
-						""
-					}
+					value={selectedOwnerName || ""}
 					readOnly
 				/>
 			</p>
@@ -296,11 +322,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					id="owner_phoneNumber1"
 					type="text"
 					name="ownerphoneNumber1"
-					value={
-						selectedOwnerPhoneNumber1 ||
-						(owner && owner.phoneNumber1) ||
-						""
-					}
+					value={selectedOwnerPhoneNumber1 || ""}
 					readOnly
 				/>
 			</p>
