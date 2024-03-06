@@ -44,7 +44,7 @@ const PatientItem = ({ data }) => {
 					<b>Name:</b> {name}
 				</p>
 				<p>
-					<b>Specie:</b> {specie}
+					<b>Specie:</b> {specie.name}
 				</p>
 				<p>
 					<b>Age:</b> {age}
