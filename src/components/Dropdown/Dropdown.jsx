@@ -2,7 +2,12 @@ import { useState } from "react";
 
 import styles from "./Dropdown.module.css";
 
-const Dropdown = ({ options, onSelect, selectedOptionDefault = "null" }) => {
+const Dropdown = ({
+	options,
+	onSelect,
+	selectedOptionDefault = "null",
+	text = "Select an Option",
+}) => {
 	const [selectedOption, setSelectedOption] = useState(selectedOptionDefault);
 
 	const handleSelect = (option) => {
@@ -16,7 +21,7 @@ const Dropdown = ({ options, onSelect, selectedOptionDefault = "null" }) => {
 			value={selectedOption}
 			onChange={(e) => handleSelect(e.target.value)}
 		>
-			<option value="">Select an option</option>
+			<option value="">{text}</option>
 			{options.map((option, index) => (
 				<option key={index} value={`${option.id}`}>
 					{`${option.option}`}

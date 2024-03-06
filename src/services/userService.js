@@ -2,6 +2,7 @@ import { getAuthToken } from "../../util/auth";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 const OWNERS_URL = "/api/owners";
+const SPECIES_URL = "/api/species";
 
 function getAllOwners() {
 	const token = getAuthToken();
@@ -13,6 +14,16 @@ function getAllOwners() {
 	}).then((res) => res.json());
 }
 
-const functions = { getAllOwners };
+function getAllSpecies() {
+	const token = getAuthToken();
+	return fetch(client_url + SPECIES_URL, {
+		headers: new Headers({
+			"Content-Type": "application/json",
+			"x-token": token,
+		}),
+	}).then((res) => res.json());
+}
+
+const functions = { getAllOwners, getAllSpecies };
 
 export default functions;

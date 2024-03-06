@@ -18,7 +18,7 @@ const PatientItem = ({ data }) => {
 		name,
 		note,
 		owner,
-		race,
+		specie,
 		sterilized,
 		user,
 		weight,
@@ -44,7 +44,7 @@ const PatientItem = ({ data }) => {
 					<b>Name:</b> {name}
 				</p>
 				<p>
-					<b>Race:</b> {race}
+					<b>Specie:</b> {specie.name}
 				</p>
 				<p>
 					<b>Age:</b> {age}

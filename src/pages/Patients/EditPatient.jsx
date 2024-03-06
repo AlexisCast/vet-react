@@ -5,12 +5,26 @@ import userService from "../../services/userService";
 
 const EditPatient = () => {
 	const [listOfOwners, setListOfOwners] = useState([]);
+	const [listOfSpecies, setListOfSpecies] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const owners = await userService.getAllOwners();
-			setListOfOwners(owners);
+			try {
+				const [owners, species] = await Promise.all([
+					userService.getAllOwners(),
+					userService.getAllSpecies(),
+				]);
+				setListOfOwners(owners);
+				setListOfSpecies(species);
+			} catch (error) {
+				// Handle error
+				console.error(
+					"Error fetching data on EditPatient page:",
+					error
+				);
+			}
 		};
+
 		fetchData();
 	}, []);
 
@@ -35,6 +49,7 @@ const EditPatient = () => {
 				method="put"
 				patient={data}
 				listOfOwners={listOfOwners}
+				listOfSpecies={listOfSpecies}
 			/>
 		</div>
 	);

@@ -25,7 +25,7 @@ const NewPatient = () => {
 		name: "",
 		note: "",
 		owner: "",
-		race: "",
+		specie: "",
 		sterilized: "",
 		user: "",
 		_id: "",
@@ -35,7 +35,12 @@ const NewPatient = () => {
 	return (
 		<div>
 			<h1>New Patient</h1>
-			<PatientForm method="post" patient={patient} listOfOwners={data} />
+			<PatientForm
+				method="post"
+				patient={patient}
+				listOfOwners={data.owners}
+				listOfSpecies={data.species}
+			/>
 		</div>
 	);
 };
@@ -47,10 +52,13 @@ export const loader = async ({ request, params }) => {
 
 	if (!isAuth) {
 		try {
-			const response = await userService.getAllOwners();
-			return response;
+			const [ownersResponse, speciesResponse] = await Promise.all([
+				userService.getAllOwners(),
+				userService.getAllSpecies(),
+			]);
+			return { owners: ownersResponse, species: speciesResponse };
 		} catch (error) {
-			console.error("Error loading new patient data:", error);
+			console.error("Error loading data:", error);
 			return null; // Or handle the error appropriately
 		}
 	} else {

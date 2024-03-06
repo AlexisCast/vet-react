@@ -17,20 +17,28 @@ import Dropdown from "../Dropdown/Dropdown";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
-const PatientForm = ({ method, patient, listOfOwners }) => {
-	//	Dropdown states
-	const [selectedOwnerOption, setSelectedOwnerOption] = useState(null);
+const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
+	//	Dropdown states for Owner
 	const [selectedOwnerName, setSelectedOwnerName] = useState(null);
 	const [selectedOwnerId, setSelectedOwnerId] = useState(null);
 	const [selectedOwnerPhoneNumber1, setSelectedOwnerPhoneNumber1] =
 		useState(null);
 
+	//	Dropdown states for Species
+	const [selectedSpeciesId, setSelectedSpeciesId] = useState(null);
+	const [selectSpeciesName, setSelectSpeciesName] = useState(null);
+
+	//	Image states
 	const [image, setImage] = useState(patient ? patient.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
 		patient ? patient.image : null
 	);
+
 	const data = useActionData();
-	const { total, owners } = listOfOwners;
+
+	const { total: totalOwners, owners } = listOfOwners;
+	const { total: totalSpecies, species } = listOfSpecies;
+
 	console.log("data PatientForm");
 	console.log(data);
 
@@ -51,20 +59,23 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 		name,
 		note,
 		owner,
-		race,
+		specie,
 		sterilized,
 		user,
 		weight,
 	} = patient;
 
-	const options = owners.map((item) => ({
+	const ownerOptions = owners.map((item) => ({
 		id: item._id,
 		option: `${item.name} ${item.lastName}`,
 	}));
 
-	const handleSelect = (option) => {
-		setSelectedOwnerOption(option);
+	const speciesOptions = species.map((item) => ({
+		id: item._id,
+		option: `${item.name}`,
+	}));
 
+	const handleSelectOwner = (option) => {
 		const filteredOwnerData = owners.filter((item) => item._id == option);
 
 		if (filteredOwnerData.length == 0) {
@@ -80,7 +91,20 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 		}
 	};
 
-	// const options = [
+	const handleSelectSpecie = (option) => {
+		const filteredSpeciesData = species.filter(
+			(item) => item._id == option
+		);
+
+		if (filteredSpeciesData.length == 0) {
+			setSelectedSpeciesId(null);
+		} else {
+			setSelectedSpeciesId(filteredSpeciesData[0]._id);
+			setSelectSpeciesName(filteredSpeciesData[0].name);
+		}
+	};
+
+	// const ownerOptions = [
 	// 	{ id: "65e0fdacf84beca149f75a8f1", option: "HELLO1", lastName: "WORLD" },
 	// 	{ id: "65e0fdacf84beca149f75a8f2", option: "HELLO2", lastName: "WORLD" },
 	// 	{ id: "65e0fdacf84beca149f75a8f3", option: "HELLO3", lastName: "WORLD" },
@@ -158,14 +182,26 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					style={{ maxWidth: "100%", maxHeight: "200px" }}
 				/>
 			)}
+			<>
+				<label htmlFor="selected_option">
+					Selected Specie: {selectedSpeciesId}
+				</label>
+				<Dropdown
+					text="Select a Specie"
+					options={speciesOptions}
+					onSelect={handleSelectSpecie}
+					selectedOptionDefault={specie._id}
+				/>
+			</>
 			<p>
-				<label htmlFor="race">Race</label>
+				<label htmlFor="specie">Specie</label>
 				<input
-					id="race"
+					id="specie"
 					type="text"
-					name="race"
+					name="specie"
 					required
-					defaultValue={patient ? race : ""}
+					value={selectedSpeciesId || (specie && specie._id) || ""}
+					readOnly
 				/>
 			</p>
 			<p>
@@ -220,11 +256,12 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 			</p>
 			<>
 				<label htmlFor="selected_option">
-					Selected Option: {selectedOwnerOption}
+					Selected Owner: {selectedOwnerId}
 				</label>
 				<Dropdown
-					options={options}
-					onSelect={handleSelect}
+					text="Select an Owner"
+					options={ownerOptions}
+					onSelect={handleSelectOwner}
 					selectedOptionDefault={owner._id}
 				/>
 			</>
@@ -245,7 +282,6 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					id="owner_name"
 					type="text"
 					name="owner_name"
-					// required
 					value={
 						selectedOwnerName ||
 						(owner && owner.name + " " + owner.lastName) ||
@@ -260,7 +296,6 @@ const PatientForm = ({ method, patient, listOfOwners }) => {
 					id="owner_phoneNumber1"
 					type="text"
 					name="ownerphoneNumber1"
-					// required
 					value={
 						selectedOwnerPhoneNumber1 ||
 						(owner && owner.phoneNumber1) ||
@@ -294,7 +329,7 @@ export const action = async ({ request, params }) => {
 
 	const eventData = {
 		name: data.get("name"),
-		race: data.get("race"),
+		specie: data.get("specie"),
 		age: data.get("age"),
 		weight: data.get("weight"),
 		gender: data.get("gender"),
