@@ -55,6 +55,9 @@ import NewPatient, {
 
 import SpeciesRootLayout from "./pages/Species/SpeciesRoot";
 import Species, { loader as speciesLoader } from "./pages/Species/Species";
+import SpecieDetailPage, {
+	loader as specieDetailLoader,
+} from "./pages/Species/SpecieDetail";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 
@@ -219,6 +222,17 @@ const router = createBrowserRouter([
 						index: true,
 						element: <Species />,
 						loader: speciesLoader,
+					},
+					{
+						path: ":specieId",
+						id: "specie-detail",
+						loader: specieDetailLoader,
+						children: [
+							{
+								index: true,
+								element: <SpecieDetailPage />,
+							},
+						],
 					},
 				],
 			},
