@@ -6,7 +6,9 @@
 
 .list {
 	display: flex;
-	gap: 1rem;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	padding: 0px;
 }
 
 .list a {

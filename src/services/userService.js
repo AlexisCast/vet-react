@@ -24,6 +24,16 @@ function getAllSpecies() {
 	}).then((res) => res.json());
 }
 
-const functions = { getAllOwners, getAllSpecies };
+function getSpecieById(specieId) {
+	const token = getAuthToken();
+	return fetch(client_url + SPECIES_URL + "/" + specieId, {
+		headers: new Headers({
+			"Content-Type": "application/json",
+			"x-token": token,
+		}),
+	}).then((res) => res.json());
+}
+
+const functions = { getAllOwners, getAllSpecies, getSpecieById };
 
 export default functions;

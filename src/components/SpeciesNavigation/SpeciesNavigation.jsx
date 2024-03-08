@@ -1,8 +1,8 @@
 import { NavLink, useRouteLoaderData } from "react-router-dom";
 
-import classes from "./ProductsNavigation.module.css";
+import classes from "./SpeciesNavigation.module.css";
 
-const ProductsNavigation = () => {
+const SpeciesNavigation = () => {
 	const token = useRouteLoaderData("root");
 
 	return (
@@ -12,25 +12,24 @@ const ProductsNavigation = () => {
 					<li>
 						<NavLink to="/products">Products</NavLink>
 					</li>
-					{token && (
-						<>
-							<li>
-								<NavLink to="/products/new">
-									New Product
-								</NavLink>
-							</li>
-						</>
-					)}
 					<li>
 						<NavLink to="/categories">Categories</NavLink>
 					</li>
 					{token && (
 						<>
 							<li>
+								<NavLink to="/owners">Owners</NavLink>
+							</li>
+							<li>
+								<NavLink to="/owners/new">New Owner</NavLink>
+							</li>
+							<li>
 								<NavLink to="/patients">Patients</NavLink>
 							</li>
 							<li>
-								<NavLink to="/owners">Owners</NavLink>
+								<NavLink to="/patients/new">
+									New Patient
+								</NavLink>
 							</li>
 						</>
 					)}
@@ -40,4 +39,4 @@ const ProductsNavigation = () => {
 	);
 };
 
-export default ProductsNavigation;
+export default SpeciesNavigation;
