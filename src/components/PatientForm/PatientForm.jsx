@@ -53,6 +53,11 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 		patient ? gender : ""
 	);
 
+	//	Dropdown states for sterilized
+	const [selectedSterilize, setSelectedSterilize] = useState(
+		patient ? sterilized : false
+	);
+
 	//	Image states
 	const [image, setImage] = useState(patient ? patient.image : null);
 	const [previewUrl, setPreviewUrl] = useState(
@@ -79,6 +84,11 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 	const genderOptions = [
 		{ id: "M", option: "Male" },
 		{ id: "F", option: "Female" },
+	];
+
+	const sterilizedOptions = [
+		{ id: true, option: "Yes" },
+		{ id: false, option: "No" },
 	];
 
 	const ownerOptions = owners.map((item) => ({
@@ -121,6 +131,10 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 
 	const handleSelectGender = (option) => {
 		setSelectedGenderId(option);
+	};
+
+	const handleSelectSterilizationStatus = (option) => {
+		setSelectedSterilize(option);
 	};
 
 	// const ownerOptions = [
@@ -202,7 +216,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				/>
 			)}
 			<>
-				<label htmlFor="selected_option">
+				<label htmlFor="selected_option_specie">
 					Selected Specie: {selectedSpeciesId}
 				</label>
 				<Dropdown
@@ -244,7 +258,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				/>
 			</p>
 			<>
-				<label htmlFor="selected_option">
+				<label htmlFor="selected_option_gender">
 					Selected Gender: {selectedGenderId}
 				</label>
 				<Dropdown
@@ -264,6 +278,18 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					readOnly
 				/>
 			</p>
+			<>
+				<label htmlFor="selected_option_sterilized">
+					Selected Sterilized Status:{" "}
+					{selectedSterilize ? "Yes" : "No"}
+				</label>
+				<Dropdown
+					text="Select Sterilized Status"
+					options={sterilizedOptions}
+					onSelect={handleSelectSterilizationStatus}
+					selectedOptionDefault={sterilized || false}
+				/>
+			</>
 			<p>
 				<label htmlFor="sterilized">Sterilized</label>
 				<input
@@ -271,7 +297,8 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					type="text"
 					name="sterilized"
 					// required
-					defaultValue={patient ? sterilized : ""}
+					value={selectedSterilize || false}
+					readOnly
 				/>
 			</p>
 			<p>
@@ -285,7 +312,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				/>
 			</p>
 			<>
-				<label htmlFor="selected_option">
+				<label htmlFor="selected_option_owner">
 					Selected Owner: {selectedOwnerId}
 				</label>
 				<Dropdown
