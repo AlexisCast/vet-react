@@ -63,6 +63,8 @@ import SpecieDetailPage, {
 import EditSpecie from "./pages/Species/EditSpecie";
 import NewSpecie from "./pages/Species/NewSpecie";
 
+import Records from "./pages/Records/Records";
+
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 
 const router = createBrowserRouter([
@@ -253,7 +255,16 @@ const router = createBrowserRouter([
 					},
 				],
 			},
-
+			{
+				path: "records",
+				element: <SpeciesRootLayout />,
+				children: [
+					{
+						index: true,
+						element: <Records />,
+					},
+				],
+			},
 			{
 				path: "auth",
 				element: <AuthenticationPage />,
