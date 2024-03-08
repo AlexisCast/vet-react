@@ -190,6 +190,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					name="image"
 					// required
 					defaultValue={patient ? patient.img : ""}
+					readOnly
 				/>
 			</p>
 			<p>
