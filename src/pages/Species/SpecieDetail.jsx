@@ -1,5 +1,5 @@
-import { Link, json, useRouteLoaderData } from "react-router-dom";
-import { getAuthToken } from "../../../util/auth";
+import { Link, json, redirect, useRouteLoaderData } from "react-router-dom";
+import { getAuthToken, isTokenExpired } from "../../../util/auth";
 import SpecieItem from "../../components/SpecieItem/SpecieItem";
 import PatientsList from "../../components/PatientsList/PatientsList";
 
@@ -18,7 +18,7 @@ const SpecieDetailPage = () => {
 			<p>
 				<Link to="/species">Species</Link>
 			</p>
-      {patients.length === 0 ? (
+			{patients.length === 0 ? (
 				<h2>No patients</h2>
 			) : (
 				<>
@@ -58,4 +58,34 @@ export const loader = async ({ request, params }) => {
 	} else {
 		return response;
 	}
+};
+
+export const action = async ({ request, params }) => {
+	const id = params.specieId;
+
+	const token = getAuthToken();
+
+	const response = await fetch(client_url + "/api/species/" + id, {
+		method: request.method,
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+
+		if (isTokenExpired(responseData?.msg)) {
+			return response;
+		} else {
+			throw json(
+				{ msg: "Could not delete specie..." },
+				{
+					status: 500,
+				}
+			);
+		}
+	}
+	return redirect("/species");
 };

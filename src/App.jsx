@@ -40,6 +40,7 @@ import { action as manipulateCategoryAction } from "./components/CategoryForm/Ca
 import { action as manipulateOwnerAction } from "./components/OwnerForm/OwnerForm";
 import { action as manipulatePatientAction } from "./components/PatientForm/PatientForm";
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
+import { action as manipulateSpecieAction } from "./components/SpecieForm/SpecieForm";
 import { action as logoutAction } from "./pages/Logout";
 
 import PatientsRootLayout from "./pages/Patients/PatientsRoot";
@@ -57,7 +58,10 @@ import SpeciesRootLayout from "./pages/Species/SpeciesRoot";
 import Species, { loader as speciesLoader } from "./pages/Species/Species";
 import SpecieDetailPage, {
 	loader as specieDetailLoader,
+	action as deleteSpecie,
 } from "./pages/Species/SpecieDetail";
+import EditSpecie from "./pages/Species/EditSpecie";
+import NewSpecie from "./pages/Species/NewSpecie";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 
@@ -231,8 +235,21 @@ const router = createBrowserRouter([
 							{
 								index: true,
 								element: <SpecieDetailPage />,
+								action: deleteSpecie,
+							},
+							{
+								path: "edit",
+								element: <EditSpecie />,
+								loader: checkAuthLoader,
+								action: manipulateSpecieAction,
 							},
 						],
+					},
+					{
+						path: "new",
+						element: <NewSpecie />,
+						action: manipulateSpecieAction,
+						loader: checkAuthLoader,
 					},
 				],
 			},
