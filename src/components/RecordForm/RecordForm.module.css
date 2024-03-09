@@ -45,19 +45,3 @@
 .actions button[type="button"]:hover {
 	background-color: var(--color-gray-800);
 }
-
-
-.patientTable {
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.patientTable th, .patientTable td {
-	border: 1px solid #ddd;
-	padding: 8px;
-	text-align: center;
-}
-
-.patientTable th {
-	background-color: #f2f2f2;
-}
