@@ -1,10 +1,18 @@
-import { Link, useRouteLoaderData, useSubmit } from "react-router-dom";
+import {
+	Link,
+	useLocation,
+	useRouteLoaderData,
+	useSubmit,
+} from "react-router-dom";
 
 import noImage from "../../assets/no-image.jpg";
 
 import styles from "./PatientItem.module.css";
 
 const PatientItem = ({ data }) => {
+	const location = useLocation();
+	console.log(location);
+
 	const token = useRouteLoaderData("root");
 
 	const submit = useSubmit();
@@ -77,8 +85,10 @@ const PatientItem = ({ data }) => {
 			{/* <p>Available: {data.available ? "YES" : "NO"}</p> */}
 			{token && (
 				<menu className={styles.actions}>
-					<Link to="edit">Edit</Link>
-					<button onClick={startDeleteHandler}>Delete</button>
+					<Link to={`../../patients/${_id}/edit`}>Edit</Link>
+					{location.pathname !== "/records/new" && (
+						<button onClick={startDeleteHandler}>Delete</button>
+					)}
 				</menu>
 			)}
 		</article>

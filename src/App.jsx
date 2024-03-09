@@ -41,6 +41,7 @@ import { action as manipulateOwnerAction } from "./components/OwnerForm/OwnerFor
 import { action as manipulatePatientAction } from "./components/PatientForm/PatientForm";
 import { action as manipulateProductAction } from "./components/ProductForm/ProductForm";
 import { action as manipulateSpecieAction } from "./components/SpecieForm/SpecieForm";
+import { action as manipulateRecordAction } from "./components/RecordForm/RecordForm";
 import { action as logoutAction } from "./pages/Logout";
 
 import PatientsRootLayout from "./pages/Patients/PatientsRoot";
@@ -64,6 +65,9 @@ import EditSpecie from "./pages/Species/EditSpecie";
 import NewSpecie from "./pages/Species/NewSpecie";
 
 import Records from "./pages/Records/Records";
+import NewRecord, {
+	loader as newRecordsLoader,
+} from "./pages/Records/NewRecord";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 
@@ -262,6 +266,13 @@ const router = createBrowserRouter([
 					{
 						index: true,
 						element: <Records />,
+					},
+					{
+						path: "new",
+						id: "new_recordsData",
+						element: <NewRecord />,
+						action: manipulateRecordAction,
+						loader: newRecordsLoader,
 					},
 				],
 			},
