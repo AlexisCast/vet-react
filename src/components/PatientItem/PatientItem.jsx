@@ -11,7 +11,6 @@ import styles from "./PatientItem.module.css";
 
 const PatientItem = ({ data }) => {
 	const location = useLocation();
-	console.log(location);
 
 	const token = useRouteLoaderData("root");
 
