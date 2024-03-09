@@ -221,13 +221,14 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					Selected Specie: {selectedSpeciesId}
 				</label>
 				<Dropdown
+					name="specie"
 					text="Select a Specie"
 					options={speciesOptions}
 					onSelect={handleSelectSpecie}
 					selectedOptionDefault={specie._id}
 				/>
 			</>
-			<p>
+			{/* <p>
 				<label htmlFor="specie">Specie</label>
 				<input
 					id="specie"
@@ -237,7 +238,7 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 					value={selectedSpeciesId || ""}
 					readOnly
 				/>
-			</p>
+			</p> */}
 			<p>
 				<label htmlFor="age">Age</label>
 				<input

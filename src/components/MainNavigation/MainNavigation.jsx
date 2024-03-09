@@ -85,6 +85,14 @@ const MainNavigation = () => {
 									<Link to="/species/new">New</Link>
 								</li>
 							</LinkDropdown>
+							<LinkDropdown label="Records" route="/records">
+								<li>
+									<Link to="/records">All</Link>
+								</li>
+								<li>
+									<Link to="/records/new">New</Link>
+								</li>
+							</LinkDropdown>
 							<LinkDropdown label="Products" route="/products">
 								<li>
 									<Link to="/products">All</Link>
