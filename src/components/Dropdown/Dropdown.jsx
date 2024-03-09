@@ -7,6 +7,7 @@ const Dropdown = ({
 	onSelect,
 	selectedOptionDefault = "null",
 	text = "Select an Option",
+	name = "",
 }) => {
 	const [selectedOption, setSelectedOption] = useState(selectedOptionDefault);
 
@@ -17,6 +18,7 @@ const Dropdown = ({
 
 	return (
 		<select
+			name={name}
 			className={styles.dropdown}
 			value={selectedOption}
 			onChange={(e) => handleSelect(e.target.value)}
