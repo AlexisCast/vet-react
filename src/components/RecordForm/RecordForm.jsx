@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Dropdown from "../Dropdown/Dropdown";
 import PatientItem from "../PatientItem/PatientItem";
@@ -64,11 +64,7 @@ const RecordForm = ({ method, listOfPatients, costData }) => {
 	};
 
 	return (
-		<Form
-			method={method}
-			className={styles.form}
-			encType="multipart/form-data"
-		>
+		<form className={styles.form}>
 			<>
 				<label>Selected Patient:</label>
 				<span>{selectPatientId}</span>
@@ -97,7 +93,7 @@ const RecordForm = ({ method, listOfPatients, costData }) => {
 
 			{/* TO DO: */}
 			<AdministrationMedTable />
-		</Form>
+		</form>
 	);
 };
 

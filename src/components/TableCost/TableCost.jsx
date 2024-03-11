@@ -10,20 +10,22 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 		});
 	};
 
-	const handleAddRow = () => {
+	const handleAddRow = (e) => {
+		e.preventDefault();
+
 		setTableCostData((prevData) => [
 			...prevData,
 			{
 				Procedimiento: "",
-				Costos: null,
+				Costos: "",
 				Material: "",
-				Costos_2: null,
+				Costos_2: "",
 				Medicacion: "",
-				Costos_3: null,
+				Costos_3: "",
 				Pruebas: "",
-				Costos_4: null,
-				Abonos: null,
-				Total: null,
+				Costos_4: "",
+				Abonos: "",
+				Total: "",
 			},
 		]);
 	};
@@ -36,6 +38,7 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 						{Object.keys(tableCostData[0]).map((key, index) => (
 							<th key={index}>{key}</th>
 						))}
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -58,6 +61,9 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 									</td>
 								)
 							)}
+							<td>
+								<button>Delete</button>
+							</td>
 						</tr>
 					))}
 				</tbody>
