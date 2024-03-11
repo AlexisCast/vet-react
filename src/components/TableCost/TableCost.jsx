@@ -30,6 +30,16 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 		]);
 	};
 
+	const handleDeleteRow = (e, rowIndex) => {
+		e.preventDefault();
+
+		setTableCostData((prevData) => {
+			const newData = [...prevData];
+			newData.splice(rowIndex, 1);
+			return newData;
+		});
+	};
+
 	return (
 		<div>
 			<table className={styles.table}>
@@ -62,7 +72,13 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 								)
 							)}
 							<td>
-								<button>Delete</button>
+								<button
+									onClick={(e) =>
+										handleDeleteRow(e, rowIndex)
+									}
+								>
+									Delete
+								</button>
 							</td>
 						</tr>
 					))}
