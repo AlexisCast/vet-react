@@ -1,0 +1,53 @@
+export const mockCostsData = [
+	{
+		Procedimiento: "Canalizacion",
+		Costos: 350,
+		Material: "Paniales",
+		Costos_2: 30,
+		Medicacion: "Metro",
+		Costos_3: 95,
+		Pruebas: "Perfilcomp",
+		Costos_4: 1500,
+		Abonos: "",
+		Total: "",
+	},
+	{
+		Procedimiento: "Canalizacion 2",
+		Costos: 350,
+		Material: "Paniales 4",
+		Costos_2: 30,
+		Medicacion: "Metro",
+		Costos_3: 952,
+		Pruebas: "Perfilcomp 5",
+		Costos_4: 1500,
+		Abonos: "",
+		Total: "",
+	},
+];
+
+export const mockCostsData2 = [
+	{
+		Procedimiento: "Canalizacion",
+		Costos: 350,
+		Material: "Paniales",
+		Costos_2: 30,
+		Medicacion: "Metro",
+		Costos_3: 95,
+		Pruebas: "Perfilcomp",
+		Costos_4: 1500,
+		Abonos: "",
+		Total: "",
+	},
+	{
+		Procedimiento: "Canalizacion 2",
+		Costos: 350,
+		Material: "Paniales 4",
+		Costos_2: 30,
+		Medicacion: "Metro",
+		Costos_3: 952,
+		Pruebas: "Perfilcomp 5",
+		Costos_4: 1500,
+		Abonos: "",
+		Total: "",
+	},
+];
