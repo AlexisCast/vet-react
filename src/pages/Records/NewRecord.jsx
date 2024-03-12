@@ -3,7 +3,7 @@ import { checkAuthLoader } from "../../../util/auth";
 import userService from "../../services/userService";
 import RecordForm from "../../components/RecordForm/RecordForm";
 
-import { mockCostsData } from "../../mock/records";
+import { mockCostsData, mockAdminMedData } from "../../mock/records";
 
 const NewRecord = () => {
 	const data = useRouteLoaderData("new_recordsData");
@@ -11,6 +11,7 @@ const NewRecord = () => {
 	console.log(data);
 
 	const costData = mockCostsData;
+	const adminMedData = mockAdminMedData;
 
 	return (
 		<div>
@@ -19,6 +20,7 @@ const NewRecord = () => {
 				method="post"
 				listOfPatients={data}
 				costData={costData}
+				adminMedData={adminMedData}
 			/>
 		</div>
 	);

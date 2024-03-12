@@ -7,6 +7,7 @@
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
+	min-width: 80px;
 }
 
 .table th {

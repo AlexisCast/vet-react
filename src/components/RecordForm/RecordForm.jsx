@@ -10,7 +10,7 @@ import userService from "../../services/userService";
 
 import styles from "./RecordForm.module.css";
 
-const RecordForm = ({ method, listOfPatients, costData }) => {
+const RecordForm = ({ method, listOfPatients, costData, adminMedData }) => {
 	const navigate = useNavigate();
 
 	const { total: totalOfPatients, patients } = listOfPatients;
@@ -19,6 +19,7 @@ const RecordForm = ({ method, listOfPatients, costData }) => {
 	const [patientData, setPatientData] = useState(null);
 
 	const [tableCostData, setTableCostData] = useState(costData);
+	const [tableAdminMedData, setTableAdminMedData] = useState(adminMedData);
 
 	const patientOptions = patients.map((item) => ({
 		id: item._id,
@@ -51,6 +52,7 @@ const RecordForm = ({ method, listOfPatients, costData }) => {
 		const data = {
 			patient: selectPatientId,
 			costsData: tableCostData,
+			adminMedData: tableAdminMedData,
 		};
 
 		console.log("data", data);
@@ -91,8 +93,10 @@ const RecordForm = ({ method, listOfPatients, costData }) => {
 
 			<h1>_</h1>
 
-			{/* TO DO: */}
-			<AdministrationMedTable />
+			<AdministrationMedTable
+				tableAdminMedData={tableAdminMedData}
+				setTableAdminMedData={setTableAdminMedData}
+			/>
 		</form>
 	);
 };
