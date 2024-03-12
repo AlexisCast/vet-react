@@ -3,15 +3,25 @@ import { checkAuthLoader } from "../../../util/auth";
 import userService from "../../services/userService";
 import RecordForm from "../../components/RecordForm/RecordForm";
 
+import { mockCostsData, mockAdminMedData } from "../../mock/records";
+
 const NewRecord = () => {
 	const data = useRouteLoaderData("new_recordsData");
 	console.log("new_recordsData");
 	console.log(data);
 
+	const costData = mockCostsData;
+	const adminMedData = mockAdminMedData;
+
 	return (
 		<div>
 			<h1>New Medical Record</h1>
-			<RecordForm method="post" listOfPatients={data} />
+			<RecordForm
+				method="post"
+				listOfPatients={data}
+				costData={costData}
+				adminMedData={adminMedData}
+			/>
 		</div>
 	);
 };
