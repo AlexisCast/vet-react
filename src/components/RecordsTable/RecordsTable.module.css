@@ -1,0 +1,9 @@
+.TableContainer {
+	padding: 0px 10px;
+	width: fit-content;
+}
+
+.section {
+	display: flex;
+	justify-content: center;
+}

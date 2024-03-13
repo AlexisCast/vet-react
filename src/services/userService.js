@@ -37,6 +37,24 @@ function getAllSpecies() {
 	}).then((res) => res.json());
 }
 
+async function getAllRecords(path) {
+	const token = getAuthToken();
+	console.log(client_url + RECORDS_URL + path);
+	const response = await fetch(client_url + RECORDS_URL + "/" + path, {
+		headers: new Headers({
+			"Content-Type": "application/json",
+			"x-token": token,
+		}),
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
 function getSpecieById(specieId) {
 	const token = getAuthToken();
 	return fetch(client_url + SPECIES_URL + "/" + specieId, {
@@ -69,6 +87,7 @@ async function postMedicalRecord(data) {
 const functions = {
 	getAllOwners,
 	getAllPatients,
+	getAllRecords,
 	getAllSpecies,
 	getSpecieById,
 	postMedicalRecord,
