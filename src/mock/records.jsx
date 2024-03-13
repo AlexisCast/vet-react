@@ -105,3 +105,29 @@ export const mockCostsData = {
 	headerData: mockCostsDataHeaders,
 	bodyData: mockCostsDataBody,
 };
+
+export const mockRecordsData = {
+	total: 2,
+	records: [
+		{
+			patient: {
+				id: "65e852f8588baec917f45cac",
+				name: "A CAT 1",
+				specie: "GATO",
+				ownerName: "LAKIEL DANIEL",
+				ownerLastName: "CAST",
+			},
+			createdAt: "2024-03-13T09:31:06.000Z",
+		},
+		{
+			patient: {
+				id: "65e7cca4bfb80ced27f7efb8",
+				name: "A DOG",
+				specie: "GATO",
+				ownerName: "LAKIEL DANIEL",
+				ownerLastName: "CAST",
+			},
+			createdAt: "2024-03-13T09:31:14.000Z",
+		},
+	],
+};
