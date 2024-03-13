@@ -53,7 +53,7 @@ const TableCost = ({ tableCostData, setTableCostData }) => {
 
 	return (
 		<div>
-			<Table.TableContainer>
+			<Table.TableContainer className={styles.TableContainer}>
 				<Table.Table>
 					<Table.TableHeader>
 						<Table.TableRow>

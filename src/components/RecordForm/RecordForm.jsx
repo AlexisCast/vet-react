@@ -67,36 +67,48 @@ const RecordForm = ({ method, listOfPatients, costData, adminMedData }) => {
 
 	return (
 		<form className={styles.form}>
-			<>
-				<label>Selected Patient:</label>
-				<span>{selectPatientId}</span>
-				<Dropdown
-					id="patient_id"
-					name="patient_id"
-					text="Select a Patient"
-					options={patientOptions}
-					onSelect={handleSelectPatient}
-				/>
-			</>
-			{patientData && <PatientItem data={patientData} />}
-			<div className={styles.actions}>
-				<button type="button" onClick={cancelHandler}>
-					Cancel
-				</button>
-				<button onClick={saveHandler}>Save</button>
+			<div className={styles.section}>
+				<>
+					<label>Selected Patient:</label>
+					<span>{selectPatientId}</span>
+					<Dropdown
+						id="patient_id"
+						name="patient_id"
+						text="Select a Patient"
+						options={patientOptions}
+						onSelect={handleSelectPatient}
+					/>
+				</>
+
+				{patientData && <PatientItem data={patientData} />}
 			</div>
 
-			<TableCost
-				tableCostData={tableCostData}
-				setTableCostData={setTableCostData}
-			/>
+			<div>
+				<h2>Costs</h2>
+				<TableCost
+					tableCostData={tableCostData}
+					setTableCostData={setTableCostData}
+				/>
+			</div>
 
-			<h1>_</h1>
+			<div>
+				<h2>Administration Medication / Dosis Table</h2>
+				<AdministrationMedTable
+					tableAdminMedData={tableAdminMedData}
+					setTableAdminMedData={setTableAdminMedData}
+				/>
+			</div>
 
-			<AdministrationMedTable
-				tableAdminMedData={tableAdminMedData}
-				setTableAdminMedData={setTableAdminMedData}
-			/>
+			<section className={styles.section}>
+				{selectPatientId && (
+					<div className={styles.actions}>
+						<button type="button" onClick={cancelHandler}>
+							Cancel
+						</button>
+						<button onClick={saveHandler}>Save</button>
+					</div>
+				)}
+			</section>
 		</form>
 	);
 };
