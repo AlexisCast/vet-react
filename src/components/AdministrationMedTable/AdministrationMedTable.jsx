@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-
-import { mockAdminMedData } from "../../mock/records";
+import Table from "../Table/Table";
 
 import styles from "./AdministrationMedTable.module.css";
 
@@ -8,86 +6,86 @@ const AdministrationMedTable = ({
 	tableAdminMedData,
 	setTableAdminMedData,
 }) => {
-	const [headerValues, setHeaderValues] = useState([
-		Object.fromEntries(Object.entries(tableAdminMedData[0])),
-	]);
+	const { headerData, bodyData } = tableAdminMedData;
 
 	const handleHeaderInputChange = (e, columnIndex) => {
 		const { value } = e.target;
-		setHeaderValues((prevData) => {
-			const newData = [...prevData];
-			newData[0][Object.keys(newData[0])[columnIndex]] = value;
-			return newData;
-		});
-
-		// Update tableAdminMedData with the new header value
-		setTableAdminMedData((prevData) => {
-			const newData = [...prevData];
-			newData[0][Object.keys(newData[0])[columnIndex]] = value;
-			return newData;
-		});
+		const newHeaderData = [...headerData];
+		newHeaderData[columnIndex].headerName = value;
+		setTableAdminMedData((prevData) => ({
+			...prevData,
+			headerData: newHeaderData,
+		}));
 	};
 
 	const handleInputChange = (e, rowIndex, columnName) => {
 		const { value } = e.target;
 		setTableAdminMedData((prevData) => {
-			const newData = [...prevData];
-			newData[rowIndex][columnName] = value;
-			return newData;
+			const newBodyData = [...prevData.bodyData];
+			newBodyData[rowIndex][columnName] = value;
+			return {
+				...prevData,
+				bodyData: newBodyData,
+			};
 		});
 	};
 
 	const handleAddRow = (e) => {
 		e.preventDefault();
-
-		setTableAdminMedData((prevData) => [
+		setTableAdminMedData((prevData) => ({
 			...prevData,
-			{
-				Medication_Dosis: "",
-				hour_1: "",
-				hour_2: "",
-				hour_3: "",
-				hour_4: "",
-				hour_5: "",
-				hour_6: "",
-				hour_7: "",
-				hour_8: "",
-				hour_9: "",
-				hour_10: "",
-				hour11: "",
-				hour_12: "",
-				hour_13: "",
-				hour_14: "",
-				observations: "",
-			},
-		]);
+			bodyData: [
+				...prevData.bodyData,
+				{
+					Medication_Dosis: "",
+					hour_1: "",
+					hour_2: "",
+					hour_3: "",
+					hour_4: "",
+					hour_5: "",
+					hour_6: "",
+					hour_7: "",
+					hour_8: "",
+					hour_9: "",
+					hour_10: "",
+					hour11: "",
+					hour_12: "",
+					hour_13: "",
+					hour_14: "",
+					observations: "",
+				},
+			],
+		}));
 	};
 
 	const handleDeleteRow = (e, rowIndex) => {
 		e.preventDefault();
-
 		setTableAdminMedData((prevData) => {
-			const newData = [...prevData];
-			newData.splice(rowIndex, 1);
-			return newData;
+			const newBodyData = [...prevData.bodyData];
+			newBodyData.splice(rowIndex, 1);
+			return {
+				...prevData,
+				bodyData: newBodyData,
+			};
 		});
 	};
 
 	return (
 		<div>
-			<table className={styles.table}>
-				<thead>
-					<tr>
-						{Object.entries(headerValues[0]).map(
-							([key, value], index) => (
-								<th key={index}>
+			<Table.TableContainer className={styles.TableContainer}>
+				<Table.Table>
+					<Table.TableHeader>
+						<Table.TableRow>
+							{headerData.map((header, index) => (
+								<Table.TableHeaderCell
+									key={index}
+									width={header.width}
+								>
 									{index !== 0 &&
-									index !==
-										Object.keys(headerValues[0]).length -
-											1 ? (
+									index !== headerData.length - 1 ? (
 										<input
 											type="text"
-											value={value}
+											value={header.headerName}
 											onChange={(e) =>
 												handleHeaderInputChange(
 													e,
@@ -96,50 +94,47 @@ const AdministrationMedTable = ({
 											}
 										/>
 									) : (
-										value
+										header.headerName
 									)}
-								</th>
-							)
-						)}
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					{tableAdminMedData.map(
-						(medication, rowIndex) =>
-							rowIndex !== 0 && (
-								<tr key={rowIndex}>
-									{Object.entries(medication).map(
-										([key, value], columnIndex) => (
-											<td key={columnIndex}>
-												<input
-													type="text"
-													value={value}
-													onChange={(e) =>
-														handleInputChange(
-															e,
-															rowIndex,
-															key
-														)
-													}
-												/>
-											</td>
-										)
-									)}
-									<td>
-										<button
-											onClick={(e) =>
-												handleDeleteRow(e, rowIndex)
-											}
-										>
-											Delete
-										</button>
-									</td>
-								</tr>
-							)
-					)}
-				</tbody>
-			</table>
+								</Table.TableHeaderCell>
+							))}
+							<th>Delete</th>
+						</Table.TableRow>
+					</Table.TableHeader>
+					<Table.TableBody>
+						{bodyData.map((medication, rowIndex) => (
+							<Table.TableRow key={rowIndex}>
+								{Object.entries(medication).map(
+									([key, value], columnIndex) => (
+										<Table.TableDataCell key={columnIndex}>
+											<input
+												type="text"
+												value={value}
+												onChange={(e) =>
+													handleInputChange(
+														e,
+														rowIndex,
+														key
+													)
+												}
+											/>
+										</Table.TableDataCell>
+									)
+								)}
+								<Table.TableDataCell>
+									<button
+										onClick={(e) =>
+											handleDeleteRow(e, rowIndex)
+										}
+									>
+										Delete
+									</button>
+								</Table.TableDataCell>
+							</Table.TableRow>
+						))}
+					</Table.TableBody>
+				</Table.Table>
+			</Table.TableContainer>
 			<button onClick={handleAddRow}>Add New Row</button>
 		</div>
 	);

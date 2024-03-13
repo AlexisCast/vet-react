@@ -1,6 +1,14 @@
 .form {
+	width: 100%;
+}
+
+.section {
 	max-width: 40rem;
 	margin: 2rem auto;
+}
+
+.tables {
+	padding: 0px 10px;
 }
 
 .form label,

@@ -1,0 +1,51 @@
+.table__container {
+	width: 100%;
+	overflow-x: auto;
+}
+
+.table {
+	width: auto;
+	border-collapse: collapse;
+}
+
+.tableHeaderCell {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+	background-color: #f2f2f2;
+}
+
+.tableHeader,
+.tableDataCell {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+.tableRow:nth-child(even) {
+	background-color: #dddddd !important;
+}
+
+.tableDataCell:nth-child(even) {
+	background-color: #9b9b9b !important;
+}
+
+.TableHeaderCell__width_80 {
+	min-width: 80px !important;
+}
+
+.TableHeaderCell__width_100 {
+	min-width: 100px !important;
+}
+
+.TableHeaderCell__width_150 {
+	min-width: 150px !important;
+}
+
+.TableHeaderCell__width_250 {
+	min-width: 250px !important;
+}
+
+.TableHeaderCell__width_350 {
+	min-width: 350px !important;
+}
