@@ -4,7 +4,6 @@ import styles from "./TableCost.module.css";
 
 const TableCost = ({ tableCostData, setTableCostData }) => {
 	const { headerData, bodyData } = tableCostData;
-	console.log(headerData);
 	const handleInputChange = (e, rowIndex, columnName) => {
 		const { value } = e.target;
 		setTableCostData((prevData) => {

@@ -84,11 +84,29 @@ async function postMedicalRecord(data) {
 	return await response.json();
 }
 
+async function getRecordById(recordId) {
+	const token = getAuthToken();
+	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
 const functions = {
 	getAllOwners,
 	getAllPatients,
 	getAllRecords,
 	getAllSpecies,
+	getRecordById,
 	getSpecieById,
 	postMedicalRecord,
 };
