@@ -40,6 +40,12 @@ const RecordsTable = ({ tableRecordsData }) => {
 							<Table.TableHeaderCell width={150}>
 								Fecha
 							</Table.TableHeaderCell>
+							<Table.TableHeaderCell width={80}>
+								Edit
+							</Table.TableHeaderCell>
+							<Table.TableHeaderCell width={80}>
+								Delete
+							</Table.TableHeaderCell>
 						</Table.TableRow>
 					</Table.TableHeader>
 					<Table.TableBody>
@@ -61,6 +67,14 @@ const RecordsTable = ({ tableRecordsData }) => {
 									{moment(record.createdAt).format(
 										"DD/MM/YY HH:mm:ss"
 									)}
+								</Table.TableDataCell>
+								<Table.TableDataCell>
+									<Link to={`./${record._id}/edit`}>
+										Edit
+									</Link>
+								</Table.TableDataCell>
+								<Table.TableDataCell>
+									<button>Delete</button>
 								</Table.TableDataCell>
 							</Table.TableRow>
 						))}

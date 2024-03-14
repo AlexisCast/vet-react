@@ -21,6 +21,7 @@ const NewRecord = () => {
 				listOfPatients={data}
 				costData={costData}
 				adminMedData={adminMedData}
+				patient={null}
 			/>
 		</div>
 	);

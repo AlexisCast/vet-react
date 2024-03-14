@@ -68,6 +68,7 @@ import Records from "./pages/Records/Records";
 import NewRecord, {
 	loader as newRecordsLoader,
 } from "./pages/Records/NewRecord";
+import EditRecord from "./pages/Records/EditRecord";
 
 import { checkAuthLoader, tokenLoader } from "../util/auth";
 
@@ -266,6 +267,15 @@ const router = createBrowserRouter([
 					{
 						index: true,
 						element: <Records />,
+					},
+					{
+						path: ":recordId",
+						children: [
+							{
+								path: "edit",
+								element: <EditRecord />,
+							},
+						],
 					},
 					{
 						path: "new",

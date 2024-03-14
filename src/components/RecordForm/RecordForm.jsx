@@ -10,13 +10,22 @@ import userService from "../../services/userService";
 
 import styles from "./RecordForm.module.css";
 
-const RecordForm = ({ method, listOfPatients, costData, adminMedData }) => {
+const RecordForm = ({
+	method,
+	listOfPatients,
+	costData,
+	adminMedData,
+	patient,
+}) => {
 	const navigate = useNavigate();
 
 	const { total: totalOfPatients, patients } = listOfPatients;
 
-	const [selectPatientId, setSelectPatientId] = useState("");
-	const [patientData, setPatientData] = useState(null);
+	// patient exist => editRecord else for newRecord
+	const [selectPatientId, setSelectPatientId] = useState(
+		patient ? patient._id : ""
+	);
+	const [patientData, setPatientData] = useState(patient);
 
 	const [tableCostData, setTableCostData] = useState(costData);
 	const [tableAdminMedData, setTableAdminMedData] = useState(adminMedData);
@@ -57,28 +66,35 @@ const RecordForm = ({ method, listOfPatients, costData, adminMedData }) => {
 
 		console.log("data", data);
 
-		try {
-			const response = await userService.postMedicalRecord(data);
-			console.log("Record saved successfully:", response);
-		} catch (error) {
-			console.error("Error saving record:", error);
+		if (!patient) {
+			try {
+				const response = await userService.postMedicalRecord(data);
+				console.log("Record saved successfully:", response);
+			} catch (error) {
+				console.error("Error saving record:", error);
+			}
+		} else {
+			// TODO: Update record
+			console.log("TODO: Update record");
 		}
 	};
 
 	return (
 		<form className={styles.form}>
 			<div className={styles.section}>
-				<>
-					<label>Selected Patient:</label>
-					<span>{selectPatientId}</span>
-					<Dropdown
-						id="patient_id"
-						name="patient_id"
-						text="Select a Patient"
-						options={patientOptions}
-						onSelect={handleSelectPatient}
-					/>
-				</>
+				{!patient && (
+					<>
+						<label>Selected Patient:</label>
+						<span>{selectPatientId}</span>
+						<Dropdown
+							id="patient_id"
+							name="patient_id"
+							text="Select a Patient"
+							options={patientOptions}
+							onSelect={handleSelectPatient}
+						/>
+					</>
+				)}
 
 				{patientData && <PatientItem data={patientData} />}
 			</div>

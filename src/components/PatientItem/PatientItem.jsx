@@ -29,6 +29,7 @@ const PatientItem = ({ data }) => {
 		sterilized,
 		user,
 		weight,
+		recordID,
 	} = data;
 
 	const startDeleteHandler = () => {
@@ -38,6 +39,9 @@ const PatientItem = ({ data }) => {
 			submit(null, { method: "delete" });
 		}
 	};
+
+	const isNewRecordPage = location.pathname === "/records/new";
+	const isEditRecordPage = location.pathname === `/records/${recordID}/edit`;
 
 	return (
 		<article className={styles.data}>
@@ -84,8 +88,13 @@ const PatientItem = ({ data }) => {
 			{/* <p>Available: {data.available ? "YES" : "NO"}</p> */}
 			{token && (
 				<menu className={styles.actions}>
-					<Link to={`../../patients/${_id}/edit`}>Edit</Link>
-					{location.pathname !== "/records/new" && (
+					{isNewRecordPage && (
+						<Link to={`../../patients/${_id}/edit`}>Edit</Link>
+					)}
+					{isEditRecordPage && (
+						<Link to={`../../../patients/${_id}/edit`}>Edit</Link>
+					)}
+					{!isNewRecordPage && !isEditRecordPage && (
 						<button onClick={startDeleteHandler}>Delete</button>
 					)}
 				</menu>
