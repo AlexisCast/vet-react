@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import userService from "../../services/userService";
 import RecordsTable from "../../components/RecordsTable/RecordsTable";
 
-import { mockRecordsData } from "../../mock/records";
 import { useLocation } from "react-router-dom";
 
 const Records = () => {
