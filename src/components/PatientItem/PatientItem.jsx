@@ -42,6 +42,7 @@ const PatientItem = ({ data }) => {
 
 	const isNewRecordPage = location.pathname === "/records/new";
 	const isEditRecordPage = location.pathname === `/records/${recordID}/edit`;
+	const isPatientDetailPage = location.pathname === `/patients/${_id}`;
 
 	return (
 		<article className={styles.data}>
@@ -94,6 +95,7 @@ const PatientItem = ({ data }) => {
 					{isEditRecordPage && (
 						<Link to={`../../../patients/${_id}/edit`}>Edit</Link>
 					)}
+					{isPatientDetailPage && <Link to={`edit`}>Edit</Link>}
 					{!isNewRecordPage && !isEditRecordPage && (
 						<button onClick={startDeleteHandler}>Delete</button>
 					)}
