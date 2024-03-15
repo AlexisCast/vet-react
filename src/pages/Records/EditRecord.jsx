@@ -43,7 +43,7 @@ const EditRecord = () => {
 
 	return (
 		<div>
-			<h1>Edit Medical Record</h1>
+			<h1>Medical Record</h1>
 			<RecordForm
 				listOfPatients={listOfPatients}
 				costData={recordData.costsData[0]}
@@ -52,6 +52,7 @@ const EditRecord = () => {
 					...recordData.patient,
 					recordID: recordData._id,
 				}}
+				showTables={true}
 			/>
 		</div>
 	);

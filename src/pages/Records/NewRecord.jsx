@@ -17,11 +17,11 @@ const NewRecord = () => {
 		<div>
 			<h1>New Medical Record</h1>
 			<RecordForm
-				method="post"
 				listOfPatients={data}
 				costData={costData}
 				adminMedData={adminMedData}
 				patient={null}
+				showTables={false}
 			/>
 		</div>
 	);
