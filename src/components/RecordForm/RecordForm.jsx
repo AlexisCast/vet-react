@@ -66,16 +66,22 @@ const RecordForm = ({
 
 		console.log("data", data);
 
-		if (!patient) {
-			try {
+		try {
+			if (!patient) {
 				const response = await userService.postMedicalRecord(data);
 				console.log("Record saved successfully:", response);
-			} catch (error) {
-				console.error("Error saving record:", error);
+			} else {
+				const response = await userService.putRecordById(
+					patientData.recordID,
+					{
+						costsData: data.costsData,
+						adminMedData: data.adminMedData,
+					}
+				);
+				console.log("Record updated successfully:", response);
 			}
-		} else {
-			// TODO: Update record
-			console.log("TODO: Update record");
+		} catch (error) {
+			console.error("Error saving/updating record:", error);
 		}
 	};
 
