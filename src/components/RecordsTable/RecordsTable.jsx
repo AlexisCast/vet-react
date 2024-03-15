@@ -38,7 +38,10 @@ const RecordsTable = ({ tableRecordsData }) => {
 								Owner Last Name
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={150}>
-								Fecha
+								Created
+							</Table.TableHeaderCell>
+							<Table.TableHeaderCell width={150}>
+								Last Updated
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={80}>
 								Edit
@@ -65,6 +68,11 @@ const RecordsTable = ({ tableRecordsData }) => {
 								</Table.TableDataCell>
 								<Table.TableDataCell>
 									{moment(record.createdAt).format(
+										"DD/MM/YY HH:mm:ss"
+									)}
+								</Table.TableDataCell>
+								<Table.TableDataCell>
+									{moment(record.lastUpdatedAt).format(
 										"DD/MM/YY HH:mm:ss"
 									)}
 								</Table.TableDataCell>

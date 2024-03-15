@@ -101,6 +101,25 @@ async function getRecordById(recordId) {
 	return await response.json();
 }
 
+async function putRecordById(recordId, data) {
+	const token = getAuthToken();
+	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+		body: JSON.stringify(data),
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
 const functions = {
 	getAllOwners,
 	getAllPatients,
@@ -109,6 +128,7 @@ const functions = {
 	getRecordById,
 	getSpecieById,
 	postMedicalRecord,
+	putRecordById,
 };
 
 export default functions;

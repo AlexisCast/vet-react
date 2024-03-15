@@ -1,4 +1,4 @@
-export const mockCostsDataHeaders = [
+export const initialCostsDataHeaders = [
 	{ field: "Procedimiento", headerName: "Procedimiento", width: 150 },
 	{ field: "Costos", headerName: "Costos", width: 100 },
 	{ field: "Material", headerName: "Material", width: 150 },
@@ -11,34 +11,22 @@ export const mockCostsDataHeaders = [
 	{ field: "Total", headerName: "Total", width: 150 },
 ];
 
-export const mockCostsDataBody = [
+export const initialCostsDataBody = [
 	{
-		Procedimiento: "Canalizacion",
-		Costos: 350,
-		Material: "Paniales",
-		Costos_2: 30,
-		Medicacion: "Metro",
-		Costos_3: 95,
-		Pruebas: "Perfilcomp",
-		Costos_4: 1500,
-		Abonos: "",
-		Total: "",
-	},
-	{
-		Procedimiento: "Canalizacion 2",
-		Costos: 350,
-		Material: "Paniales 4",
-		Costos_2: 30,
-		Medicacion: "Metro",
-		Costos_3: 952,
-		Pruebas: "Perfilcomp 5",
-		Costos_4: 1500,
+		Procedimiento: "",
+		Costos: "",
+		Material: "",
+		Costos_2: "",
+		Medicacion: "",
+		Costos_3: "",
+		Pruebas: "",
+		Costos_4: "",
 		Abonos: "",
 		Total: "",
 	},
 ];
 
-export const mockAdminMedDataHeaders = [
+export const initialAdminMedDataHeaders = [
 	{ field: "Medication_Dosis", headerName: "Medication / Dosis", width: 350 },
 	{ field: "hour_1", headerName: "10", width: 80 },
 	{ field: "hour_2", headerName: "11", width: 80 },
@@ -57,77 +45,33 @@ export const mockAdminMedDataHeaders = [
 	{ field: "observations", headerName: "Observations", width: 250 },
 ];
 
-export const mockAdminMedDataBody = [
+export const initialAdminMedDataBody = [
 	{
-		Medication_Dosis: "Medication test1",
-		hour_1: "10:23",
+		Medication_Dosis: "",
+		hour_1: "",
 		hour_2: "",
 		hour_3: "",
-		hour_4: "1:34",
+		hour_4: "",
 		hour_5: "",
-		hour_6: "3:34",
-		hour_7: "4:21",
+		hour_6: "",
+		hour_7: "",
 		hour_8: "",
-		hour_9: "6:01",
+		hour_9: "",
 		hour_10: "",
 		hour11: "",
-		hour_12: "9:30",
+		hour_12: "",
 		hour_130: "",
-		hour_14: "11:02",
-		observations: "test 1",
-	},
-	{
-		Medication_Dosis: "med 34e",
-		hour_1: "",
-		hour_2: "11:34",
-		hour_3: "",
-		hour_4: "1:34",
-		hour_5: "",
-		hour_6: "3:34",
-		hour_7: "4:21",
-		hour_8: "",
-		hour_9: "6:01",
-		hour_10: "",
-		hour11: "8:23",
-		hour_12: "9:30",
-		hour_13: "",
 		hour_14: "",
-		observations: "test 2",
+		observations: "",
 	},
 ];
 
 export const mockAdminMedData = {
-	headerData: mockAdminMedDataHeaders,
-	bodyData: mockAdminMedDataBody,
+	headerData: initialAdminMedDataHeaders,
+	bodyData: initialAdminMedDataBody,
 };
 
-export const mockCostsData = {
-	headerData: mockCostsDataHeaders,
-	bodyData: mockCostsDataBody,
-};
-
-export const mockRecordsData = {
-	total: 2,
-	records: [
-		{
-			patient: {
-				id: "65e852f8588baec917f45cac",
-				name: "A CAT 1",
-				specie: "GATO",
-				ownerName: "LAKIEL DANIEL",
-				ownerLastName: "CAST",
-			},
-			createdAt: "2024-03-13T09:31:06.000Z",
-		},
-		{
-			patient: {
-				id: "65e7cca4bfb80ced27f7efb8",
-				name: "A DOG",
-				specie: "GATO",
-				ownerName: "LAKIEL DANIEL",
-				ownerLastName: "CAST",
-			},
-			createdAt: "2024-03-13T09:31:14.000Z",
-		},
-	],
+export const initialCostsData = {
+	headerData: initialCostsDataHeaders,
+	bodyData: initialCostsDataBody,
 };
