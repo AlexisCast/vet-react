@@ -3,9 +3,11 @@ import moment from "moment-timezone";
 import Table from "../Table/Table";
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import userService from "../../services/userService";
 
 import styles from "./RecordsTable.module.css";
-import { Link } from "react-router-dom";
 
 const RecordsTable = ({ tableRecordsData }) => {
 	const { total, records: bodyData } = tableRecordsData;
@@ -18,6 +20,22 @@ const RecordsTable = ({ tableRecordsData }) => {
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber);
 	};
+
+	const deleteHandler = async (recordId) => {
+		const proceed = window.confirm("Are you sure?");
+
+		if (proceed) {
+			console.log("Deleting the record", recordId);
+			try {
+				const response = await userService.deleteRecordById(recordId);
+				console.log("Record deleted", response);
+				window.location.reload();
+			} catch (error) {
+				console.error("Error deleting record", error);
+			}
+		}
+	};
+
 	return (
 		<section className={styles.section}>
 			<Table.TableContainer className={styles.TableContainer}>
@@ -82,7 +100,13 @@ const RecordsTable = ({ tableRecordsData }) => {
 									</Link>
 								</Table.TableDataCell>
 								<Table.TableDataCell>
-									<button>Delete</button>
+									<button
+										onClick={() => {
+											deleteHandler(record._id);
+										}}
+									>
+										Delete
+									</button>
 								</Table.TableDataCell>
 							</Table.TableRow>
 						))}

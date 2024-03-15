@@ -20,6 +20,7 @@ npm run dev
 -  [feat_18_FE](https://github.com/AlexisCast/vet-react/tree/feat/18_Records_page_and_RecordsTable) -> [feat_9_BE](https://github.com/AlexisCast/vet-serv/tree/feat/9_records_get_for_feat_18_FE)
 -  [feat_19_FE](https://github.com/AlexisCast/vet-react/tree/feat/19_EditRecord_page) -> [feat_10_BE](https://github.com/AlexisCast/vet-serv/tree/feat/10_records_get_obtainRecord_for_feat_19_FE)
 -  [feat_20_FE](https://github.com/AlexisCast/vet-react/tree/feat/20_EditRecord_page_update_record) -> [feat_11_BE](https://github.com/AlexisCast/vet-serv/tree/feat/11_records_put_update_record_for_feat_20_FE)
+-  [feat_21_FE](https://github.com/AlexisCast/vet-react/tree/feat/21_DeleteRecord) -> [feat_12_BE](https://github.com/AlexisCast/vet-serv/tree/feat/12_records_delete_record_for_feat_21_FE)
 
 ## Env File:
 - VITE_TITLE

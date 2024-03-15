@@ -11,11 +11,11 @@ import userService from "../../services/userService";
 import styles from "./RecordForm.module.css";
 
 const RecordForm = ({
-	method,
 	listOfPatients,
 	costData,
 	adminMedData,
-	patient,
+	patient, // patient exist => editRecord else for newRecord
+	showTables = false, //if false is for New Medical record ELSE is for EdiRedord
 }) => {
 	const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const RecordForm = ({
 	};
 
 	function cancelHandler() {
-		navigate("..");
+		navigate("/records");
 	}
 
 	const saveHandler = async (e) => {
@@ -69,7 +69,12 @@ const RecordForm = ({
 		try {
 			if (!patient) {
 				const response = await userService.postMedicalRecord(data);
+
+				const createRecordId = response._id;
+
 				console.log("Record saved successfully:", response);
+
+				navigate(`/records/${createRecordId}/edit`);
 			} else {
 				const response = await userService.putRecordById(
 					patientData.recordID,
@@ -105,21 +110,25 @@ const RecordForm = ({
 				{patientData && <PatientItem data={patientData} />}
 			</div>
 
-			<div>
-				<h2>Costs</h2>
-				<TableCost
-					tableCostData={tableCostData}
-					setTableCostData={setTableCostData}
-				/>
-			</div>
+			{showTables && (
+				<>
+					<div>
+						<h2>Costs</h2>
+						<TableCost
+							tableCostData={tableCostData}
+							setTableCostData={setTableCostData}
+						/>
+					</div>
 
-			<div>
-				<h2>Administration Medication / Dosis Table</h2>
-				<AdministrationMedTable
-					tableAdminMedData={tableAdminMedData}
-					setTableAdminMedData={setTableAdminMedData}
-				/>
-			</div>
+					<div>
+						<h2>Administration Medication / Dosis Table</h2>
+						<AdministrationMedTable
+							tableAdminMedData={tableAdminMedData}
+							setTableAdminMedData={setTableAdminMedData}
+						/>
+					</div>
+				</>
+			)}
 
 			<section className={styles.section}>
 				{selectPatientId && (
@@ -127,7 +136,9 @@ const RecordForm = ({
 						<button type="button" onClick={cancelHandler}>
 							Cancel
 						</button>
-						<button onClick={saveHandler}>Save</button>
+						<button onClick={saveHandler}>
+							{!showTables ? "Create Record" : "Save"}
+						</button>
 					</div>
 				)}
 			</section>

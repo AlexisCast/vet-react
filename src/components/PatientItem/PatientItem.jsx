@@ -90,10 +90,14 @@ const PatientItem = ({ data }) => {
 			{token && (
 				<menu className={styles.actions}>
 					{isNewRecordPage && (
-						<Link to={`../../patients/${_id}/edit`}>Edit</Link>
+						<Link to={`../../patients/${_id}/edit`}>
+							Edit Patient Data
+						</Link>
 					)}
 					{isEditRecordPage && (
-						<Link to={`../../../patients/${_id}/edit`}>Edit</Link>
+						<Link to={`../../../patients/${_id}/edit`}>
+							Edit Patient Data
+						</Link>
 					)}
 					{isPatientDetailPage && <Link to={`edit`}>Edit</Link>}
 					{!isNewRecordPage && !isEditRecordPage && (
