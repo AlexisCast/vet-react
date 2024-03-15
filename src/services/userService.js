@@ -49,6 +49,7 @@ async function getAllRecords(path) {
 
 	if (!response.ok) {
 		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
 		throw new Error(responseData.msg);
 	}
 
@@ -78,6 +79,7 @@ async function postMedicalRecord(data) {
 
 	if (!response.ok) {
 		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
 		throw new Error(responseData.msg);
 	}
 
@@ -95,6 +97,7 @@ async function getRecordById(recordId) {
 
 	if (!response.ok) {
 		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
 		throw new Error(responseData.msg);
 	}
 
@@ -114,6 +117,26 @@ async function putRecordById(recordId, data) {
 
 	if (!response.ok) {
 		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
+async function deleteRecordById(recordId) {
+	const token = getAuthToken();
+	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
 		throw new Error(responseData.msg);
 	}
 
@@ -121,6 +144,7 @@ async function putRecordById(recordId, data) {
 }
 
 const functions = {
+	deleteRecordById,
 	getAllOwners,
 	getAllPatients,
 	getAllRecords,
