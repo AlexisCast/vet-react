@@ -5,32 +5,35 @@ import {
 	useRouteLoaderData,
 } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+
 import Drawer from "../Drawer/Drawer";
 
 import styles from "./DrawerLayout.module.css";
 import Accordion, { AccordionItem } from "../Accordion/Accordion";
 import { setToken } from "../../../util/auth";
 
-const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
+const DrawerLayout = ({ userName }) => {
 	const token = useRouteLoaderData("root");
 
 	const navigate = useNavigate();
 
-	// const drawerIsVisbile = useSelector((state) => state.ui.drawerIsVisbile);
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
+	const drawerIsVisible = useSelector((state) => state.ui.drawerIsVisible);
 
 	const toggleDrawer = () => {
-		setShowDrawer(false);
+		dispatch(uiActions.closeDrawer());
 	};
 
 	const toggleDrawerWithAction = () => {
-		setShowDrawer(false);
+		dispatch(uiActions.closeDrawer());
 		setToken();
 		navigate("/");
 	};
 
 	const toggleDrawerWithActionLogIn = () => {
-		setShowDrawer(false);
+		dispatch(uiActions.closeDrawer());
 		setToken();
 		navigate("/auth?mode=login");
 	};
@@ -38,7 +41,7 @@ const DrawerLayout = ({ showDrawer, setShowDrawer, userName }) => {
 	//TODO: refactor for toggleDrawer
 
 	return (
-		<Drawer isOpen={showDrawer} onClose={toggleDrawer}>
+		<Drawer isOpen={drawerIsVisible} onClose={toggleDrawer}>
 			<div className={styles.Drawer__container}>
 				<p>Drawer Header</p>
 				<nav className={styles.Drawer__nav}>

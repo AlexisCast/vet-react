@@ -1,6 +1,9 @@
 import { Form, Link, NavLink, useRouteLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
@@ -13,12 +16,13 @@ import { getUser } from "../../../util/auth";
 const title = import.meta.env.VITE_TITLE;
 
 const MainNavigation = () => {
+	const dispatch = useDispatch();
+
 	const token = useRouteLoaderData("root");
 
 	const { name: userName } = getUser();
 
 	const [windowIsWide, setWindowIsWide] = useState(window.innerWidth > 1000);
-	const [showDrawer, setShowDrawer] = useState(false);
 
 	const updateState = () => {
 		setWindowIsWide(window.innerWidth > 1000);
@@ -30,16 +34,12 @@ const MainNavigation = () => {
 	});
 
 	const handleOnclick = () => {
-		setShowDrawer(true);
+		dispatch(uiActions.openDrawer());
 	};
 
 	return (
 		<header>
-			<DrawerLayout
-				showDrawer={showDrawer}
-				setShowDrawer={setShowDrawer}
-				userName={userName}
-			/>
+			<DrawerLayout userName={userName} />
 			<nav>
 				{windowIsWide ? (
 					<ul className={styles.navContainer}>
