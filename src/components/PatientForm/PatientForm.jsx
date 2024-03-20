@@ -14,6 +14,7 @@ import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
 import noImage from "../../assets/no-image.jpg";
 import Dropdown from "../Dropdown/Dropdown";
+import RequiredLabel from "../RequiredLabel/RequiredLabel";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
@@ -41,21 +42,6 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 	);
 	const [selectedOwnerPhoneNumber1, setSelectedOwnerPhoneNumber1] = useState(
 		owner ? owner.phoneNumber1 : ""
-	);
-
-	//	Dropdown states for Species
-	const [selectedSpeciesId, setSelectedSpeciesId] = useState(
-		specie ? specie._id : ""
-	);
-
-	//	Dropdown states for Gender
-	const [selectedGenderId, setSelectedGenderId] = useState(
-		patient ? gender : ""
-	);
-
-	//	Dropdown states for sterilized
-	const [selectedSterilize, setSelectedSterilize] = useState(
-		patient ? sterilized : false
 	);
 
 	//	Image states
@@ -117,26 +103,6 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 		}
 	};
 
-	const handleSelectSpecie = (option) => {
-		const filteredSpeciesData = species.filter(
-			(item) => item._id == option
-		);
-
-		if (filteredSpeciesData.length == 0) {
-			setSelectedSpeciesId(null);
-		} else {
-			setSelectedSpeciesId(filteredSpeciesData[0]._id);
-		}
-	};
-
-	const handleSelectGender = (option) => {
-		setSelectedGenderId(option);
-	};
-
-	const handleSelectSterilizationStatus = (option) => {
-		setSelectedSterilize(option);
-	};
-
 	// const ownerOptions = [
 	// 	{ id: "65e0fdacf84beca149f75a8f1", option: "HELLO1", lastName: "WORLD" },
 	// 	{ id: "65e0fdacf84beca149f75a8f2", option: "HELLO2", lastName: "WORLD" },
@@ -173,11 +139,13 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				</ul>
 			)}
 			<p>
-				<label htmlFor="name">Name</label>
+				<RequiredLabel htmlFor="name" required>
+					Name
+				</RequiredLabel>
 				<input
 					id="name"
-					type="text"
 					name="name"
+					type="text"
 					required
 					defaultValue={patient ? name : ""}
 				/>
@@ -186,15 +154,14 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				<label htmlFor="image">Image</label>
 				<input
 					id="image"
-					type="url"
 					name="image"
-					// required
+					type="url"
 					defaultValue={patient ? patient.img : ""}
 					readOnly
 				/>
 			</p>
 			<p>
-				<label htmlFor="image">Current Image</label>
+				<label htmlFor="file">Current Image</label>
 				{patient.img ? (
 					<img src={patient.img} alt={patient.name} />
 				) : (
@@ -203,8 +170,8 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				{/* Change input type to file */}
 				<input
 					id="file"
-					type="file"
 					name="file"
+					type="file"
 					onChange={handleImageChange}
 					required={!patient}
 				/>
@@ -217,140 +184,121 @@ const PatientForm = ({ method, patient, listOfOwners, listOfSpecies }) => {
 				/>
 			)}
 			<>
-				<label htmlFor="selected_option_specie">
-					Selected Specie: {selectedSpeciesId}
-				</label>
+				<RequiredLabel htmlFor="specie" required>
+					Selected Specie:
+				</RequiredLabel>
 				<Dropdown
+					id="specie"
 					name="specie"
 					text="Select a Specie"
 					options={speciesOptions}
-					onSelect={handleSelectSpecie}
+					onSelect={(option) => {
+						console.log(option);
+					}}
 					selectedOptionDefault={specie._id}
+					required
 				/>
 			</>
-			{/* <p>
-				<label htmlFor="specie">Specie</label>
-				<input
-					id="specie"
-					type="text"
-					name="specie"
-					required
-					value={selectedSpeciesId || ""}
-					readOnly
-				/>
-			</p> */}
 			<p>
-				<label htmlFor="age">Age</label>
+				<RequiredLabel htmlFor="age" required>
+					Age
+				</RequiredLabel>
 				<input
 					id="age"
-					type="text"
 					name="age"
-					// required
+					type="text"
+					required
 					defaultValue={patient ? age : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="weight">Weight</label>
+				<RequiredLabel htmlFor="weight" required>
+					Weight
+				</RequiredLabel>
 				<input
 					id="weight"
-					type="text"
 					name="weight"
-					// required
+					type="text"
+					required
 					defaultValue={patient ? weight : ""}
 				/>
 			</p>
 			<>
-				<label htmlFor="selected_option_gender">
-					Selected Gender: {selectedGenderId}
-				</label>
+				<label htmlFor="gender">Selected Gender:</label>
 				<Dropdown
+					id="gender"
+					name="gender"
 					text="Select a Gender"
 					options={genderOptions}
-					onSelect={handleSelectGender}
+					onSelect={(option) => {
+						console.log(option);
+					}}
 					selectedOptionDefault={gender}
 				/>
 			</>
-			<p>
-				<label htmlFor="gender">Gender</label>
-				<input
-					id="gender"
-					type="text"
-					name="gender"
-					value={selectedGenderId || ""}
-					readOnly
-				/>
-			</p>
 			<>
-				<label htmlFor="selected_option_sterilized">
-					Selected Sterilized Status:{" "}
-					{selectedSterilize ? "Yes" : "No"}
-				</label>
+				<label htmlFor="sterilized">Selected Sterilized Status:</label>
 				<Dropdown
+					id="sterilized"
+					name="sterilized"
 					text="Select Sterilized Status"
 					options={sterilizedOptions}
-					onSelect={handleSelectSterilizationStatus}
+					onSelect={(option) => {
+						console.log(option);
+					}}
 					selectedOptionDefault={sterilized || false}
 				/>
 			</>
 			<p>
-				<label htmlFor="sterilized">Sterilized</label>
-				<input
-					id="sterilized"
-					type="text"
-					name="sterilized"
-					// required
-					value={selectedSterilize || false}
-					readOnly
-				/>
-			</p>
-			<p>
-				<label htmlFor="sterilized">Note</label>
+				<label htmlFor="note">Note</label>
 				<input
 					id="note"
-					type="text"
 					name="note"
-					// required
+					type="text"
 					defaultValue={patient ? note : ""}
 				/>
 			</p>
 			<>
-				<label htmlFor="selected_option_owner">
-					Selected Owner: {selectedOwnerId}
-				</label>
+				<RequiredLabel htmlFor="ownerID" required>
+					Selected Owner:
+				</RequiredLabel>
 				<Dropdown
+					id="ownerID"
+					name="ownerID"
 					text="Select an Owner"
 					options={ownerOptions}
 					onSelect={handleSelectOwner}
 					selectedOptionDefault={owner._id}
+					required
 				/>
 			</>
 			<p>
-				<label htmlFor="owner_id">Owners ID</label>
+				<label htmlFor="ownerIDSelected">Owners ID</label>
 				<input
-					id="owner_id"
+					id="ownerIDSelected"
+					name="ownerIDSelected"
 					type="text"
-					name="owner_id"
 					required
 					value={selectedOwnerId || ""}
 					readOnly
 				/>
 			</p>
 			<p>
-				<label htmlFor="owner_name">Owners Name</label>
+				<label htmlFor="ownerName">Owners Name</label>
 				<input
-					id="owner_name"
+					id="ownerName"
+					name="ownerName"
 					type="text"
-					name="owner_name"
 					value={selectedOwnerName || ""}
 					readOnly
 				/>
 			</p>
 			<p>
-				<label htmlFor="owner_phoneNumber1">Phone Number 1</label>
+				<label htmlFor="ownerPhoneNumber1">Phone Number 1</label>
 				<input
-					id="owner_phoneNumber1"
+					id="ownerPhoneNumber1"
+					name="ownerPhoneNumber1"
 					type="text"
-					name="ownerphoneNumber1"
 					value={selectedOwnerPhoneNumber1 || ""}
 					readOnly
 				/>
@@ -386,7 +334,7 @@ export const action = async ({ request, params }) => {
 		gender: data.get("gender"),
 		sterilized: data.get("sterilized"),
 		note: data.get("note"),
-		owner: data.get("owner_id"),
+		owner: data.get("ownerID"),
 		file: data.get("file"),
 	};
 
