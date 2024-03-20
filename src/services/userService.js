@@ -1,7 +1,7 @@
 import { json } from "react-router-dom";
 import { getAuthToken, isTokenExpired } from "../../util/auth";
 
-const client_url = import.meta.env.VITE_CLIENT_URL;
+const CLIENT_URL = import.meta.env.VITE_CLIENT_URL;
 const OWNERS_URL = "/api/owners";
 const SPECIES_URL = "/api/species";
 const PATIENTS_URL = "/api/patients";
@@ -9,7 +9,7 @@ const RECORDS_URL = "/api/records";
 
 function getAllOwners() {
 	const token = getAuthToken();
-	return fetch(client_url + OWNERS_URL, {
+	return fetch(CLIENT_URL + OWNERS_URL, {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -19,7 +19,7 @@ function getAllOwners() {
 
 function getAllPatients() {
 	const token = getAuthToken();
-	return fetch(client_url + PATIENTS_URL, {
+	return fetch(CLIENT_URL + PATIENTS_URL, {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -29,7 +29,7 @@ function getAllPatients() {
 
 function getAllSpecies() {
 	const token = getAuthToken();
-	return fetch(client_url + SPECIES_URL, {
+	return fetch(CLIENT_URL + SPECIES_URL, {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -39,8 +39,8 @@ function getAllSpecies() {
 
 async function getAllRecords(path) {
 	const token = getAuthToken();
-	console.log(client_url + RECORDS_URL + path);
-	const response = await fetch(client_url + RECORDS_URL + "/" + path, {
+	console.log(CLIENT_URL + RECORDS_URL + path);
+	const response = await fetch(CLIENT_URL + RECORDS_URL + "/" + path, {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -58,7 +58,7 @@ async function getAllRecords(path) {
 
 function getSpecieById(specieId) {
 	const token = getAuthToken();
-	return fetch(client_url + SPECIES_URL + "/" + specieId, {
+	return fetch(CLIENT_URL + SPECIES_URL + "/" + specieId, {
 		headers: new Headers({
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -68,7 +68,7 @@ function getSpecieById(specieId) {
 
 async function postMedicalRecord(data) {
 	const token = getAuthToken();
-	const response = await fetch(client_url + RECORDS_URL, {
+	const response = await fetch(CLIENT_URL + RECORDS_URL, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -88,7 +88,7 @@ async function postMedicalRecord(data) {
 
 async function getRecordById(recordId) {
 	const token = getAuthToken();
-	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+	const response = await fetch(CLIENT_URL + RECORDS_URL + "/" + recordId, {
 		headers: {
 			"Content-Type": "application/json",
 			"x-token": token,
@@ -106,7 +106,7 @@ async function getRecordById(recordId) {
 
 async function putRecordById(recordId, data) {
 	const token = getAuthToken();
-	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+	const response = await fetch(CLIENT_URL + RECORDS_URL + "/" + recordId, {
 		method: "PUT",
 		headers: {
 			"Content-Type": "application/json",
@@ -126,7 +126,7 @@ async function putRecordById(recordId, data) {
 
 async function deleteRecordById(recordId) {
 	const token = getAuthToken();
-	const response = await fetch(client_url + RECORDS_URL + "/" + recordId, {
+	const response = await fetch(CLIENT_URL + RECORDS_URL + "/" + recordId, {
 		method: "DELETE",
 		headers: {
 			"Content-Type": "application/json",
