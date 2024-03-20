@@ -8,6 +8,7 @@ const Dropdown = ({
 	selectedOptionDefault = "null",
 	text = "Select an Option",
 	name = "",
+	...props
 }) => {
 	const [selectedOption, setSelectedOption] = useState(selectedOptionDefault);
 
@@ -22,6 +23,7 @@ const Dropdown = ({
 			className={styles.dropdown}
 			value={selectedOption}
 			onChange={(e) => handleSelect(e.target.value)}
+			{...props}
 		>
 			<option value="">{text}</option>
 			{options.map((option, index) => (
