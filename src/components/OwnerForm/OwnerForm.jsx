@@ -7,9 +7,11 @@ import {
 	redirect,
 } from "react-router-dom";
 
-import styles from "./OwnerForm.module.css";
+import RequiredLabel from "../RequiredLabel/RequiredLabel";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
+
+import styles from "./OwnerForm.module.css";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
@@ -46,72 +48,74 @@ const OwnerForm = ({ method, owner }) => {
 				</ul>
 			)}
 			<p>
-				<label htmlFor="title">Name</label>
+				<RequiredLabel htmlFor="name" required>
+					Name
+				</RequiredLabel>
 				<input
 					id="name"
-					type="text"
 					name="name"
+					type="text"
 					required
 					defaultValue={owner ? name : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Last Name</label>
+				<RequiredLabel htmlFor="lastName" required>
+					Last Name
+				</RequiredLabel>
 				<input
 					id="lastName"
-					type="text"
 					name="lastName"
+					type="text"
 					required
 					defaultValue={owner ? lastName : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Email</label>
+				<label htmlFor="email">Email</label>
 				<input
 					id="email"
-					type="text"
 					name="email"
-					// required
+					type="text"
 					defaultValue={owner ? email : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Address</label>
+				<label htmlFor="address">Address</label>
 				<input
 					id="address"
-					type="text"
 					name="address"
-					// required
+					type="text"
 					defaultValue={owner ? address : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Other</label>
+				<label htmlFor="other">Other</label>
 				<input
 					id="other"
-					type="text"
 					name="other"
-					// required
+					type="text"
 					defaultValue={owner ? other : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Phone Number 1</label>
+				<RequiredLabel htmlFor="phoneNumber1" required>
+					Phone Number 1
+				</RequiredLabel>
 				<input
 					id="phoneNumber1"
-					type="text"
 					name="phoneNumber1"
+					type="text"
 					required
 					defaultValue={owner ? phoneNumber1 : ""}
 				/>
 			</p>
 			<p>
-				<label htmlFor="date">Phone Number 2</label>
+				<label htmlFor="phoneNumber2">Phone Number 2</label>
 				<input
 					id="phoneNumber2"
-					type="text"
 					name="phoneNumber2"
-					// required
+					type="text"
 					defaultValue={owner ? phoneNumber2 : ""}
 				/>
 			</p>

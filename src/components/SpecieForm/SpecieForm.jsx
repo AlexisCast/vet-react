@@ -7,9 +7,11 @@ import {
 	redirect,
 } from "react-router-dom";
 
-import styles from "./SpecieForm.module.css";
+import RequiredLabel from "../RequiredLabel/RequiredLabel";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
+
+import styles from "./SpecieForm.module.css";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
@@ -35,11 +37,13 @@ const SpecieForm = ({ method, specie }) => {
 				</ul>
 			)}
 			<p>
-				<label htmlFor="title">Name</label>
+				<RequiredLabel htmlFor="name" required>
+					Name
+				</RequiredLabel>
 				<input
 					id="name"
-					type="text"
 					name="name"
+					type="text"
 					required
 					defaultValue={specie ? name : ""}
 				/>
