@@ -12,7 +12,7 @@ const EditOwner = () => {
 	return (
 		<div>
 			<h1>Edit Owner</h1>
-			<p>{params.ownerId}</p>
+			{/* <p>{params.ownerId}</p> */}
 
 			<OwnerForm method="put" owner={ownderData} />
 		</div>
