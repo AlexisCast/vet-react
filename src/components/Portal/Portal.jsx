@@ -6,18 +6,18 @@ const PortalOverlay = ({ children }) => {
 	return <div className={styles.container__drawer}>{children}</div>;
 };
 
-export const Portal = ({ isOpen = true, children }) => {
+export const Portal = ({ isOpen = true, rootId, children }) => {
 	if (!isOpen) return null;
 
-	const whatsAppRoot = document.getElementById("whatsApp-root");
+	const rootNameId = document.getElementById(rootId);
 
-	if (!whatsAppRoot) return null;
+	if (!rootNameId) return null;
 
 	return (
 		<>
 			{ReactDOM.createPortal(
 				<PortalOverlay>{children}</PortalOverlay>,
-				whatsAppRoot
+				rootNameId
 			)}
 		</>
 	);

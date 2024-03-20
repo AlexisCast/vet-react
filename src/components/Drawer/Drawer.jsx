@@ -13,7 +13,6 @@ const DrawerOverlay = ({ children }) => {
 export const Drawer = ({ isOpen = false, onClose, children }) => {
 	if (!isOpen) return null;
 
-	console.log("123");
 	const backdropRoot = document.getElementById("backdrop-root");
 	const portalRoot = document.getElementById("portal-root");
 
