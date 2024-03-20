@@ -5,6 +5,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import PatientItem from "../PatientItem/PatientItem";
 import TableCost from "../TableCost/TableCost";
 import AdministrationMedTable from "../AdministrationMedTable/AdministrationMedTable";
+import RequiredLabel from "../RequiredLabel/RequiredLabel";
 
 import userService from "../../services/userService";
 
@@ -95,14 +96,16 @@ const RecordForm = ({
 			<div className={styles.section}>
 				{!patient && (
 					<>
-						<label>Selected Patient:</label>
-						<span>{selectPatientId}</span>
+						<RequiredLabel htmlFor="patient_id" required>
+							Selected Patient:
+						</RequiredLabel>
 						<Dropdown
 							id="patient_id"
 							name="patient_id"
 							text="Select a Patient"
 							options={patientOptions}
 							onSelect={handleSelectPatient}
+							required
 						/>
 					</>
 				)}
