@@ -1,17 +1,17 @@
 import { Form, Link, NavLink, useRouteLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+
+import DrawerLayout from "../DrawerLayout/DrawerLayout";
+import LinkDropdown from "../LinkDropDowns/LinkDropdown";
+
+import { getUser } from "../../../util/auth";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-
-import DrawerLayout from "../DrawerLayout/DrawerLayout";
-
 import styles from "./MainNavigation.module.css";
-import LinkDropdown from "../LinkDropDowns/LinkDropdown";
-import { getUser } from "../../../util/auth";
 
 const title = import.meta.env.VITE_TITLE;
 
