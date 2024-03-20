@@ -8,13 +8,14 @@ import {
 	redirect,
 } from "react-router-dom";
 
-import styles from "./PatientForm.module.css";
+import Dropdown from "../Dropdown/Dropdown";
+import RequiredLabel from "../RequiredLabel/RequiredLabel";
+
+import noImage from "../../assets/no-image.jpg";
 
 import { getAuthToken, isTokenExpired } from "../../../util/auth";
 
-import noImage from "../../assets/no-image.jpg";
-import Dropdown from "../Dropdown/Dropdown";
-import RequiredLabel from "../RequiredLabel/RequiredLabel";
+import styles from "./PatientForm.module.css";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
