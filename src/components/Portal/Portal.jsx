@@ -9,15 +9,15 @@ const PortalOverlay = ({ children }) => {
 export const Portal = ({ isOpen = true, rootId, children }) => {
 	if (!isOpen) return null;
 
-	const root = document.getElementById(rootId);
+	const rootNameId = document.getElementById(rootId);
 
-	if (!root) return null;
+	if (!rootNameId) return null;
 
 	return (
 		<>
 			{ReactDOM.createPortal(
 				<PortalOverlay>{children}</PortalOverlay>,
-				root
+				rootNameId
 			)}
 		</>
 	);
