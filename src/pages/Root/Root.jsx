@@ -42,7 +42,7 @@ const RootLayout = () => {
 				<Outlet />
 			</main>
 			{!token && (
-				<Portal>
+				<Portal rootId="whatsApp-root">
 					<WhatsAppButton />
 				</Portal>
 			)}
