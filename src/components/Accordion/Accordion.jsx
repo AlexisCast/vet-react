@@ -7,7 +7,7 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Accordion.module.css";
 
-export function Accordion({ title, closeDrawer, children }) {
+export const Accordion = ({ title, closeDrawer, children }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleAccordion = () => {
@@ -38,7 +38,7 @@ export function Accordion({ title, closeDrawer, children }) {
 			)}
 		</div>
 	);
-}
+};
 
 export const AccordionItem = ({ route, label }) => {
 	return (
@@ -48,4 +48,7 @@ export const AccordionItem = ({ route, label }) => {
 	);
 };
 
-export default Accordion;
+export default {
+	Accordion,
+	AccordionItem,
+};
