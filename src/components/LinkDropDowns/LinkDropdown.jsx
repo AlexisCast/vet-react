@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { CaretDownIcon } from "../Icons/Icons";
+
 import styles from "./LinkDropdown.module.css";
 
 const LinkDropdown = ({ label, route, children }) => {
@@ -24,7 +24,7 @@ const LinkDropdown = ({ label, route, children }) => {
 			<div to={route} style={{ width: "100%", textAlign: "center" }}>
 				{label}
 				<span style={{ marginLeft: "5px" }}>
-					<FontAwesomeIcon icon={faCaretDown} size="sm" />
+					<CaretDownIcon size="sm" />
 				</span>
 			</div>
 			<ul
