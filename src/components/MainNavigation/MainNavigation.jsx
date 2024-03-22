@@ -9,8 +9,8 @@ import LinkDropdown from "../LinkDropDowns/LinkDropdown";
 
 import { getUser } from "../../../util/auth";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { BarsIcon } from "../Icons/Icons";
+
 import styles from "./MainNavigation.module.css";
 
 const title = import.meta.env.VITE_TITLE;
@@ -148,8 +148,7 @@ const MainNavigation = () => {
 						</ul>
 						<ul className={`${styles.webNav} ${styles.noMinWidth}`}>
 							<li onClick={handleOnclick}>
-								<FontAwesomeIcon
-									icon={faBars}
+								<BarsIcon
 									size="2xl"
 									className={styles.faBars}
 									onClick={handleOnclick}

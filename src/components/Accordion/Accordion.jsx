@@ -2,8 +2,7 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { CaretDownIcon } from "../Icons/Icons";
 
 import styles from "./Accordion.module.css";
 
@@ -21,9 +20,8 @@ export const Accordion = ({ title, closeDrawer, children }) => {
 					onClick={toggleAccordion}
 					className={styles.AccordionButton__button}
 				>
-					<FontAwesomeIcon
+					<CaretDownIcon
 						className={styles.faCaretDown}
-						icon={faCaretDown}
 						size="lg"
 						onClick={toggleAccordion}
 					/>
