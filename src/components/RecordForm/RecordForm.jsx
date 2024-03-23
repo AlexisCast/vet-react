@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { toastActions } from "../../store/toasts-slice";
+
 import Dropdown from "../Dropdown/Dropdown";
 import PatientItem from "../PatientItem/PatientItem";
 import TableCost from "../TableCost/TableCost";
@@ -19,6 +22,7 @@ const RecordForm = ({
 	showTables = false, //if false is for New Medical record ELSE is for EdiRedord
 }) => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const { total: totalOfPatients, patients } = listOfPatients;
 
@@ -74,6 +78,12 @@ const RecordForm = ({
 				const createRecordId = response._id;
 
 				console.log("Record saved successfully:", response);
+				dispatch(
+					toastActions.showToast({
+						message: "Record saved successfully",
+						type: "success",
+					})
+				);
 
 				navigate(`/records/${createRecordId}/edit`);
 			} else {
@@ -85,9 +95,21 @@ const RecordForm = ({
 					}
 				);
 				console.log("Record updated successfully:", response);
+				dispatch(
+					toastActions.showToast({
+						message: "Record updated successfully",
+						type: "success",
+					})
+				);
 			}
 		} catch (error) {
 			console.error("Error saving/updating record:", error);
+			dispatch(
+				toastActions.showToast({
+					message: "Error saving/updating record: " + error,
+					type: "failure",
+				})
+			);
 		}
 	};
 

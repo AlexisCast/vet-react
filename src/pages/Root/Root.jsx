@@ -9,6 +9,8 @@ import MainNavigation from "../../components/MainNavigation/MainNavigation";
 
 import Portal from "../../components/Portal/Portal";
 import WhatsAppButton from "../../components/WhatsAppButton/WhatsAppButton";
+import ToastPortal from "../../components/ToastPortal/ToastPortal";
+import Toasts from "../../components/ToastPortal/Toasts";
 
 import styles from "./Root.module.css";
 
@@ -46,6 +48,9 @@ const RootLayout = () => {
 					<WhatsAppButton />
 				</Portal>
 			)}
+			<ToastPortal>
+				<Toasts />
+			</ToastPortal>
 		</>
 	);
 };
