@@ -6,6 +6,7 @@ const OWNERS_URL = "/api/owners";
 const SPECIES_URL = "/api/species";
 const PATIENTS_URL = "/api/patients";
 const RECORDS_URL = "/api/records";
+const SEARCH_PATIENTS_URL = "/api/search/patients";
 
 function getAllOwners() {
 	const token = getAuthToken();
@@ -143,6 +144,27 @@ async function deleteRecordById(recordId) {
 	return await response.json();
 }
 
+async function getPatientsPhrase(phrase) {
+	const token = getAuthToken();
+	const response = await fetch(
+		CLIENT_URL + SEARCH_PATIENTS_URL + "/" + phrase,
+		{
+			headers: {
+				"Content-Type": "application/json",
+				"x-token": token,
+			},
+		}
+	);
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
 const functions = {
 	deleteRecordById,
 	getAllOwners,
@@ -153,6 +175,7 @@ const functions = {
 	getSpecieById,
 	postMedicalRecord,
 	putRecordById,
+	getPatientsPhrase,
 };
 
 export default functions;

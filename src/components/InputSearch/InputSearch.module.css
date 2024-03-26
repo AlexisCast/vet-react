@@ -1,0 +1,25 @@
+.inputSearch_container {
+	display: flex;
+	flex-direction: column;
+	max-width: 20rem;
+	margin: 2rem auto;
+}
+
+.inputSearch_container label {
+	text-align: justify;
+	display: block;
+	width: 100%;
+}
+
+.input_button_section {
+  width: 100%;
+  display: flex;
+}
+
+.input_button_section input {
+	font: inherit;
+	padding: 0.25rem;
+  width: 100%;
+}
+
+
