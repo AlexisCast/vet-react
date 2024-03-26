@@ -13,14 +13,11 @@ const toastSlice = createSlice({
 	reducers: {
 		showToast(state, action) {
 			const { message, type } = action.payload;
-			console.log(message);
-			console.log(type);
 			const newToast = {
 				id: Date.now(),
 				message,
 				type,
 			};
-			console.log(newToast);
 			state.toasts.push(newToast);
 		},
 		removeToast(state, action) {

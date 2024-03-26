@@ -52,9 +52,19 @@ export const checkAuthLoader = () => {
 };
 
 export const isTokenExpired = (msg) => {
+	console.log("msg", msg);
 	if (msg === "Token has expired") {
 		window.confirm("Session has expired...");
 		localStorage.setItem("token", "EXPIRED");
+		return true;
+	}
+	// TODO: Update condition
+	if (msg === "Token not valid") {
+		console.log("Token not valid");
+		// window.confirm("Session has expired...");
+		localStorage.setItem("token", "EXPIRED");
+		window.location.href = "/auth?mode=login";
+
 		return true;
 	}
 	return false;
