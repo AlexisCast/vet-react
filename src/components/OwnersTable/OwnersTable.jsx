@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import moment from "moment-timezone";
-
 import Table from "../Table/Table";
 
 import userService from "../../services/userService";
 
-import styles from "./RecordsTable.module.css";
+import styles from "./OwnersTable.module.css";
 
-const RecordsTable = ({ tableRecordsData }) => {
+const OwnersTable = ({ tableRecordsData }) => {
 	const location = useLocation();
 
-	const { total, records: bodyData } = tableRecordsData;
+	const { total, owners: bodyData } = tableRecordsData;
 
 	// TODO: refactor pagination
 	// State variables for pagination
@@ -20,7 +18,7 @@ const RecordsTable = ({ tableRecordsData }) => {
 	const [itemsPerPage] = useState(15);
 	const numberOfPages = Math.ceil(total / itemsPerPage);
 
-	//resets currentpage when it goes back to /records
+	//resets currentpage when it goes back to /owners
 	useEffect(() => {
 		if (!location.search) {
 			setCurrentPage(0);
@@ -37,7 +35,7 @@ const RecordsTable = ({ tableRecordsData }) => {
 		if (proceed) {
 			console.log("Deleting the record", recordId);
 			try {
-				const response = await userService.deleteRecordById(recordId);
+				const response = await userService.deleteOwnerById(recordId);
 				console.log("Record deleted", response);
 				window.location.reload();
 			} catch (error) {
@@ -54,22 +52,19 @@ const RecordsTable = ({ tableRecordsData }) => {
 					<Table.TableHeader>
 						<Table.TableRow>
 							<Table.TableHeaderCell width={150}>
-								Patient Name
-							</Table.TableHeaderCell>
-							<Table.TableHeaderCell width={150}>
-								Specie
-							</Table.TableHeaderCell>
-							<Table.TableHeaderCell width={150}>
 								Owner First Name
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={150}>
 								Owner Last Name
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={150}>
-								Created
+								phoneNumber 1
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={150}>
-								Last Updated
+								phoneNumber 2
+							</Table.TableHeaderCell>
+							<Table.TableHeaderCell width={80}>
+								Open
 							</Table.TableHeaderCell>
 							<Table.TableHeaderCell width={80}>
 								Edit
@@ -83,26 +78,21 @@ const RecordsTable = ({ tableRecordsData }) => {
 						{bodyData.map((record, index) => (
 							<Table.TableRow key={index}>
 								<Table.TableDataCell>
-									{record.patient.name}
+									{record.name}
 								</Table.TableDataCell>
 								<Table.TableDataCell>
-									{record.patient.specie}
+									{record.lastName}
 								</Table.TableDataCell>
 								<Table.TableDataCell>
-									{record.patient.ownerName}
+									{record.phoneNumber1}
 								</Table.TableDataCell>
 								<Table.TableDataCell>
-									{record.patient.ownerLastName}
+									{record.phoneNumber2}
 								</Table.TableDataCell>
 								<Table.TableDataCell>
-									{moment(record.createdAt).format(
-										"DD/MM/YY HH:mm:ss"
-									)}
-								</Table.TableDataCell>
-								<Table.TableDataCell>
-									{moment(record.lastUpdatedAt).format(
-										"DD/MM/YY HH:mm:ss"
-									)}
+									<Link to={`/owners/${record._id}`}>
+										Open
+									</Link>
 								</Table.TableDataCell>
 								<Table.TableDataCell>
 									<Link to={`./${record._id}/edit`}>
@@ -144,4 +134,4 @@ const RecordsTable = ({ tableRecordsData }) => {
 	);
 };
 
-export default RecordsTable;
+export default OwnersTable;

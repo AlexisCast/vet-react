@@ -144,6 +144,25 @@ async function deleteRecordById(recordId) {
 	return await response.json();
 }
 
+async function deleteOwnerById(recordId) {
+	const token = getAuthToken();
+	const response = await fetch(CLIENT_URL + OWNERS_URL + "/" + recordId, {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+			"x-token": token,
+		},
+	});
+
+	if (!response.ok) {
+		const responseData = await response.clone().json();
+		isTokenExpired(responseData?.msg);
+		throw new Error(responseData.msg);
+	}
+
+	return await response.json();
+}
+
 async function getPatientsPhrase(phrase) {
 	const token = getAuthToken();
 	const response = await fetch(
@@ -166,16 +185,17 @@ async function getPatientsPhrase(phrase) {
 }
 
 const functions = {
+	deleteOwnerById,
 	deleteRecordById,
 	getAllOwners,
 	getAllPatients,
 	getAllRecords,
 	getAllSpecies,
+	getPatientsPhrase,
 	getRecordById,
 	getSpecieById,
 	postMedicalRecord,
 	putRecordById,
-	getPatientsPhrase,
 };
 
 export default functions;

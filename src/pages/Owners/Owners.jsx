@@ -1,8 +1,9 @@
 import { Link, useLoaderData, json } from "react-router-dom";
-import { getAuthToken } from "../../../util/auth";
-import OwnersList from "../../components/OwnersList/OwnersList";
 
-// import { mockProducts } from "../mock/products";
+import OwnersList from "../../components/OwnersList/OwnersList";
+import OwnersTable from "../../components/OwnersTable/OwnersTable";
+
+import { getAuthToken } from "../../../util/auth";
 
 const client_url = import.meta.env.VITE_CLIENT_URL;
 
@@ -14,33 +15,34 @@ const Owners = () => {
 	if (data.isError) {
 		return <p>{data.msg}</p>;
 	}
-	const owners = data.owners;
 
 	return (
 		<div>
 			<h1>Owners </h1>
-			<p>
-				Go to <Link to="/">HomePage</Link>
-			</p>
-			<div style={{ textAlign: "center" }}>
-				{/* {isLoading && <p>Loading...</p>} */}
-				{/* {error && <p>{error}</p>} */}
-			</div>
-			{/* {!isLoading && fetchedProducts && ( */}
-			<OwnersList owners={owners} />
-			{/* )} */}
+			<OwnersTable tableRecordsData={data} />
+			{/* <OwnersList owners={data.owners} /> */}
 		</div>
 	);
 };
 
 export default Owners;
 
-export const loader = async () => {
+export const loader = async ({ request, params }) => {
 	console.log("Owners");
+
+	const url = new URL(request.url);
+	const queryParams = url.searchParams;
+	const limit = queryParams.get("limit");
+	const from = queryParams.get("from");
+	let ownersPagedPath = "";
 
 	const token = getAuthToken();
 
-	const response = await fetch(client_url + "/api/owners", {
+	if (limit) {
+		ownersPagedPath = `?limit=${limit}&from=${from}`;
+	}
+
+	const response = await fetch(client_url + "/api/owners" + ownersPagedPath, {
 		method: "GET",
 		headers: {
 			"Content-Type": "application/json",
