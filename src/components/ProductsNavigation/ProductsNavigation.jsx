@@ -9,21 +9,6 @@ const ProductsNavigation = () => {
 		<header className={styles.header}>
 			<nav>
 				<ul className={styles.list}>
-					<li>
-						<NavLink to="/products">Products</NavLink>
-					</li>
-					{token && (
-						<>
-							<li>
-								<NavLink to="/products/new">
-									New Product
-								</NavLink>
-							</li>
-						</>
-					)}
-					<li>
-						<NavLink to="/categories">Categories</NavLink>
-					</li>
 					{token && (
 						<>
 							<li>

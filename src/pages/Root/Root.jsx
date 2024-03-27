@@ -43,11 +43,11 @@ const RootLayout = () => {
 				{navigation.state === "loading" && <p>Loading...</p>}
 				<Outlet />
 			</main>
-			{!token && (
+			{/* {!token && (
 				<Portal rootId="whatsApp-root">
 					<WhatsAppButton />
 				</Portal>
-			)}
+			)} */}
 			<ToastPortal>
 				<Toasts />
 			</ToastPortal>

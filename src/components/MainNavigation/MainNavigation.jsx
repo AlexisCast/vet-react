@@ -50,68 +50,67 @@ const MainNavigation = () => {
 						</ul>
 						<ul className={styles.webNav}>
 							{token && <li>Welcome, {userName} </li>}
-							<li>
-								<NavLink
-									to="/"
-									className={({ isActive }) =>
-										isActive ? styles.active : undefined
-									}
-									end
-								>
-									Home
-								</NavLink>
-							</li>
-							<LinkDropdown label="Owners" route="/owners">
-								<li>
-									<Link to="/owners">All</Link>
-								</li>
-								<li>
-									<Link to="/owners/new">New</Link>
-								</li>
-							</LinkDropdown>
-							<LinkDropdown label="Patients" route="/users">
-								<li>
-									<Link to="/patients">All</Link>
-								</li>
-								<li>
-									<Link to="/patients/new">New</Link>
-								</li>
-							</LinkDropdown>
-							<LinkDropdown label="Species" route="/species">
-								<li>
-									<Link to="/species">All</Link>
-								</li>
-								<li>
-									<Link to="/species/new">New</Link>
-								</li>
-							</LinkDropdown>
-							<LinkDropdown label="Records" route="/records">
-								<li>
-									<Link to="/records">All</Link>
-								</li>
-								<li>
-									<Link to="/records/new">New</Link>
-								</li>
-							</LinkDropdown>
-							<LinkDropdown label="Products" route="/products">
-								<li>
-									<Link to="/products">All</Link>
-								</li>
-								<li>
-									<Link to="/products/new">New</Link>
-								</li>
-							</LinkDropdown>
-							<LinkDropdown
-								label="Categories"
-								route="/categories"
-							>
-								<li>
-									<Link to="/categories">All</Link>
-								</li>
-								<li>
-									<Link to="/categories">New</Link>
-								</li>
-							</LinkDropdown>
+							{token && (
+								<>
+									<li>
+										<NavLink
+											to="/"
+											className={({ isActive }) =>
+												isActive
+													? styles.active
+													: undefined
+											}
+											end
+										>
+											Home
+										</NavLink>
+									</li>
+									<LinkDropdown
+										label="Owners"
+										route="/owners"
+									>
+										<li>
+											<Link to="/owners">All</Link>
+										</li>
+										<li>
+											<Link to="/owners/new">New</Link>
+										</li>
+									</LinkDropdown>
+									<LinkDropdown
+										label="Patients"
+										route="/users"
+									>
+										<li>
+											<Link to="/patients">All</Link>
+										</li>
+										<li>
+											<Link to="/patients/new">New</Link>
+										</li>
+									</LinkDropdown>
+									<LinkDropdown
+										label="Species"
+										route="/species"
+									>
+										<li>
+											<Link to="/species">All</Link>
+										</li>
+										<li>
+											<Link to="/species/new">New</Link>
+										</li>
+									</LinkDropdown>
+									<LinkDropdown
+										label="Records"
+										route="/records"
+									>
+										<li>
+											<Link to="/records">All</Link>
+										</li>
+										<li>
+											<Link to="/records/new">New</Link>
+										</li>
+									</LinkDropdown>
+								</>
+							)}
 							{!token && (
 								<li>
 									<NavLink
