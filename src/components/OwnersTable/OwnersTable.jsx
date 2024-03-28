@@ -12,6 +12,10 @@ const OwnersTable = ({ tableRecordsData }) => {
 
 	const { total, owners: bodyData } = tableRecordsData;
 
+	//// TODO: refactor pagination is used for pagination
+	const queryParams = new URLSearchParams(location.search);
+	const stateValue = queryParams.get("state");
+
 	// TODO: refactor pagination
 	// State variables for pagination
 	const [currentPage, setCurrentPage] = useState(1);
@@ -122,7 +126,7 @@ const OwnersTable = ({ tableRecordsData }) => {
 							key={index + 1}
 							to={`?limit=${itemsPerPage}&from=${
 								itemsPerPage * index
-							}`}
+							}${stateValue ? "&state=false" : ""}`}
 							onClick={() => paginate(index)}
 						>
 							{index + 1}
