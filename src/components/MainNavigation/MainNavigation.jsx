@@ -75,6 +75,9 @@ const MainNavigation = () => {
 										<li>
 											<Link to="/owners/new">New</Link>
 										</li>
+										<li>
+											<Link to="/owners?state=false">Deleted</Link>
+										</li>
 									</LinkDropdown>
 									<LinkDropdown
 										label="Patients"
@@ -107,6 +110,9 @@ const MainNavigation = () => {
 										</li>
 										<li>
 											<Link to="/records/new">New</Link>
+										</li>
+										<li>
+											<Link to="/records?state=false">Deleted</Link>
 										</li>
 									</LinkDropdown>
 								</>

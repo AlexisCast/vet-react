@@ -6,9 +6,13 @@ import RecordsTable from "../../components/RecordsTable/RecordsTable";
 import { useLocation } from "react-router-dom";
 
 const Records = () => {
+	const location = useLocation();
+
 	const [records, setRecords] = useState([]);
 
-	const location = useLocation();
+	const queryParams = new URLSearchParams(location.search);
+	const stateValue = queryParams.get("state");
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -25,7 +29,7 @@ const Records = () => {
 				);
 			}
 		};
-		
+
 		fetchData();
 	}, [location.search]);
 
@@ -39,7 +43,7 @@ const Records = () => {
 
 	return (
 		<div>
-			<h1>Medical Records</h1>
+			<h1>{stateValue && "Deleted "}Medical Records</h1>
 			<RecordsTable tableRecordsData={records} />
 		</div>
 	);
